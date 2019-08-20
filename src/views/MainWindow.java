@@ -661,7 +661,7 @@ public class MainWindow {
 				Spinner spnRY = new Spinner(cmpNewGamut, SWT.BORDER);
 				spnRY.setDigits(3);
 				spnRY.setMaximum(399);
-				spnRY.setMinimum(20);
+				spnRY.setMinimum(211);
 				spnRY.setSelection(330);
 				spnRY.setBounds(79, 66, 56, 22);
 				
@@ -687,7 +687,7 @@ public class MainWindow {
 				spnBX.setBounds(79, 184, 56, 22);
 				
 				Spinner spnBY = new Spinner(cmpNewGamut, SWT.BORDER);
-				spnBY.setMaximum(299);
+				spnBY.setMaximum(209);
 				spnBY.setMinimum(20);
 				spnBY.setSelection(60);
 				spnBY.setDigits(3);
@@ -752,8 +752,7 @@ public class MainWindow {
 					public void widgetSelected(SelectionEvent e) {
 						hm.get(bm).rX = spnRX.getSelection();
 						drawTriangle(lblTriangleImage, hm.get(bm));
-						comGam = Gamut.getCommonArea(gam1, gam2);
-						drawCommon(lblCommonTriangle);
+						getCommon();
 					}
 				});
 				
@@ -762,8 +761,7 @@ public class MainWindow {
 					public void widgetSelected(SelectionEvent e) {
 						hm.get(bm).rY = spnRY.getSelection();
 						drawTriangle(lblTriangleImage, hm.get(bm));
-						comGam = Gamut.getCommonArea(gam1, gam2);
-						drawCommon(lblCommonTriangle);
+						getCommon();
 					}
 				});
 				
@@ -772,8 +770,7 @@ public class MainWindow {
 					public void widgetSelected(SelectionEvent e) {
 						hm.get(bm).gX = spnGX.getSelection();
 						drawTriangle(lblTriangleImage, hm.get(bm));
-						comGam = Gamut.getCommonArea(gam1, gam2);
-						drawCommon(lblCommonTriangle);
+						getCommon();
 					}
 				});
 				
@@ -782,8 +779,7 @@ public class MainWindow {
 					public void widgetSelected(SelectionEvent e) {
 						hm.get(bm).gY = spnGY.getSelection();
 						drawTriangle(lblTriangleImage, hm.get(bm));
-						comGam = Gamut.getCommonArea(gam1, gam2);
-						drawCommon(lblCommonTriangle);
+						getCommon();
 					}
 				});
 				
@@ -792,8 +788,7 @@ public class MainWindow {
 					public void widgetSelected(SelectionEvent e) {
 						hm.get(bm).bX = spnBX.getSelection();
 						drawTriangle(lblTriangleImage, hm.get(bm));
-						comGam = Gamut.getCommonArea(gam1, gam2);
-						drawCommon(lblCommonTriangle);
+						getCommon();
 					}
 				});
 				
@@ -802,8 +797,7 @@ public class MainWindow {
 					public void widgetSelected(SelectionEvent e) {
 						hm.get(bm).bY = spnBY.getSelection();
 						drawTriangle(lblTriangleImage, hm.get(bm));
-						comGam = Gamut.getCommonArea(gam1, gam2);
-						drawCommon(lblCommonTriangle);
+						getCommon();
 					}
 				});
 				//----------------------------------------------------------------------------------------------------------------------//
@@ -854,6 +848,30 @@ public class MainWindow {
 	    //image.dispose();
 	    gc.dispose();
 		
+	}
+	
+	
+	protected void getCommon() {
+		
+		boolean firstGamut = true;
+		
+		for (int keySuffix = 1; keySuffix < 11; keySuffix++) {
+			
+			testKey = keyPrefix + keySuffix;
+		
+			if (hm.get(testKey).rX != Gamut.EMPTY) {
+				
+				if (firstGamut) {
+					comGam = hm.get(testKey);
+					firstGamut = false;
+					
+				} else {
+					
+					comGam = Gamut.getCommonArea(comGam, hm.get(testKey));
+				}
+			}
+		}
+		drawCommon(lblCommonTriangle);
 	}
 	
 	
@@ -928,4 +946,6 @@ public class MainWindow {
 		
 		
 	}
+
+
 } //end of class
