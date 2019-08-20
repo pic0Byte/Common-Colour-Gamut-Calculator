@@ -8,7 +8,7 @@ public class Gamut {
 	public static final int EMPTY = -1;
 	private static final int X = 0;
 	private static final int Y = 1;
-	private static final double FUDGE = 0.99;
+	private static final double FUDGE = 0.98;
 	
 	public int rX, rY, gX, gY, bX, bY, drawColour; 
 	public double bgM, bgC, grM, grC, rbM, rbC;    //---------Coefficients (M) & constants (C) for slope equations------//
@@ -29,8 +29,14 @@ public class Gamut {
 	
 	public static void slope(Gamut gam) {
 		
-		gam.bgM = (double)(gam.bY - gam.gY) / (gam.bX - gam.gX);
-		gam.bgC = (double)gam.bY - (gam.bgM * gam.bX);
+		if (gam.gX == gam.bX) {
+			gam.bgM = (double)(gam.bY - gam.gY) / (gam.bX - gam.gX - 0.00001);
+			gam.bgC = (double)gam.bY - (gam.bgM * gam.bX);
+		} else {
+			gam.bgM = (double)(gam.bY - gam.gY) / (gam.bX - gam.gX);
+			gam.bgC = (double)gam.bY - (gam.bgM * gam.bX);
+		}
+		
 		gam.grM = (double)(gam.gY - gam.rY) / (gam.gX - gam.rX);
 		gam.grC = (double)gam.gY - (gam.grM * gam.gX);
 		gam.rbM = (double)(gam.rY - gam.bY) / (gam.rX - gam.bX);
@@ -52,7 +58,15 @@ public class Gamut {
 		
 		slope(gam1);
 		slope(gam2);
+		
 		getCommonPoints(gam1, gam2, commonPoints);
+		solveRed (commonPoints, common, gam1, gam2);
+		
+		getCommonPoints(gam1, gam2, commonPoints);
+		solveGreen (commonPoints, common, gam1, gam2);
+		
+		getCommonPoints(gam1, gam2, commonPoints);
+		solveBlue (commonPoints, common, gam1, gam2);
 		
 		MainWindow.lblBg1Bg2X.setText(Double.toString(commonPoints[0][X]));
 		MainWindow.lblBg1Gr2X.setText(Double.toString(commonPoints[1][X]));
@@ -86,10 +100,6 @@ public class Gamut {
 		MainWindow.lblG2y.setText(Double.toString(commonPoints[13][Y]));
 		MainWindow.lblB2y.setText(Double.toString(commonPoints[14][Y]));
 		
-		
-		solveRed (commonPoints, common, gam1, gam2);
-		solveGreen (commonPoints, common, gam1, gam2);
-		solveBlue (commonPoints, common, gam1, gam2);
 	    
 		return common;
 		
@@ -144,93 +154,204 @@ public class Gamut {
 		commonPoints[14][Y] = gam2.bY;
 		
 		for (int i = 0; i < 15; i++) {
-			if (!Double.isFinite(commonPoints[i][X])){
-				commonPoints[i][X] = 19;
+			if (!Double.isFinite(commonPoints[i][X])) {
+				commonPoints[i][X] = 1;
 			}
-			if (!Double.isFinite(commonPoints[i][Y])){
-				commonPoints[i][Y] = 11;
+			if (!Double.isFinite(commonPoints[i][Y])) {
+				commonPoints[i][Y] = 1;
 			}
+			
 		}
 		
 	}
 
 	
-	private static void solveGreen(double[][] commonPoints, Gamut common, Gamut gam1, Gamut gam2) {
+	private static void solveRed(double[][] commonPoints, Gamut common, Gamut gam1, Gamut gam2) {
 		
-		boolean greenSolved = false;
-		double discardedYValue = 1000;
-		int highYIndex = highestY(commonPoints, discardedYValue);
-		double x = (commonPoints[highYIndex][X]);
-		double y = (commonPoints[highYIndex][Y]) * FUDGE;
+		boolean redSolved = false;
+		int highXIndex = highestX(commonPoints);
+		double x = (commonPoints[highXIndex][X]);
+		double y = (commonPoints[highXIndex][Y]);
 		
-		while (!greenSolved) {
+		
+		
+		while (!redSolved) {
 			
-			/*double bg1 = gam1.bgM * x + gam1.bgC;
-			bg1 = checkFinite(bg1, commonPoints[highYIndex][Y]);
-			double gr1 = gam1.grM * x + gam1.grM;
-			gr1 = checkFinite(gr1, commonPoints[highYIndex][Y]);
-			double bg2 = gam2.bgM * x + gam2.bgC;
-			bg2 = checkFinite(bg2, commonPoints[highYIndex][Y]);
-			double gr2 = gam2.grM * x + gam2.grC;
-			gr2 = checkFinite(gr2, commonPoints[highYIndex][Y]);
-			*/
 			
-			System.out.println();
-			System.out.println(gam1.bgM * x + gam1.bgC + " is >= to " + y);
-			System.out.println(gam1.grM * x + gam1.grC + " is >= to " + y);
-			System.out.println(gam2.bgM * x + gam2.bgC + " is >= to " + y);
-			System.out.println(gam2.grM * x + gam2.grC + " is >= to " + y);
+			double grX1 = (y - gam1.grC) / gam1.grM;
+			double grX2 = (y - gam2.grC) / gam2.grM;
+			double rbY1 = gam1.rbM * x + gam1.rbC;
+			double rbX1 = (y - gam1.rbC) / gam1.rbM;
+			double rbY2 = gam2.rbM * x + gam2.rbC;
+			double rbX2 = (y - gam2.rbC) / gam2.rbM; 
 			
-			if ((y <= gam1.bgM * x + gam1.bgC) && (y <= gam1.grM * x + gam1.grC) 
-					&& (y <= gam2.bgM * x + gam2.bgC) && (y <= gam2.grM * x + gam2.grC)) {
+			if ((gam1.rY > gam1.bY) && (gam2.rY > gam2.bY) //- RB1 & RB2 slopes are both positive
+					&& (x * FUDGE <= grX1) && (x * FUDGE <= rbX1) && (x * FUDGE <= grX2) && (x * FUDGE <= rbX2)){
 				
-				common.gX = (int) x;
-				common.gY = (int) commonPoints[highYIndex][Y];
-				greenSolved = true;
+				common.rX = (int) x;
+				common.rY = (int) y;
+				redSolved = true;
+				
+			} else if ((gam1.rY < gam1.bY) && (gam2.rY > gam2.bY) //- RB1 slope is negative, RB2 is positive
+					&& (x * FUDGE <= grX1) && (y / FUDGE >= rbY1) && (x * FUDGE <= grX2) && (x * FUDGE <= rbX2)){
+				
+				common.rX = (int) x;
+				common.rY = (int) y;
+				redSolved = true;	
+				
+			} else if ((gam1.rY > gam1.bY) && (gam2.rY < gam2.bY) //- RB1 slope is positive, RB2 is negative
+					&& (x * FUDGE <= grX1) && (x * FUDGE <= rbX1) && (x * FUDGE <= grX2) && (y / FUDGE >= rbY2)){
+				
+				common.rX = (int) x;
+				common.rY = (int) y;
+				redSolved = true;	
+				
+			} else if ((gam1.rY < gam1.bY) && (gam2.rY < gam2.bY) //- RB1 & RB2 slopes are both negative
+					&& (x * FUDGE <= grX1) && (y / FUDGE >= rbY1) && (x * FUDGE <= grX2) && (y / FUDGE >= rbY2)){
+				
+				common.rX = (int) x;
+				common.rY = (int) y;
+				redSolved = true;
+				
+			} else if ((gam1.rY == gam1.bY) && (gam2.rY > gam2.bY) //- RB1 slope is horizontal, RB2 is positive
+					&& (x * FUDGE <= grX1) && (y / FUDGE >= gam1.rY) && (x * FUDGE <= grX2) && (x * FUDGE <= rbX2)){
+				
+				common.rX = (int) x;
+				common.rY = (int) y;
+				redSolved = true;
+				
+			} else if ((gam1.rY > gam1.bY) && (gam2.rY == gam2.bY) //- RB1 slope is positive, RB2 is horizontal
+					&& (x * FUDGE <= grX1) && (x * FUDGE <= rbX1) && (x * FUDGE <= grX2) && (y / FUDGE >= gam2.rY)){
+				
+				common.rX = (int) x;
+				common.rY = (int) y;
+				redSolved = true;
+				
+			} else if ((gam1.rY == gam1.bY) && (gam2.rY < gam2.bY) //- RB1 slope is horizontal, RB2 is negative
+					&& (x * FUDGE <= grX1) && (y / FUDGE >= gam1.rY) && (x * FUDGE <= grX2) && (y / FUDGE >= rbY2)){
+				
+				common.rX = (int) x;
+				common.rY = (int) y;
+				redSolved = true;
+				
+			} else if ((gam1.rY < gam1.bY) && (gam2.rY == gam2.bY) //- RB1 slope is negative, RB2 is horizontal
+					&& (x * FUDGE <= grX1) && (y / FUDGE >= rbY1) && (x * FUDGE <= grX2) && (y / FUDGE >= gam2.rY)){
+				
+				common.rX = (int) x;
+				common.rY = (int) y;
+				redSolved = true;
+				
+			} else if ((gam1.rY == gam1.bY) && (gam2.rY == gam2.bY) //- RB1 & RB2 slopes are both horizontal
+					&& (x * FUDGE <= grX1) && (y / FUDGE >= gam1.rX) && (x * FUDGE <= grX2) && (y / FUDGE >= gam2.rY)){
+				
+				common.rX = (int) x;
+				common.rY = (int) y;
+				redSolved = true;
 			
+			} else if (x == EMPTY){
+				
+				common.rX = 313;
+				common.rY = 329;
+				redSolved = true;
+				
 			} else {
-				discardedYValue = commonPoints[highYIndex][Y];
-				highYIndex = highestY(commonPoints, discardedYValue);
-				x = (commonPoints[highYIndex][X]);
-				y = (commonPoints[highYIndex][Y]) * FUDGE;
-				System.out.println("Discarded Y " + discardedYValue);
-				System.out.println();
+				
+				commonPoints[highXIndex][X] = EMPTY;
+				commonPoints[highXIndex][Y] = EMPTY;
+				highXIndex = highestX(commonPoints);
+				x = commonPoints[highXIndex][X];
+				y = commonPoints[highXIndex][Y];
+				
 			}
 		}
 		
 	}
 	
 	
-	private static void solveRed(double[][] commonPoints, Gamut common, Gamut gam1, Gamut gam2) {
+	private static void solveGreen(double[][] commonPoints, Gamut common, Gamut gam1, Gamut gam2) {
 		
-		boolean redSolved = false;
-		double discardedXValue = 1000;
-		int highXIndex = highestX(commonPoints, discardedXValue);
-		double x = (commonPoints[highXIndex][X]) * FUDGE;
-		double y = (commonPoints[highXIndex][Y]);
+		boolean greenSolved = false;
+		int highYIndex = highestY(commonPoints);
+		double x = (commonPoints[highYIndex][X]);
+		double y = (commonPoints[highYIndex][Y]);
 		
-		while (!redSolved) {
+		while (!greenSolved) {
 			
-			System.out.println();
-			System.out.println(x + " is <= to " + (y - gam1.grC) / gam1.grM);
-			System.out.println(x + " is <= to " + (y - gam1.rbC) / gam1.rbM);
-			System.out.println(x + " is <= to " + (y - gam2.grC) / gam2.grM);
-			System.out.println(x + " is <= to " + (y - gam2.rbC) / gam2.rbM);
+			double bgY1 = gam1.bgM * x + gam1.bgC;
+			double bgX1 = (y - gam1.bgC) / gam1.bgM;
+			double grY1 = gam1.grM * x + gam1.grC;
+			double bgY2 = gam2.bgM * x + gam2.bgC;
+			double bgX2 = (y - gam2.bgC) / gam2.bgM;
+			double grY2 = gam2.grM * x + gam2.grC;
 			
-			if ((x <= (y - gam1.grC) / gam1.grM) && (x <= (y - gam1.rbC) / gam1.rbM) && 
-					(x <= (y - gam2.grC) / gam2.grM) && (x <= (y - gam2.rbC) / gam2.rbM)){
+			
+			if ((gam1.gX > gam1.bX) && (gam2.gX > gam2.bX)     //-Both bg slopes are positive
+					&& (y * FUDGE <= bgY1) && (y * FUDGE <= grY1) && (y * FUDGE <= bgY2) && (y * FUDGE <= grY2)) {
 				
-				common.rX = (int) commonPoints[highXIndex][X];
-				common.rY = (int) y;
-				redSolved = true;
+				greenSolved = true;
 			
+			} else if ((gam1.gX < gam1.bX) && (gam2.gX > gam2.bX)  //-BG1 slope is negative
+					&& ((x / FUDGE) >= bgX1) && (y * FUDGE <= grY1) && (y * FUDGE <= bgY2) && (y * FUDGE <= grY2)) {
+				
+				greenSolved = true;
+				
+			} else if ((gam1.gX > gam1.bX) && (gam2.gX < gam2.bX)  //-BG2 slope is negative
+					&& (y * FUDGE <= bgY1) && (y * FUDGE <= grY1) && ((x / FUDGE) >= bgX2) && (y * FUDGE <= grY2)) {
+				
+				greenSolved = true;
+				
+			} else if ((gam1.gX < gam1.bX) && (gam2.gX < gam2.bX)  //-BG1 & BG2 slopes are both negative
+					&& ((x / FUDGE) >= bgX1) && (y * FUDGE <= grY1) && ((x / FUDGE) >= bgX2) && (y * FUDGE <= grY2)) {
+				
+				greenSolved = true;
+				
+			} else if ((gam1.gX == gam1.bX) && (gam2.gX < gam2.bX)  //-BG1 is vertical & BG2 is negative
+					&& ((x / FUDGE) > gam1.gX) && (y * FUDGE <= grY1) && ((x / FUDGE) >= bgX2) && (y * FUDGE <= grY2)) {
+				
+				greenSolved = true; 
+				
+			} else if ((gam1.gX == gam1.bX) && (gam2.gX > gam2.bX)  //-BG1 is vertical & BG2 is positive
+					&& ((x / FUDGE) > gam1.gX) && (y * FUDGE <= grY1) && (y * FUDGE <= bgY2) && (y * FUDGE <= grY2)) {
+				
+				greenSolved = true;
+				
+			} else if ((gam1.gX > gam1.bX) && (gam2.gX == gam2.bX)  //-BG1 is positive & BG2 is vertical
+					&& (y * FUDGE <= bgY1) && (y * FUDGE <= grY1) && (x / FUDGE > gam2.gX) && (y * FUDGE <= grY2)) {
+				
+				greenSolved = true;
+				
+			} else if ((gam1.gX < gam1.bX) && (gam2.gX == gam2.bX)  //-BG1 is negative & BG2 is vertical
+					&& ((x / FUDGE) >= bgX1) && (y * FUDGE <= grY1) && (x / FUDGE > gam2.gX) && (y * FUDGE <= grY2)) {
+				
+				greenSolved = true;
+				
+			} else if ((gam1.gX == gam1.bX) && (gam2.gX == gam2.bX)  //-BG1 & BG2 are vertical
+					&& ((x / FUDGE) > gam1.gX) && (y * FUDGE <= grY1) && (x / FUDGE > gam2.gX) && (y * FUDGE <= grY2)) {
+						
+				greenSolved = true;
+				
 			} else {
-				discardedXValue = commonPoints[highXIndex][X];
-				highXIndex = highestX(commonPoints, discardedXValue);
-				x = (commonPoints[highXIndex][X]) * FUDGE;
-				y = (commonPoints[highXIndex][Y]);
-				System.out.println("Discarded X " + discardedXValue);
-				System.out.println();
+				
+				commonPoints[highYIndex][X] = EMPTY;
+				commonPoints[highYIndex][Y] = EMPTY;
+				
+				highYIndex = highestY(commonPoints);
+				x = (commonPoints[highYIndex][X]);
+				y = (commonPoints[highYIndex][Y]);
+
+			}
+			
+			if (greenSolved) {
+				
+				common.gX = (int) x;
+				common.gY = (int) y;
+				
+			} else if (x == EMPTY){
+				 
+				common.gX = 313;
+				common.gY = 329;
+				greenSolved = true;
+				
 			}
 		}
 		
@@ -240,46 +361,97 @@ public class Gamut {
 	private static void solveBlue(double[][] commonPoints, Gamut common, Gamut gam1, Gamut gam2) {
 		
 		boolean blueSolved = false;
-		double discardedXValue = 0;
-		int lowXIndex = lowestX(commonPoints, discardedXValue);
-		double x = commonPoints[lowXIndex][X];
-		double y = commonPoints[lowXIndex][Y];
-		
+		int lowXYIndex = lowestXY(commonPoints);
+		double x = commonPoints[lowXYIndex][X];
+		double y = commonPoints[lowXYIndex][Y];
 		
 		while (!blueSolved) {
 			
-			System.out.println();
-			System.out.println(x + " is >= to " + (y - gam1.bgC) / gam1.bgM);
-			System.out.println(y + " is >= to " + (gam1.rbM * x + gam1.rbC));
-			System.out.println(x + " is >= to " + (y - gam2.bgC) / gam2.bgM);
-			System.out.println(y + " is >= to " + (gam2.rbM * x + gam2.rbC));
+			double bgY1 = gam1.bgM * x + gam1.bgC;
+			double rbY1 = gam1.rbM * x + gam1.rbC;
+			double bgY2 = gam2.bgM * x + gam2.bgC;
+			double rbY2 = gam2.rbM * x + gam2.rbC;
 			
-			if ((x / FUDGE >= (y - gam1.bgC) / gam1.bgM) && (y / FUDGE >= gam1.rbM * x + gam1.rbC) 
-					&& (x / FUDGE >= (y - gam2.bgC) / gam2.bgM) && (y / FUDGE >= gam2.rbM * x + gam2.rbC)){
+			
+			if ((gam1.gX > gam1.bX) && (gam2.gX > gam2.bX) // Both BG slopes are positive
+					&& (y * FUDGE <= bgY1) && (y / FUDGE >= rbY1) && (y * FUDGE <= bgY2) && (y / FUDGE >= rbY2)) {
 				
-				common.bX = (int) commonPoints[lowXIndex][X];
-				common.bY = (int) commonPoints[lowXIndex][Y];
 				blueSolved = true;
-			
+				
+			} else if ((gam1.gX < gam1.bX) && (gam2.gX > gam2.bX) // BG1 slope is negative, BG2 is positive
+					&& (y / FUDGE >= bgY1) && (y / FUDGE >= rbY1) && (y * FUDGE <= bgY2) && (y / FUDGE >= rbY2)) {
+				
+				blueSolved = true;
+				
+			} else if ((gam1.gX > gam1.bX) && (gam2.gX < gam2.bX) // BG1 slope is positive, BG2 is negative
+					&& (y * FUDGE <= bgY1) && (y / FUDGE >= rbY1) && (y / FUDGE >= bgY2) && (y / FUDGE >= rbY2)) {
+				
+				blueSolved = true;
+				
+			} else if ((gam1.gX < gam1.bX) && (gam2.gX < gam2.bX) // BG1 & BG2 slopes are both negative
+					&& (y / FUDGE >= bgY1) && (y / FUDGE >= rbY1) && (y / FUDGE >= bgY2) && (y / FUDGE >= rbY2)) {
+				
+				blueSolved = true;
+				
+			} else if ((gam1.gX == gam1.bX) && (gam2.gX > gam2.bX) // BG1 slope is vertical, BG2 is positive
+					&& (x / FUDGE >= gam1.bX ) && (y / FUDGE >= rbY1) && (y * FUDGE <= bgY2) && (y / FUDGE >= rbY2)) {
+				
+				blueSolved = true;
+				
+			} else if ((gam1.gX == gam1.bX) && (gam2.gX < gam2.bX) // BG1 slope is vertical, BG2 is negative
+					&& (x / FUDGE >= gam1.bX ) && (y / FUDGE >= rbY1) && (y / FUDGE >= bgY2) && (y / FUDGE >= rbY2)) {
+				
+				blueSolved = true;
+				
+			} else if ((gam1.gX > gam1.bX) && (gam2.gX == gam2.bX) // BG1 slope is positive, BG2 is vertical
+					&& (y * FUDGE <= bgY1) && (y / FUDGE >= rbY1) && (x / FUDGE >= gam2.bX) && (y / FUDGE >= rbY2)) {
+				
+				blueSolved = true;
+				
+			} else if ((gam1.gX < gam1.bX) && (gam2.gX == gam2.bX) // BG1 slope is negative, BG2 is vertical
+					&& (y / FUDGE >= bgY1) && (y / FUDGE >= rbY1) && (x / FUDGE >= gam2.bX) && (y / FUDGE >= rbY2)) {
+				
+				blueSolved = true;
+				
+			} else if ((gam1.gX == gam1.bX) && (gam2.gX == gam2.bX) // BG1 & BG2 slopes are both vertical
+					&& (x / FUDGE >= gam1.bX) && (y / FUDGE >= rbY1) && (x / FUDGE >= gam2.bX) && (y / FUDGE >= rbY2)) {
+				
+				blueSolved = true;
+				
+			} else if (x == 1000){
+				
+				common.bX = 313;
+				common.bY = 329;
+				blueSolved = true;
+				
 			} else {
-				discardedXValue = commonPoints[lowXIndex][X];
-				lowXIndex = lowestX(commonPoints, discardedXValue);
-				x = (commonPoints[lowXIndex][X]);
-				y = (commonPoints[lowXIndex][Y]);
-				System.out.println("Discarded blue X = " + discardedXValue);
-				System.out.println();
+				
+				commonPoints[lowXYIndex][X] = 1000;
+				commonPoints[lowXYIndex][Y] = 1000;
+				lowXYIndex = lowestXY(commonPoints);
+				x = (commonPoints[lowXYIndex][X]);
+				y = (commonPoints[lowXYIndex][Y]);
+				
+			}
+			
+			if (blueSolved) {
+				
+				common.bX = (int) x;
+				common.bY = (int) y;
+
 			}
 		}
 		
 	}
 
-	private static int highestX(double[][] commonPoints, double discardedXValue) {
+	
+	private static int highestX(double[][] commonPoints) {
 		
 		double highestSeen = 0;
 		int highestIndex = 0;
 		
 		for (int i=0; i<15; i++) {
-			if ((commonPoints[i][X] > highestSeen) && (commonPoints[i][X] < discardedXValue)) {
+			if ((commonPoints[i][X] > highestSeen)) {
 				highestIndex = i;
 				highestSeen = commonPoints[i][X];
 			}
@@ -289,29 +461,13 @@ public class Gamut {
 	}
 	
 	
-	private static int lowestX(double[][] commonPoints, double discardedXValue) {
-		
-		double lowestSeen = 1000;
-		int lowestIndex = 0;
-		
-		for (int i=0; i<15; i++) {
-			if ((commonPoints[i][X] < lowestSeen) && (commonPoints[i][X] > discardedXValue)) {
-				lowestIndex = i;
-				lowestSeen = commonPoints[i][X];
-			}
-		}
-		
-		return lowestIndex;
-	}
-	
-	
-	private static int highestY(double[][] commonPoints, double discardedYValue) {
+	private static int highestY(double[][] commonPoints) {
 		
 		double highestSeen = 0;
 		int highestIndex = 0;
 		
 		for (int i=0; i<15; i++) {
-			if ((commonPoints[i][Y] > highestSeen) && (commonPoints[i][Y] < discardedYValue)) {
+			if ((commonPoints[i][Y] > highestSeen)) {
 				highestIndex = i;
 				highestSeen = commonPoints[i][Y];
 			}
@@ -320,13 +476,23 @@ public class Gamut {
 		return highestIndex;
 	}
 	
-	private static double checkFinite (double in, double sub) {
+	
+	private static int lowestXY(double[][] commonPoints) {
+		
+		double lowestSeen = 1000;
+		int lowestIndex = 0;
+		
+		for (int i=0; i<15; i++) {
 			
-		if (!Double.isFinite(in)) {
-			in = sub;
+			double total = commonPoints[i][X] + commonPoints[i][Y];
+			
+			if (total < lowestSeen) {
+				lowestSeen = total;
+				lowestIndex = i;
+			}
 		}
 		
-		return in;
+		return lowestIndex;
 	}
 	
 
