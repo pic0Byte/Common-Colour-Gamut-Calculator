@@ -188,64 +188,46 @@ public class Gamut {
 			if ((gam1.rY > gam1.bY) && (gam2.rY > gam2.bY) //- RB1 & RB2 slopes are both positive
 					&& (x * FUDGE <= grX1) && (x * FUDGE <= rbX1) && (x * FUDGE <= grX2) && (x * FUDGE <= rbX2)){
 				
-				common.rX = (int) x;
-				common.rY = (int) y;
 				redSolved = true;
 				
 			} else if ((gam1.rY < gam1.bY) && (gam2.rY > gam2.bY) //- RB1 slope is negative, RB2 is positive
 					&& (x * FUDGE <= grX1) && (y / FUDGE >= rbY1) && (x * FUDGE <= grX2) && (x * FUDGE <= rbX2)){
 				
-				common.rX = (int) x;
-				common.rY = (int) y;
 				redSolved = true;	
 				
 			} else if ((gam1.rY > gam1.bY) && (gam2.rY < gam2.bY) //- RB1 slope is positive, RB2 is negative
 					&& (x * FUDGE <= grX1) && (x * FUDGE <= rbX1) && (x * FUDGE <= grX2) && (y / FUDGE >= rbY2)){
 				
-				common.rX = (int) x;
-				common.rY = (int) y;
 				redSolved = true;	
 				
 			} else if ((gam1.rY < gam1.bY) && (gam2.rY < gam2.bY) //- RB1 & RB2 slopes are both negative
 					&& (x * FUDGE <= grX1) && (y / FUDGE >= rbY1) && (x * FUDGE <= grX2) && (y / FUDGE >= rbY2)){
 				
-				common.rX = (int) x;
-				common.rY = (int) y;
 				redSolved = true;
 				
 			} else if ((gam1.rY == gam1.bY) && (gam2.rY > gam2.bY) //- RB1 slope is horizontal, RB2 is positive
 					&& (x * FUDGE <= grX1) && (y / FUDGE >= gam1.rY) && (x * FUDGE <= grX2) && (x * FUDGE <= rbX2)){
 				
-				common.rX = (int) x;
-				common.rY = (int) y;
 				redSolved = true;
 				
 			} else if ((gam1.rY > gam1.bY) && (gam2.rY == gam2.bY) //- RB1 slope is positive, RB2 is horizontal
 					&& (x * FUDGE <= grX1) && (x * FUDGE <= rbX1) && (x * FUDGE <= grX2) && (y / FUDGE >= gam2.rY)){
 				
-				common.rX = (int) x;
-				common.rY = (int) y;
 				redSolved = true;
 				
 			} else if ((gam1.rY == gam1.bY) && (gam2.rY < gam2.bY) //- RB1 slope is horizontal, RB2 is negative
 					&& (x * FUDGE <= grX1) && (y / FUDGE >= gam1.rY) && (x * FUDGE <= grX2) && (y / FUDGE >= rbY2)){
 				
-				common.rX = (int) x;
-				common.rY = (int) y;
 				redSolved = true;
 				
 			} else if ((gam1.rY < gam1.bY) && (gam2.rY == gam2.bY) //- RB1 slope is negative, RB2 is horizontal
 					&& (x * FUDGE <= grX1) && (y / FUDGE >= rbY1) && (x * FUDGE <= grX2) && (y / FUDGE >= gam2.rY)){
 				
-				common.rX = (int) x;
-				common.rY = (int) y;
 				redSolved = true;
 				
 			} else if ((gam1.rY == gam1.bY) && (gam2.rY == gam2.bY) //- RB1 & RB2 slopes are both horizontal
 					&& (x * FUDGE <= grX1) && (y / FUDGE >= gam1.rX) && (x * FUDGE <= grX2) && (y / FUDGE >= gam2.rY)){
 				
-				common.rX = (int) x;
-				common.rY = (int) y;
 				redSolved = true;
 			
 			} else if (x == EMPTY){
@@ -261,6 +243,13 @@ public class Gamut {
 				highXIndex = highestX(commonPoints);
 				x = commonPoints[highXIndex][X];
 				y = commonPoints[highXIndex][Y];
+				
+			}
+			
+			if (redSolved) {
+				
+				common.rX = (int) x;
+				common.rY = (int) y;
 				
 			}
 		}
