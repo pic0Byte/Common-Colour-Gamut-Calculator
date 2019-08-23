@@ -131,6 +131,7 @@ public class MainWindow {
 		shlTabby.layout();
 		handleEvents();
 		newGamut();
+		getCommon();
 		while (!shlTabby.isDisposed()) {
 			if (!display.readAndDispatch()) {
 				display.sleep();
@@ -177,45 +178,6 @@ public class MainWindow {
 		btnUpdate.setText("Update");
 		tabFolder.setLayoutData(fd_tabFolder);
 		tabFolder.setSelectionBackground(Display.getCurrent().getSystemColor(SWT.COLOR_TITLE_INACTIVE_BACKGROUND_GRADIENT));
-		
-		/*Composite cmpCommon = new Composite(tabFolder, SWT.NONE);
-		tbtmCommon.setControl(cmpCommon);
-		
-		tabFolder.setSelection(tbtmCommon);
-		
-		lblCommonImage = new Label(cmpCommon, SWT.NONE);
-		lblCommonImage.setImage(image);
-		lblCommonImage.setBounds(242, 43, 343, 355);
-		
-		Label lblRedX = new Label(cmpCommon, SWT.NONE);
-		lblRedX.setAlignment(SWT.RIGHT);
-		lblRedX.setBounds(18, 43, 55, 15);
-		lblRedX.setText("Red X");
-		
-		Label lblRedY = new Label(cmpCommon, SWT.NONE);
-		lblRedY.setText("Red Y");
-		lblRedY.setAlignment(SWT.RIGHT);
-		lblRedY.setBounds(18, 68, 55, 15);
-		
-		Label lblGrnX = new Label(cmpCommon, SWT.NONE);
-		lblGrnX.setText("Green X");
-		lblGrnX.setAlignment(SWT.RIGHT);
-		lblGrnX.setBounds(18, 112, 55, 15);
-		
-		Label lblGrnY = new Label(cmpCommon, SWT.NONE);
-		lblGrnY.setText("Green Y");
-		lblGrnY.setAlignment(SWT.RIGHT);
-		lblGrnY.setBounds(18, 137, 55, 15);
-		
-		Label lblBluX = new Label(cmpCommon, SWT.NONE);
-		lblBluX.setText("Blue X");
-		lblBluX.setAlignment(SWT.RIGHT);
-		lblBluX.setBounds(18, 186, 55, 15);
-		
-		Label lblBluY = new Label(cmpCommon, SWT.NONE);
-		lblBluY.setText("Blue Y");
-		lblBluY.setAlignment(SWT.RIGHT);
-		lblBluY.setBounds(18, 211, 55, 15);*/
 		
 		Composite cmpCom = new Composite(shlTabby, SWT.NONE);
 		FormData fd_cmpCom = new FormData();
@@ -658,12 +620,26 @@ public class MainWindow {
 				spnRX.setSelection(640);
 				spnRX.setBounds(79, 41, 56, 22);
 				
+				Spinner spnRXN = new Spinner(cmpNewGamut, SWT.BORDER);
+				spnRXN.setDigits(3);
+				spnRXN.setMaximum(750);
+				spnRXN.setMinimum(401);
+				spnRXN.setSelection(640);
+				spnRXN.setBounds(179, 41, 56, 22);
+				
 				Spinner spnRY = new Spinner(cmpNewGamut, SWT.BORDER);
 				spnRY.setDigits(3);
 				spnRY.setMaximum(399);
 				spnRY.setMinimum(211);
 				spnRY.setSelection(330);
 				spnRY.setBounds(79, 66, 56, 22);
+				
+				Spinner spnRYN = new Spinner(cmpNewGamut, SWT.BORDER);
+				spnRYN.setDigits(3);
+				spnRYN.setMaximum(399);
+				spnRYN.setMinimum(211);
+				spnRYN.setSelection(330);
+				spnRYN.setBounds(179, 66, 56, 22);
 				
 				Spinner spnGX = new Spinner(cmpNewGamut, SWT.BORDER);
 				spnGX.setMaximum(399);
@@ -672,12 +648,26 @@ public class MainWindow {
 				spnGX.setDigits(3);
 				spnGX.setBounds(79, 110, 56, 22);
 				
+				Spinner spnGXN = new Spinner(cmpNewGamut, SWT.BORDER);
+				spnGXN.setMaximum(399);
+				spnGXN.setMinimum(20);
+				spnGXN.setSelection(300);
+				spnGXN.setDigits(3);
+				spnGXN.setBounds(179, 110, 56, 22);
+				
 				Spinner spnGY = new Spinner(cmpNewGamut, SWT.BORDER);
 				spnGY.setDigits(3);
 				spnGY.setMaximum(850);
 				spnGY.setMinimum(401);
 				spnGY.setSelection(600);
 				spnGY.setBounds(79, 135, 56, 22);
+				
+				Spinner spnGYN = new Spinner(cmpNewGamut, SWT.BORDER);
+				spnGYN.setDigits(3);
+				spnGYN.setMaximum(850);
+				spnGYN.setMinimum(401);
+				spnGYN.setSelection(600);
+				spnGYN.setBounds(179, 135, 56, 22);
 				
 				Spinner spnBX = new Spinner(cmpNewGamut, SWT.BORDER);
 				spnBX.setMaximum(299);
@@ -686,6 +676,13 @@ public class MainWindow {
 				spnBX.setDigits(3);
 				spnBX.setBounds(79, 184, 56, 22);
 				
+				Spinner spnBXN = new Spinner(cmpNewGamut, SWT.BORDER);
+				spnBXN.setMaximum(299);
+				spnBXN.setMinimum(20);
+				spnBXN.setSelection(150);
+				spnBXN.setDigits(3);
+				spnBXN.setBounds(179, 184, 56, 22);
+				
 				Spinner spnBY = new Spinner(cmpNewGamut, SWT.BORDER);
 				spnBY.setMaximum(209);
 				spnBY.setMinimum(20);
@@ -693,35 +690,111 @@ public class MainWindow {
 				spnBY.setDigits(3);
 				spnBY.setBounds(79, 209, 56, 22);
 				
+				Spinner spnBYN = new Spinner(cmpNewGamut, SWT.BORDER);
+				spnBYN.setMaximum(209);
+				spnBYN.setMinimum(20);
+				spnBYN.setSelection(60);
+				spnBYN.setDigits(3);
+				spnBYN.setBounds(179, 209, 56, 22);
+				
+				Label lblMeasured = new Label(cmpNewGamut, SWT.NONE);
+				lblMeasured.setAlignment(SWT.LEFT);
+				lblMeasured.setBounds(80, 19, 55, 15);
+				lblMeasured.setText("Measured");
+				
+				Label lblNative = new Label(cmpNewGamut, SWT.NONE);
+				lblNative.setAlignment(SWT.LEFT);
+				lblNative.setBounds(180, 19, 55, 15);
+				lblNative.setText("Native");
+				
+				Label lblDesVal = new Label(cmpNewGamut, SWT.NONE);
+				lblDesVal.setAlignment(SWT.LEFT);
+				lblDesVal.setBounds(80, 240, 170, 15);
+				lblDesVal.setText("Target Values (offsets)");
+				
 				Label lblRedX = new Label(cmpNewGamut, SWT.NONE);
 				lblRedX.setAlignment(SWT.RIGHT);
 				lblRedX.setBounds(18, 43, 55, 15);
 				lblRedX.setText("Red X");
+				
+				Label lblRedXT = new Label(cmpNewGamut, SWT.NONE);
+				lblRedXT.setAlignment(SWT.RIGHT);
+				lblRedXT.setBounds(18, 264, 55, 15);
+				lblRedXT.setText("Red X");
+				
+				Label lblRedXTVal = new Label(cmpNewGamut, SWT.BORDER);
+				lblRedXTVal.setAlignment(SWT.LEFT);
+				lblRedXTVal.setBounds(79, 264, 55, 15);
 				
 				Label lblRedY = new Label(cmpNewGamut, SWT.NONE);
 				lblRedY.setText("Red Y");
 				lblRedY.setAlignment(SWT.RIGHT);
 				lblRedY.setBounds(18, 68, 55, 15);
 				
+				Label lblRedYT = new Label(cmpNewGamut, SWT.NONE);
+				lblRedYT.setText("Red Y");
+				lblRedYT.setAlignment(SWT.RIGHT);
+				lblRedYT.setBounds(18, 288, 55, 15);
+				
+				Label lblRedYTVal = new Label(cmpNewGamut, SWT.BORDER);
+				lblRedYTVal.setAlignment(SWT.LEFT);
+				lblRedYTVal.setBounds(79, 288, 55, 15);
+				
 				Label lblGrnX = new Label(cmpNewGamut, SWT.NONE);
 				lblGrnX.setText("Green X");
 				lblGrnX.setAlignment(SWT.RIGHT);
 				lblGrnX.setBounds(18, 112, 55, 15);
+				
+				Label lblGrnTX = new Label(cmpNewGamut, SWT.NONE);
+				lblGrnTX.setText("Green X");
+				lblGrnTX.setAlignment(SWT.RIGHT);
+				lblGrnTX.setBounds(18, 332, 55, 15);
+				
+				Label lblGrnXTVal = new Label(cmpNewGamut, SWT.BORDER);
+				lblGrnXTVal.setAlignment(SWT.LEFT);
+				lblGrnXTVal.setBounds(79, 332, 55, 15);
 				
 				Label lblGrnY = new Label(cmpNewGamut, SWT.NONE);
 				lblGrnY.setText("Green Y");
 				lblGrnY.setAlignment(SWT.RIGHT);
 				lblGrnY.setBounds(18, 137, 55, 15);
 				
+				Label lblGrnYT = new Label(cmpNewGamut, SWT.NONE);
+				lblGrnYT.setText("Green Y");
+				lblGrnYT.setAlignment(SWT.RIGHT);
+				lblGrnYT.setBounds(18, 356, 55, 15);
+				
+				Label lblGrnYTVal = new Label(cmpNewGamut, SWT.BORDER);
+				lblGrnYTVal.setAlignment(SWT.LEFT);
+				lblGrnYTVal.setBounds(79, 356, 55, 15);
+				
 				Label lblBluX = new Label(cmpNewGamut, SWT.NONE);
 				lblBluX.setText("Blue X");
 				lblBluX.setAlignment(SWT.RIGHT);
 				lblBluX.setBounds(18, 186, 55, 15);
 				
+				Label lblBluXT = new Label(cmpNewGamut, SWT.NONE);
+				lblBluXT.setText("Blue X");
+				lblBluXT.setAlignment(SWT.RIGHT);
+				lblBluXT.setBounds(130, 264, 50, 15);
+				
+				Label lblBluXTVal = new Label(cmpNewGamut, SWT.BORDER);
+				lblBluXTVal.setAlignment(SWT.LEFT);
+				lblBluXTVal.setBounds(185, 264, 55, 15);
+				
 				Label lblBluY = new Label(cmpNewGamut, SWT.NONE);
 				lblBluY.setText("Blue Y");
 				lblBluY.setAlignment(SWT.RIGHT);
 				lblBluY.setBounds(18, 211, 55, 15);
+				
+				Label lblBluYT = new Label(cmpNewGamut, SWT.NONE);
+				lblBluYT.setText("Blue X");
+				lblBluYT.setAlignment(SWT.RIGHT);
+				lblBluYT.setBounds(130, 288, 50, 15);
+				
+				Label lblBluYTVal = new Label(cmpNewGamut, SWT.BORDER);
+				lblBluYTVal.setAlignment(SWT.LEFT);
+				lblBluYTVal.setBounds(185, 288, 55, 15);
 				
 				//-----------------------------------------------------end of create tab layout-----------------------------------------//
 				
@@ -732,7 +805,23 @@ public class MainWindow {
 				hm.get(testKey).gY = spnGY.getSelection();
 				hm.get(testKey).bX = spnBX.getSelection();
 				hm.get(testKey).bY = spnBY.getSelection();
-				//Gamut.slope(hm.get(testKey));
+				
+				hm.get(testKey).rXN = spnRXN.getSelection();
+				hm.get(testKey).rYN = spnRYN.getSelection();
+				hm.get(testKey).gXN = spnGXN.getSelection();
+				hm.get(testKey).gYN = spnGYN.getSelection();
+				hm.get(testKey).bXN = spnBXN.getSelection();
+				hm.get(testKey).bYN = spnBYN.getSelection();
+				
+				//getCommon();
+				
+				Gamut.updateNative(hm.get(testKey));
+				lblRedXTVal.setText(Integer.toString(hm.get(testKey).rXO + comGam.rX));
+				lblRedYTVal.setText(Integer.toString(hm.get(testKey).rYO + comGam.rY));
+				lblGrnXTVal.setText(Integer.toString(hm.get(testKey).gXO + comGam.gX));
+				lblGrnYTVal.setText(Integer.toString(hm.get(testKey).gYO + comGam.gY));
+				lblBluXTVal.setText(Integer.toString(hm.get(testKey).bXO + comGam.bX));
+				lblBluYTVal.setText(Integer.toString(hm.get(testKey).bYO + comGam.bX));
 				//----------------------------------------------------------------------------------------------------------------------//
 				
 				
@@ -744,14 +833,40 @@ public class MainWindow {
 				tabFolder.setSelection(tbtGam);
 				
 				final String bm = testKey;            //--testKey needs to be converted to a 'final' to be used in event handler methods//
+				Gamut eventGam = hm.get(testKey);
 				
 				//--------------------------------add event handlers to update gamut values when spinners are changed-------------------//
+				
+		
+				tabFolder.addSelectionListener(new SelectionAdapter() {
+					@Override
+					public void widgetSelected(SelectionEvent e) {
+						if (tabFolder.getSelection() == tbtGam) {
+							eventGam.rXN = spnRXN.getSelection();
+							eventGam.rYN = spnRYN.getSelection();
+							eventGam.gXN = spnGXN.getSelection();
+							eventGam.gYN = spnGYN.getSelection();
+							eventGam.bXN = spnBXN.getSelection();
+							eventGam.bYN = spnBYN.getSelection();
+							Gamut.updateNative(eventGam);
+							lblRedXTVal.setText(Integer.toString(eventGam.rXO + comGam.rX));
+							lblRedYTVal.setText(Integer.toString(eventGam.rYO + comGam.rY));
+							lblGrnXTVal.setText(Integer.toString(eventGam.gXO + comGam.gX));
+							lblGrnYTVal.setText(Integer.toString(eventGam.gYO + comGam.gY));
+							lblBluXTVal.setText(Integer.toString(eventGam.bXO + comGam.bX));
+							lblBluYTVal.setText(Integer.toString(eventGam.bYO + comGam.bX));
+						}
+					}
+				});
 				
 				spnRX.addSelectionListener(new SelectionAdapter() {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
-						hm.get(bm).rX = spnRX.getSelection();
-						drawTriangle(lblTriangleImage, hm.get(bm));
+						eventGam.rX = spnRX.getSelection();
+						eventGam.rXN = spnRXN.getSelection();
+						Gamut.updateNative(eventGam);
+						lblRedXTVal.setText(Integer.toString(eventGam.rXO + comGam.rX));
+						drawTriangle(lblTriangleImage, eventGam);
 						getCommon();
 					}
 				});
@@ -759,8 +874,11 @@ public class MainWindow {
 				spnRY.addSelectionListener(new SelectionAdapter() {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
-						hm.get(bm).rY = spnRY.getSelection();
-						drawTriangle(lblTriangleImage, hm.get(bm));
+						eventGam.rY = spnRY.getSelection();
+						eventGam.rYN = spnRYN.getSelection();
+						Gamut.updateNative(eventGam);
+						lblRedYTVal.setText(Integer.toString(eventGam.rYO + comGam.rY));
+						drawTriangle(lblTriangleImage, eventGam);
 						getCommon();
 					}
 				});
@@ -768,8 +886,11 @@ public class MainWindow {
 				spnGX.addSelectionListener(new SelectionAdapter() {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
-						hm.get(bm).gX = spnGX.getSelection();
-						drawTriangle(lblTriangleImage, hm.get(bm));
+						eventGam.gX = spnGX.getSelection();
+						eventGam.gXN = spnGXN.getSelection();
+						Gamut.updateNative(eventGam);
+						lblGrnXTVal.setText(Integer.toString(eventGam.gXO + comGam.gX));
+						drawTriangle(lblTriangleImage, eventGam);
 						getCommon();
 					}
 				});
@@ -777,8 +898,11 @@ public class MainWindow {
 				spnGY.addSelectionListener(new SelectionAdapter() {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
-						hm.get(bm).gY = spnGY.getSelection();
-						drawTriangle(lblTriangleImage, hm.get(bm));
+						eventGam.gY = spnGY.getSelection();
+						eventGam.gYN = spnGYN.getSelection();
+						Gamut.updateNative(eventGam);
+						lblGrnYTVal.setText(Integer.toString(eventGam.gYO + comGam.gY));
+						drawTriangle(lblTriangleImage, eventGam);
 						getCommon();
 					}
 				});
@@ -786,8 +910,11 @@ public class MainWindow {
 				spnBX.addSelectionListener(new SelectionAdapter() {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
-						hm.get(bm).bX = spnBX.getSelection();
-						drawTriangle(lblTriangleImage, hm.get(bm));
+						eventGam.bX = spnBX.getSelection();
+						eventGam.bXN = spnBXN.getSelection();
+						Gamut.updateNative(eventGam);
+						lblBluXTVal.setText(Integer.toString(eventGam.bXO + comGam.bX));
+						drawTriangle(lblTriangleImage, eventGam);
 						getCommon();
 					}
 				});
@@ -795,12 +922,71 @@ public class MainWindow {
 				spnBY.addSelectionListener(new SelectionAdapter() {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
-						hm.get(bm).bY = spnBY.getSelection();
-						drawTriangle(lblTriangleImage, hm.get(bm));
+						eventGam.bY = spnBY.getSelection();
+						eventGam.bYN = spnBYN.getSelection();
+						Gamut.updateNative(eventGam);
+						lblBluYTVal.setText(Integer.toString(eventGam.bYO + comGam.bY));
+						drawTriangle(lblTriangleImage, eventGam);
 						getCommon();
 					}
 				});
+				
+				spnRXN.addSelectionListener(new SelectionAdapter() {
+					@Override
+					public void widgetSelected(SelectionEvent e) {
+						eventGam.rXN = spnRXN.getSelection();
+						Gamut.updateNative(eventGam);
+						lblRedXTVal.setText(Integer.toString (eventGam.rXO + comGam.rX));
+					}
+				});
+				
+				spnRYN.addSelectionListener(new SelectionAdapter() {
+					@Override
+					public void widgetSelected(SelectionEvent e) {
+						eventGam.rYN = spnRYN.getSelection();
+						Gamut.updateNative(eventGam);
+						lblRedYTVal.setText(Integer.toString (eventGam.rYO + comGam.rY));
+					}
+				});
+				
+				spnGXN.addSelectionListener(new SelectionAdapter() {
+					@Override
+					public void widgetSelected(SelectionEvent e) {
+						eventGam.gXN = spnGXN.getSelection();
+						Gamut.updateNative(eventGam);
+						lblGrnXTVal.setText(Integer.toString (eventGam.gXO + comGam.gX));
+					}
+				});
+				
+				spnGYN.addSelectionListener(new SelectionAdapter() {
+					@Override
+					public void widgetSelected(SelectionEvent e) {
+						eventGam.gYN = spnGYN.getSelection();
+						Gamut.updateNative(eventGam);
+						lblGrnYTVal.setText(Integer.toString (eventGam.gYO + comGam.gY));
+					}
+				});
+				
+				spnBXN.addSelectionListener(new SelectionAdapter() {
+					@Override
+					public void widgetSelected(SelectionEvent e) {
+						eventGam.bXN = spnBXN.getSelection();
+						Gamut.updateNative(eventGam);
+						lblBluXTVal.setText(Integer.toString (eventGam.bXO + comGam.bX));
+					}
+				});
+				
+				spnBYN.addSelectionListener(new SelectionAdapter() {
+					@Override
+					public void widgetSelected(SelectionEvent e) {
+						eventGam.bYN = spnBYN.getSelection();
+						Gamut.updateNative(eventGam);
+						lblBluYTVal.setText(Integer.toString (eventGam.bYO + comGam.bY));
+					}
+				});
 				//----------------------------------------------------------------------------------------------------------------------//
+				
+				
 				
 				tbtGam.addDisposeListener(new DisposeListener() {           //----set gamut back to all zero values if tab is closed----//
 					public void widgetDisposed(DisposeEvent arg0) {

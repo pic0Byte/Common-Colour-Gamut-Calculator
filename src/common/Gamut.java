@@ -8,21 +8,38 @@ public class Gamut {
 	public static final int EMPTY = -1;
 	private static final int X = 0;
 	private static final int Y = 1;
-	private static final double FUDGE = 0.98;
+	private static final double FUDGE = 0.999;
 	
 	public int rX, rY, gX, gY, bX, bY, drawColour; 
 	public double bgM, bgC, grM, grC, rbM, rbC;    //---------Coefficients (M) & constants (C) for slope equations------//
+	public int rXN, rYN, gXN, gYN, bXN, bYN;     //---------Native values
+	public int rXO, rYO, gXO, gYO, bXO, bYO;     //---------Offset between native & measured values
 	
 	
-	public Gamut (int rx, int ry, int gx, int gy, int bx, int by, int dC) {
+	public Gamut (int rX, int rY, int gX, int gY, int bX, int bY, int drawColour) {
 		
-		rX = rx;
-		rY = ry;
-		gX = gx;
-		gY = gy;
-		bX = bx;
-		bY = by;
-		drawColour = dC;
+		this.rX = rX;
+		this.rY = rY;
+		this.gX = gX;
+		this.gY = gY;
+		this.bX = bX;
+		this.bY = bY;
+		this.drawColour = drawColour;
+		
+		this.rXN = rX;
+		this.rYN = rY;
+		this.gXN = gX;
+		this.gYN = gY;
+		this.bXN = bX;
+		this.bYN = bY;
+		
+		this.rXO = rXN - rX;
+		this.rYO = rYN - rY;
+		this.gXO = gXN - gX;
+		this.gYO = gYN - gY;
+		this.bXO = bXN - bX;
+		this.bYO = bYN - bY;
+		
 		
 	}
 	
@@ -41,6 +58,18 @@ public class Gamut {
 		gam.grC = (double)gam.gY - (gam.grM * gam.gX);
 		gam.rbM = (double)(gam.rY - gam.bY) / (gam.rX - gam.bX);
 		gam.rbC = (double)gam.rY - (gam.rbM * gam.rX);
+		
+	}
+	
+	
+	public static void updateNative(Gamut gam) {
+		
+		gam.rXO = gam.rXN - gam.rX;
+		gam.rYO = gam.rYN - gam.rY;
+		gam.gXO = gam.gXN - gam.gX;
+		gam.gYO = gam.gYN - gam.gY;
+		gam.bXO = gam.bXN - gam.bX;
+		gam.bYO = gam.bYN - gam.bY;
 		
 	}
 	
@@ -319,6 +348,12 @@ public class Gamut {
 						
 				greenSolved = true;
 				
+			} else if (x == EMPTY){
+				 
+				common.gX = 313;
+				common.gY = 329;
+				greenSolved = true;
+				
 			} else {
 				
 				commonPoints[highYIndex][X] = EMPTY;
@@ -328,20 +363,14 @@ public class Gamut {
 				x = (commonPoints[highYIndex][X]);
 				y = (commonPoints[highYIndex][Y]);
 
-			}
+			} 
 			
 			if (greenSolved) {
 				
 				common.gX = (int) x;
 				common.gY = (int) y;
-				
-			} else if (x == EMPTY){
-				 
-				common.gX = 313;
-				common.gY = 329;
-				greenSolved = true;
-				
 			}
+				
 		}
 		
 	}
