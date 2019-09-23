@@ -22,6 +22,7 @@ import org.eclipse.swt.events.DisposeEvent;
 import java.util.HashMap;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Spinner;
+import org.eclipse.wb.swt.SWTResourceManager;
 
 
 public class MainWindow {
@@ -32,85 +33,24 @@ public class MainWindow {
 	final static int XOFFSET = 50;
 	final static int YOFFSET = 310;
 	
-	private Shell shlTabby;
+	private Shell shlCCGC;
 	private Display display;
 	private Button btnNewGamut;
-	private Button btnUpdate;
 	private CTabFolder tabFolder;
-	//private int numClass = 0;
-	protected Gamut comGam, gam1, gam2, gam3, gam4, gam5, gam6, gam7, gam8, gam9, gam10;
-	private HashMap<String, Gamut> hm;
+	
 	private Label lblCommonTriangle;
-	private String keyPrefix = "Display ";
-	private String testKey;
 	private Label lblBluYComVal;
 	private Label lblBluXComVal;
 	private Label lblGrnYComVal;
 	private Label lblGrnXComVal;
 	private Label lblRedYComVal;
 	private Label lblRedXComVal;
-	private Label lblGamut;
-	private Label lblBgY;
-	private Label lblGam1BgmVal;
-	private Label lblGam1BxVal;
-	private Label label_1;
-	private Label lblGam1BgcVal;
-	private Label lblGrY;
-	private Label lblGam1GrmVal;
-	private Label lblGam1GxVal;
-	private Label label_5;
-	private Label lblGam1GrcVal;
-	private Label lblRbY;
-	private Label lblGam1RbmVal;
-	private Label lblGam1RxVal;
-	private Label label_10;
-	private Label lblGam1RbcVal;
-	private Label lblGamut_1;
-	private Label label_3;
-	private Label label_4;
-	private Label label_6;
-	private Label lblGam2BgmVal;
-	private Label lblGam2GrmVal;
-	private Label lblGam2RbmVal;
-	private Label lblGam2BxVal;
-	private Label lblGam2GxVal;
-	private Label lblGam2RxVal;
-	private Label label_14;
-	private Label label_15;
-	private Label label_16;
-	private Label lblGam2BgcVal;
-	private Label lblGam2GrcVal;
-	private Label lblGam2RbcVal;
-	public static Label lblBg1Bg2Y;
-	public static Label lblBg1Gr2Y;
-	public static Label lblBg1Rb2Y;
-	public static Label lblGr1Bg2Y;
-	public static Label lblGr1Gr2Y;
-	public static Label lblGr1Rb2Y;
-	public static Label lblRb1Bg2Y;
-	public static Label lblRb1Gr2Y;
-	public static Label lblRb1Rb2Y;
-	public static Label lblR1y;
-	public static Label lblG1y;
-	public static Label lblB1y;
-	public static Label lblR2y;
-	public static Label lblG2y;
-	public static Label lblB2y;
-	public static Label lblBg1Bg2X;
-	public static Label lblBg1Gr2X;
-	public static Label lblBg1Rb2X;
-	public static Label lblGr1Bg2X;
-	public static Label lblGr1Gr2X;
-	public static Label lblGr1Rb2X;
-	public static Label lblRb1Bg2X;
-	public static Label lblRb1Gr2X;
-	public static Label lblRb1Rb2X;
-	public static Label lblR1x;
-	public static Label lblG1x;
-	public static Label lblB1x;
-	public static Label lblR2x;
-	public static Label lblG2x;
-	public static Label lblB2x;
+	
+	protected Gamut comGam, gam1, gam2, gam3, gam4, gam5, gam6, gam7, gam8, gam9, gam10;
+	private HashMap<String, Gamut> hm;
+	private String keyPrefix = "Display ";
+	private String testKey;
+	
 
 	
 	public static void main(String[] args) {
@@ -127,12 +67,12 @@ public class MainWindow {
 	public void open() {
 		display = Display.getDefault();
 		createContents();
-		shlTabby.open();
-		shlTabby.layout();
+		shlCCGC.open();
+		shlCCGC.layout();
 		handleEvents();
 		newGamut();
 		getCommon();
-		while (!shlTabby.isDisposed()) {
+		while (!shlCCGC.isDisposed()) {
 			if (!display.readAndDispatch()) {
 				display.sleep();
 			}
@@ -141,12 +81,12 @@ public class MainWindow {
 
 	
 	protected void createContents() {
-		shlTabby = new Shell();
-		shlTabby.setSize(1234, 914);
-		shlTabby.setText("Tabby2");
-		shlTabby.setLayout(new FormLayout());
+		shlCCGC = new Shell();
+		shlCCGC.setSize(1106, 720);
+		shlCCGC.setText("Common Colour Gamut Calculator");
+		shlCCGC.setLayout(new FormLayout());
 		
-		Composite composite = new Composite(shlTabby, SWT.NONE);
+		Composite composite = new Composite(shlCCGC, SWT.NONE);
 		composite.setLayout(new FormLayout());
 		FormData fd_composite = new FormData();
 		fd_composite.left = new FormAttachment(0);
@@ -155,12 +95,11 @@ public class MainWindow {
 		fd_composite.bottom = new FormAttachment(0, 65);
 		composite.setLayoutData(fd_composite);
 		
-		tabFolder = new CTabFolder(shlTabby, SWT.BORDER);
+		tabFolder = new CTabFolder(shlCCGC, SWT.BORDER);
 		FormData fd_tabFolder = new FormData();
 		fd_tabFolder.left = new FormAttachment(composite, 10, SWT.LEFT);
 		fd_tabFolder.top = new FormAttachment(composite, 2);
 		fd_tabFolder.bottom = new FormAttachment(100);
-		fd_tabFolder.right = new FormAttachment(100, -540);
 		
 		
 		btnNewGamut = new Button(composite, SWT.NONE);
@@ -170,18 +109,14 @@ public class MainWindow {
 		btnNewGamut.setLayoutData(fd_btnNewGamut);
 		btnNewGamut.setText("Add Gamut");
 		
-		btnUpdate = new Button(composite, SWT.NONE);
-		FormData fd_btnUpdate = new FormData();
-		fd_btnUpdate.top = new FormAttachment(btnNewGamut, 0, SWT.TOP);
-		fd_btnUpdate.left = new FormAttachment(btnNewGamut, 21);
-		btnUpdate.setLayoutData(fd_btnUpdate);
-		btnUpdate.setText("Update");
+		
 		tabFolder.setLayoutData(fd_tabFolder);
 		tabFolder.setSelectionBackground(Display.getCurrent().getSystemColor(SWT.COLOR_TITLE_INACTIVE_BACKGROUND_GRADIENT));
 		
-		Composite cmpCom = new Composite(shlTabby, SWT.NONE);
+		Composite cmpCom = new Composite(shlCCGC, SWT.NONE);
+		fd_tabFolder.right = new FormAttachment(cmpCom, -6);
 		FormData fd_cmpCom = new FormData();
-		fd_cmpCom.left = new FormAttachment(tabFolder, 6);
+		fd_cmpCom.left = new FormAttachment(0, 717);
 		fd_cmpCom.right = new FormAttachment(100);
 		fd_cmpCom.top = new FormAttachment(composite, 6);
 		fd_cmpCom.bottom = new FormAttachment(100, -6);
@@ -191,325 +126,59 @@ public class MainWindow {
 		
 		lblCommonTriangle = new Label(cmpCom, SWT.NONE);
 		lblCommonTriangle.setImage(image);
-		lblCommonTriangle.setBounds(10, 10, 329, 346);
+		lblCommonTriangle.setBounds(10, 66, 329, 346);
 		
 		Label lblCommonColourGamut = new Label(cmpCom, SWT.NONE);
-		lblCommonColourGamut.setBounds(44, 383, 148, 15);
+		lblCommonColourGamut.setBounds(148, 433, 148, 15);
 		lblCommonColourGamut.setText("Common Colour Gamut:");
 		
 		Label lblRedXCom = new Label(cmpCom, SWT.NONE);
 		lblRedXCom.setAlignment(SWT.RIGHT);
-		lblRedXCom.setBounds(44, 414, 55, 15);
+		lblRedXCom.setBounds(81, 464, 55, 15);
 		lblRedXCom.setText("Red X");
 		
 		Label lblRedYCom = new Label(cmpCom, SWT.NONE);
 		lblRedYCom.setAlignment(SWT.RIGHT);
-		lblRedYCom.setBounds(44, 434, 55, 15);
+		lblRedYCom.setBounds(81, 484, 55, 15);
 		lblRedYCom.setText("Red Y");
 		
 		Label lblGrnXCom = new Label(cmpCom, SWT.NONE);
 		lblGrnXCom.setText("Green X");
 		lblGrnXCom.setAlignment(SWT.RIGHT);
-		lblGrnXCom.setBounds(44, 464, 55, 15);
+		lblGrnXCom.setBounds(81, 514, 55, 15);
 		
 		Label lblGrnYCom = new Label(cmpCom, SWT.NONE);
 		lblGrnYCom.setText("Green Y");
 		lblGrnYCom.setAlignment(SWT.RIGHT);
-		lblGrnYCom.setBounds(44, 484, 55, 15);
+		lblGrnYCom.setBounds(81, 534, 55, 15);
 		
 		Label lblBluXCom = new Label(cmpCom, SWT.NONE);
 		lblBluXCom.setText("Blue X");
 		lblBluXCom.setAlignment(SWT.RIGHT);
-		lblBluXCom.setBounds(44, 514, 55, 15);
+		lblBluXCom.setBounds(203, 464, 55, 15);
 		
 		Label lblBluYCom = new Label(cmpCom, SWT.NONE);
 		lblBluYCom.setText("Blue Y");
 		lblBluYCom.setAlignment(SWT.RIGHT);
-		lblBluYCom.setBounds(44, 534, 55, 15);
+		lblBluYCom.setBounds(203, 484, 55, 15);
 		
 		lblRedXComVal = new Label(cmpCom, SWT.BORDER);
-		lblRedXComVal.setBounds(105, 414, 55, 15);
+		lblRedXComVal.setBounds(142, 464, 55, 15);
 		
 		lblRedYComVal = new Label(cmpCom, SWT.BORDER);
-		lblRedYComVal.setBounds(105, 434, 55, 15);
+		lblRedYComVal.setBounds(142, 484, 55, 15);
 		
 		lblGrnXComVal = new Label(cmpCom, SWT.BORDER);
-		lblGrnXComVal.setBounds(105, 464, 55, 15);
+		lblGrnXComVal.setBounds(142, 514, 55, 15);
 		
 		lblGrnYComVal = new Label(cmpCom, SWT.BORDER);
-		lblGrnYComVal.setBounds(105, 484, 55, 15);
+		lblGrnYComVal.setBounds(142, 534, 55, 15);
 		
 		lblBluXComVal = new Label(cmpCom, SWT.BORDER);
-		lblBluXComVal.setBounds(105, 514, 55, 15);
+		lblBluXComVal.setBounds(264, 464, 55, 15);
 		
 		lblBluYComVal = new Label(cmpCom, SWT.BORDER);
-		lblBluYComVal.setBounds(105, 534, 55, 15);
-		
-		lblGamut = new Label(cmpCom, SWT.NONE);
-		lblGamut.setBounds(208, 383, 55, 15);
-		lblGamut.setText("Gamut 1:");
-		
-		lblBgY = new Label(cmpCom, SWT.NONE);
-		lblBgY.setAlignment(SWT.RIGHT);
-		lblBgY.setBounds(193, 414, 55, 15);
-		lblBgY.setText("BG: y = ");
-		
-		lblGam1BgmVal = new Label(cmpCom, SWT.BORDER);
-		lblGam1BgmVal.setBounds(250, 414, 28, 15);
-		
-		lblGam1BxVal = new Label(cmpCom, SWT.BORDER);
-		lblGam1BxVal.setBounds(284, 414, 28, 15);
-		
-		label_1 = new Label(cmpCom, SWT.NONE);
-		label_1.setBounds(320, 414, 8, 15);
-		label_1.setText("+");
-		
-		lblGam1BgcVal = new Label(cmpCom, SWT.BORDER);
-		lblGam1BgcVal.setBounds(330, 414, 34, 15);
-		
-		lblGrY = new Label(cmpCom, SWT.NONE);
-		lblGrY.setText("GR: y = ");
-		lblGrY.setAlignment(SWT.RIGHT);
-		lblGrY.setBounds(192, 434, 55, 15);
-		
-		lblGam1GrmVal = new Label(cmpCom, SWT.BORDER);
-		lblGam1GrmVal.setBounds(250, 433, 28, 15);
-		
-		lblGam1GxVal = new Label(cmpCom, SWT.BORDER);
-		lblGam1GxVal.setBounds(283, 434, 28, 15);
-		
-		label_5 = new Label(cmpCom, SWT.NONE);
-		label_5.setText("+");
-		label_5.setBounds(319, 434, 8, 15);
-		
-		lblGam1GrcVal = new Label(cmpCom, SWT.BORDER);
-		lblGam1GrcVal.setBounds(329, 434, 34, 15);
-		
-		lblRbY = new Label(cmpCom, SWT.NONE);
-		lblRbY.setText("RB: y = ");
-		lblRbY.setAlignment(SWT.RIGHT);
-		lblRbY.setBounds(193, 455, 55, 15);
-		
-		lblGam1RbmVal = new Label(cmpCom, SWT.BORDER);
-		lblGam1RbmVal.setBounds(250, 455, 28, 15);
-		
-		lblGam1RxVal = new Label(cmpCom, SWT.BORDER);
-		lblGam1RxVal.setBounds(284, 455, 28, 15);
-		
-		label_10 = new Label(cmpCom, SWT.NONE);
-		label_10.setText("+");
-		label_10.setBounds(320, 455, 8, 15);
-		
-		lblGam1RbcVal = new Label(cmpCom, SWT.BORDER);
-		lblGam1RbcVal.setBounds(330, 455, 34, 15);
-		
-		lblGamut_1 = new Label(cmpCom, SWT.NONE);
-		lblGamut_1.setText("Gamut 2:");
-		lblGamut_1.setBounds(209, 487, 55, 15);
-		
-		label_3 = new Label(cmpCom, SWT.NONE);
-		label_3.setText("BG: y = ");
-		label_3.setAlignment(SWT.RIGHT);
-		label_3.setBounds(194, 518, 55, 15);
-		
-		label_4 = new Label(cmpCom, SWT.NONE);
-		label_4.setText("GR: y = ");
-		label_4.setAlignment(SWT.RIGHT);
-		label_4.setBounds(193, 538, 55, 15);
-		
-		label_6 = new Label(cmpCom, SWT.NONE);
-		label_6.setText("RB: y = ");
-		label_6.setAlignment(SWT.RIGHT);
-		label_6.setBounds(194, 559, 55, 15);
-		
-		lblGam2BgmVal = new Label(cmpCom, SWT.BORDER);
-		lblGam2BgmVal.setBounds(251, 518, 28, 15);
-		
-		lblGam2GrmVal = new Label(cmpCom, SWT.BORDER);
-		lblGam2GrmVal.setBounds(251, 537, 28, 15);
-		
-		lblGam2RbmVal = new Label(cmpCom, SWT.BORDER);
-		lblGam2RbmVal.setBounds(251, 559, 28, 15);
-		
-		lblGam2BxVal = new Label(cmpCom, SWT.BORDER);
-		lblGam2BxVal.setBounds(285, 518, 28, 15);
-		
-		lblGam2GxVal = new Label(cmpCom, SWT.BORDER);
-		lblGam2GxVal.setBounds(284, 538, 28, 15);
-		
-		lblGam2RxVal = new Label(cmpCom, SWT.BORDER);
-		lblGam2RxVal.setBounds(285, 559, 28, 15);
-		
-		label_14 = new Label(cmpCom, SWT.NONE);
-		label_14.setText("+");
-		label_14.setBounds(321, 518, 8, 15);
-		
-		label_15 = new Label(cmpCom, SWT.NONE);
-		label_15.setText("+");
-		label_15.setBounds(320, 538, 8, 15);
-		
-		label_16 = new Label(cmpCom, SWT.NONE);
-		label_16.setText("+");
-		label_16.setBounds(321, 559, 8, 15);
-		
-		lblGam2BgcVal = new Label(cmpCom, SWT.BORDER);
-		lblGam2BgcVal.setBounds(331, 518, 34, 15);
-		
-		lblGam2GrcVal = new Label(cmpCom, SWT.BORDER);
-		lblGam2GrcVal.setBounds(330, 538, 34, 15);
-		
-		lblGam2RbcVal = new Label(cmpCom, SWT.BORDER);
-		lblGam2RbcVal.setBounds(331, 559, 34, 15);
-		
-		Label lblNewLabel = new Label(cmpCom, SWT.NONE);
-		lblNewLabel.setBounds(345, 52, 55, 15);
-		lblNewLabel.setText("BG1/BG2");
-		
-		Label lblBggr = new Label(cmpCom, SWT.NONE);
-		lblBggr.setText("BG1/GR2");
-		lblBggr.setBounds(345, 73, 55, 15);
-		
-		Label lblBgrb = new Label(cmpCom, SWT.NONE);
-		lblBgrb.setText("BG1/RB2");
-		lblBgrb.setBounds(345, 95, 55, 15);
-		
-		Label lblGrbg = new Label(cmpCom, SWT.NONE);
-		lblGrbg.setText("GR1/BG2");
-		lblGrbg.setBounds(345, 116, 55, 15);
-		
-		Label lblGrgr = new Label(cmpCom, SWT.NONE);
-		lblGrgr.setText("GR1/GR2");
-		lblGrgr.setBounds(345, 137, 55, 15);
-		
-		Label lblGrrb = new Label(cmpCom, SWT.NONE);
-		lblGrrb.setText("GR1/RB2");
-		lblGrrb.setBounds(345, 158, 55, 15);
-		
-		Label lblRbbg = new Label(cmpCom, SWT.NONE);
-		lblRbbg.setText("RB1/BG2");
-		lblRbbg.setBounds(345, 179, 55, 15);
-		
-		Label lblRbgr = new Label(cmpCom, SWT.NONE);
-		lblRbgr.setText("RB1/GR2");
-		lblRbgr.setBounds(345, 200, 55, 15);
-		
-		Label lblRbrb = new Label(cmpCom, SWT.NONE);
-		lblRbrb.setText("RB1/RB2");
-		lblRbrb.setBounds(345, 221, 55, 15);
-		
-		Label lblRx = new Label(cmpCom, SWT.NONE);
-		lblRx.setText("RX 1");
-		lblRx.setBounds(345, 242, 55, 15);
-		
-		Label lblGx = new Label(cmpCom, SWT.NONE);
-		lblGx.setText("GX 1");
-		lblGx.setBounds(345, 263, 55, 15);
-		
-		Label lblBx = new Label(cmpCom, SWT.NONE);
-		lblBx.setText("BX 1");
-		lblBx.setBounds(345, 284, 55, 15);
-		
-		Label lblRx_1 = new Label(cmpCom, SWT.NONE);
-		lblRx_1.setText("RX 2");
-		lblRx_1.setBounds(345, 305, 55, 15);
-		
-		Label lblGx_1 = new Label(cmpCom, SWT.NONE);
-		lblGx_1.setText("GX 2");
-		lblGx_1.setBounds(345, 326, 55, 15);
-		
-		Label lblBx_1 = new Label(cmpCom, SWT.NONE);
-		lblBx_1.setText("BX 2");
-		lblBx_1.setBounds(345, 347, 55, 15);
-		
-		lblBg1Bg2X = new Label(cmpCom, SWT.BORDER);
-		lblBg1Bg2X.setBounds(406, 52, 42, 15);
-		
-		lblBg1Gr2X = new Label(cmpCom, SWT.BORDER);
-		lblBg1Gr2X.setBounds(406, 73, 42, 15);
-		
-		lblBg1Rb2X = new Label(cmpCom, SWT.BORDER);
-		lblBg1Rb2X.setBounds(406, 95, 42, 15);
-		
-		lblGr1Bg2X = new Label(cmpCom, SWT.BORDER);
-		lblGr1Bg2X.setBounds(406, 116, 42, 15);
-		
-		lblGr1Gr2X = new Label(cmpCom, SWT.BORDER);
-		lblGr1Gr2X.setBounds(406, 137, 42, 15);
-		
-		lblGr1Rb2X = new Label(cmpCom, SWT.BORDER);
-		lblGr1Rb2X.setBounds(406, 158, 42, 15);
-		
-		lblRb1Bg2X = new Label(cmpCom, SWT.BORDER);
-		lblRb1Bg2X.setBounds(406, 179, 42, 15);
-		
-		lblRb1Gr2X = new Label(cmpCom, SWT.BORDER);
-		lblRb1Gr2X.setBounds(406, 200, 42, 15);
-		
-		lblRb1Rb2X = new Label(cmpCom, SWT.BORDER);
-		lblRb1Rb2X.setBounds(406, 221, 42, 15);
-		
-		lblR1x = new Label(cmpCom, SWT.BORDER);
-		lblR1x.setBounds(406, 242, 42, 15);
-		
-		lblG1x = new Label(cmpCom, SWT.BORDER);
-		lblG1x.setBounds(406, 263, 42, 15);
-		
-		lblB1x = new Label(cmpCom, SWT.BORDER);
-		lblB1x.setBounds(406, 284, 42, 15);
-		
-		lblR2x = new Label(cmpCom, SWT.BORDER);
-		lblR2x.setBounds(406, 305, 42, 15);
-		
-		lblG2x = new Label(cmpCom, SWT.BORDER);
-		lblG2x.setBounds(406, 326, 42, 15);
-		
-		lblB2x = new Label(cmpCom, SWT.BORDER);
-		lblB2x.setBounds(406, 347, 42, 15);
-		
-		lblBg1Bg2Y = new Label(cmpCom, SWT.BORDER);
-		lblBg1Bg2Y.setBounds(466, 52, 42, 15);
-		
-		lblBg1Gr2Y = new Label(cmpCom, SWT.BORDER);
-		lblBg1Gr2Y.setBounds(466, 73, 42, 15);
-		
-		lblBg1Rb2Y = new Label(cmpCom, SWT.BORDER);
-		lblBg1Rb2Y.setBounds(466, 95, 42, 15);
-		
-		lblGr1Bg2Y = new Label(cmpCom, SWT.BORDER);
-		lblGr1Bg2Y.setBounds(466, 116, 42, 15);
-		
-		lblGr1Gr2Y = new Label(cmpCom, SWT.BORDER);
-		lblGr1Gr2Y.setBounds(466, 137, 42, 15);
-		
-		lblGr1Rb2Y = new Label(cmpCom, SWT.BORDER);
-		lblGr1Rb2Y.setBounds(466, 158, 42, 15);
-		
-		lblRb1Bg2Y = new Label(cmpCom, SWT.BORDER);
-		lblRb1Bg2Y.setBounds(466, 179, 42, 15);
-		
-		lblRb1Gr2Y = new Label(cmpCom, SWT.BORDER);
-		lblRb1Gr2Y.setBounds(466, 200, 42, 15);
-		
-		lblRb1Rb2Y = new Label(cmpCom, SWT.BORDER);
-		lblRb1Rb2Y.setBounds(466, 221, 42, 15);
-		
-		lblR1y = new Label(cmpCom, SWT.BORDER);
-		lblR1y.setBounds(466, 242, 42, 15);
-		
-		lblG1y = new Label(cmpCom, SWT.BORDER);
-		lblG1y.setBounds(466, 263, 42, 15);
-		
-		lblB1y = new Label(cmpCom, SWT.BORDER);
-		lblB1y.setBounds(466, 284, 42, 15);
-		
-		lblR2y = new Label(cmpCom, SWT.BORDER);
-		lblR2y.setBounds(466, 305, 42, 15);
-		
-		lblG2y = new Label(cmpCom, SWT.BORDER);
-		lblG2y.setBounds(466, 326, 42, 15);
-		
-		lblB2y = new Label(cmpCom, SWT.BORDER);
-		lblB2y.setBounds(466, 347, 42, 15);
+		lblBluYComVal.setBounds(264, 484, 55, 15);
 		
 		
 		
@@ -527,71 +196,55 @@ public class MainWindow {
 			}
 		});
 		
-		/*tabFolder.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				if (tabFolder.getSelection() == tbtmCommon) {
-					comGam = Gamut.getCommonArea(gam1, gam2);
-					drawCommon(lblCommonTriangle);
-				}
-			}
-		});*/
 		
-		btnUpdate.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				comGam = Gamut.getCommonArea(gam1, gam2);
-				drawCommon(lblCommonTriangle);
-			}
-		});
 	}
 	
 	
 	protected void makeGamuts() {
 		
 		comGam = new Gamut(Gamut.EMPTY, Gamut.EMPTY, Gamut.EMPTY, Gamut.EMPTY, 
-				Gamut.EMPTY, Gamut.EMPTY, SWT.COLOR_WHITE);
+				Gamut.EMPTY, Gamut.EMPTY, Gamut.EMPTY, Gamut.EMPTY, SWT.COLOR_WHITE);
 		
 		hm = new HashMap<String, Gamut>();
 		
 		gam1 = new Gamut(Gamut.EMPTY, Gamut.EMPTY, Gamut.EMPTY, Gamut.EMPTY, 
-				Gamut.EMPTY, Gamut.EMPTY, SWT.COLOR_CYAN);
+				Gamut.EMPTY, Gamut.EMPTY, Gamut.EMPTY, Gamut.EMPTY, SWT.COLOR_CYAN);
 		hm.put("Display 1", gam1);
 		
 		gam2 = new Gamut(Gamut.EMPTY, Gamut.EMPTY, Gamut.EMPTY, Gamut.EMPTY, 
-				Gamut.EMPTY, Gamut.EMPTY, SWT.COLOR_MAGENTA);
+				Gamut.EMPTY, Gamut.EMPTY, Gamut.EMPTY, Gamut.EMPTY, SWT.COLOR_MAGENTA);
 		hm.put("Display 2", gam2);
 		
 		gam3 = new Gamut(Gamut.EMPTY, Gamut.EMPTY, Gamut.EMPTY, Gamut.EMPTY, 
-				Gamut.EMPTY, Gamut.EMPTY, SWT.COLOR_YELLOW);
+				Gamut.EMPTY, Gamut.EMPTY, Gamut.EMPTY, Gamut.EMPTY, SWT.COLOR_YELLOW);
 		hm.put("Display 3", gam3);
 		
 		gam4 = new Gamut(Gamut.EMPTY, Gamut.EMPTY, Gamut.EMPTY, Gamut.EMPTY, 
-				Gamut.EMPTY, Gamut.EMPTY, 0x3);
+				Gamut.EMPTY, Gamut.EMPTY, Gamut.EMPTY, Gamut.EMPTY, 0x3);
 		hm.put("Display 4", gam4);
 		
 		gam5 = new Gamut(Gamut.EMPTY, Gamut.EMPTY, Gamut.EMPTY, Gamut.EMPTY, 
-				Gamut.EMPTY, Gamut.EMPTY, 0x4);
+				Gamut.EMPTY, Gamut.EMPTY, Gamut.EMPTY, Gamut.EMPTY, 0x4);
 		hm.put("Display 5", gam5);
 		
 		gam6 = new Gamut(Gamut.EMPTY, Gamut.EMPTY, Gamut.EMPTY, Gamut.EMPTY, 
-				Gamut.EMPTY, Gamut.EMPTY, 0x5);
+				Gamut.EMPTY, Gamut.EMPTY, Gamut.EMPTY, Gamut.EMPTY, 0x5);
 		hm.put("Display 6", gam6);
 		
 		gam7 = new Gamut(Gamut.EMPTY, Gamut.EMPTY, Gamut.EMPTY, Gamut.EMPTY, 
-				Gamut.EMPTY, Gamut.EMPTY, 0x1a);
+				Gamut.EMPTY, Gamut.EMPTY, Gamut.EMPTY, Gamut.EMPTY, 0x1a);
 		hm.put("Display 7", gam7);
 		
 		gam8 = new Gamut(Gamut.EMPTY, Gamut.EMPTY, Gamut.EMPTY, Gamut.EMPTY, 
-				Gamut.EMPTY, Gamut.EMPTY, 0x8);
+				Gamut.EMPTY, Gamut.EMPTY, Gamut.EMPTY, Gamut.EMPTY, 0x8);
 		hm.put("Display 8", gam8);
 		
 		gam9 = new Gamut(Gamut.EMPTY, Gamut.EMPTY, Gamut.EMPTY, Gamut.EMPTY, 
-				Gamut.EMPTY, Gamut.EMPTY, 0x9);
+				Gamut.EMPTY, Gamut.EMPTY, Gamut.EMPTY, Gamut.EMPTY, 0x9);
 		hm.put("Display 9", gam9);
 		
 		gam10 = new Gamut(Gamut.EMPTY, Gamut.EMPTY, Gamut.EMPTY, Gamut.EMPTY, 
-				Gamut.EMPTY, Gamut.EMPTY, 0x10);
+				Gamut.EMPTY, Gamut.EMPTY, Gamut.EMPTY, Gamut.EMPTY, 0x10);
 		hm.put("Display 10", gam10);
 	}
 	
@@ -606,6 +259,7 @@ public class MainWindow {
 		
 			if (hm.get(testKey).rX == Gamut.EMPTY) {
 				
+				
 				//---------------------------------Create Tab layout--------------------------------------------------------------------//
 				
 				tbtGam = new CTabItem(tabFolder, SWT.CLOSE);
@@ -619,6 +273,10 @@ public class MainWindow {
 				spnRX.setMinimum(401);
 				spnRX.setSelection(640);
 				spnRX.setBounds(79, 41, 56, 22);
+				
+				Button btnLinkRx = new Button(cmpNewGamut, SWT.NONE);
+				btnLinkRx.setBounds(145, 41, 25, 22);
+				btnLinkRx.setImage(SWTResourceManager.getImage(MainWindow.class, "/resource/link.png"));
 				
 				Spinner spnRXN = new Spinner(cmpNewGamut, SWT.BORDER);
 				spnRXN.setDigits(3);
@@ -697,6 +355,34 @@ public class MainWindow {
 				spnBYN.setDigits(3);
 				spnBYN.setBounds(179, 209, 56, 22);
 				
+				Spinner spnWX = new Spinner(cmpNewGamut, SWT.BORDER);
+				spnWX.setMaximum(400);
+				spnWX.setMinimum(250);
+				spnWX.setSelection(313);
+				spnWX.setDigits(3);
+				spnWX.setBounds(79, 258, 56, 22);
+				
+				Spinner spnWXN = new Spinner(cmpNewGamut, SWT.BORDER);
+				spnWXN.setMaximum(400);
+				spnWXN.setMinimum(250);
+				spnWXN.setSelection(313);
+				spnWXN.setDigits(3);
+				spnWXN.setBounds(179, 258, 56, 22);
+				
+				Spinner spnWY = new Spinner(cmpNewGamut, SWT.BORDER);
+				spnWY.setMaximum(400);
+				spnWY.setMinimum(250);
+				spnWY.setSelection(329);
+				spnWY.setDigits(3);
+				spnWY.setBounds(79, 283, 56, 22);
+				
+				Spinner spnWYN = new Spinner(cmpNewGamut, SWT.BORDER);
+				spnWYN.setMaximum(400);
+				spnWYN.setMinimum(250);
+				spnWYN.setSelection(329);
+				spnWYN.setDigits(3);
+				spnWYN.setBounds(179, 283, 56, 22);
+				
 				Label lblMeasured = new Label(cmpNewGamut, SWT.NONE);
 				lblMeasured.setAlignment(SWT.LEFT);
 				lblMeasured.setBounds(80, 19, 55, 15);
@@ -709,7 +395,7 @@ public class MainWindow {
 				
 				Label lblDesVal = new Label(cmpNewGamut, SWT.NONE);
 				lblDesVal.setAlignment(SWT.LEFT);
-				lblDesVal.setBounds(80, 240, 170, 15);
+				lblDesVal.setBounds(80, 334, 170, 15);
 				lblDesVal.setText("Target Values (offsets)");
 				
 				Label lblRedX = new Label(cmpNewGamut, SWT.NONE);
@@ -719,12 +405,12 @@ public class MainWindow {
 				
 				Label lblRedXT = new Label(cmpNewGamut, SWT.NONE);
 				lblRedXT.setAlignment(SWT.RIGHT);
-				lblRedXT.setBounds(18, 264, 55, 15);
+				lblRedXT.setBounds(18, 358, 55, 15);
 				lblRedXT.setText("Red X");
 				
 				Label lblRedXTVal = new Label(cmpNewGamut, SWT.BORDER);
 				lblRedXTVal.setAlignment(SWT.LEFT);
-				lblRedXTVal.setBounds(79, 264, 55, 15);
+				lblRedXTVal.setBounds(79, 358, 55, 15);
 				
 				Label lblRedY = new Label(cmpNewGamut, SWT.NONE);
 				lblRedY.setText("Red Y");
@@ -734,25 +420,25 @@ public class MainWindow {
 				Label lblRedYT = new Label(cmpNewGamut, SWT.NONE);
 				lblRedYT.setText("Red Y");
 				lblRedYT.setAlignment(SWT.RIGHT);
-				lblRedYT.setBounds(18, 288, 55, 15);
+				lblRedYT.setBounds(18, 382, 55, 15);
 				
 				Label lblRedYTVal = new Label(cmpNewGamut, SWT.BORDER);
 				lblRedYTVal.setAlignment(SWT.LEFT);
-				lblRedYTVal.setBounds(79, 288, 55, 15);
+				lblRedYTVal.setBounds(79, 382, 55, 15);
 				
 				Label lblGrnX = new Label(cmpNewGamut, SWT.NONE);
 				lblGrnX.setText("Green X");
 				lblGrnX.setAlignment(SWT.RIGHT);
 				lblGrnX.setBounds(18, 112, 55, 15);
 				
-				Label lblGrnTX = new Label(cmpNewGamut, SWT.NONE);
-				lblGrnTX.setText("Green X");
-				lblGrnTX.setAlignment(SWT.RIGHT);
-				lblGrnTX.setBounds(18, 332, 55, 15);
+				Label lblGrnXT = new Label(cmpNewGamut, SWT.NONE);
+				lblGrnXT.setText("Green X");
+				lblGrnXT.setAlignment(SWT.RIGHT);
+				lblGrnXT.setBounds(18, 426, 55, 15);
 				
 				Label lblGrnXTVal = new Label(cmpNewGamut, SWT.BORDER);
 				lblGrnXTVal.setAlignment(SWT.LEFT);
-				lblGrnXTVal.setBounds(79, 332, 55, 15);
+				lblGrnXTVal.setBounds(79, 426, 55, 15);
 				
 				Label lblGrnY = new Label(cmpNewGamut, SWT.NONE);
 				lblGrnY.setText("Green Y");
@@ -762,11 +448,11 @@ public class MainWindow {
 				Label lblGrnYT = new Label(cmpNewGamut, SWT.NONE);
 				lblGrnYT.setText("Green Y");
 				lblGrnYT.setAlignment(SWT.RIGHT);
-				lblGrnYT.setBounds(18, 356, 55, 15);
+				lblGrnYT.setBounds(18, 450, 55, 15);
 				
 				Label lblGrnYTVal = new Label(cmpNewGamut, SWT.BORDER);
 				lblGrnYTVal.setAlignment(SWT.LEFT);
-				lblGrnYTVal.setBounds(79, 356, 55, 15);
+				lblGrnYTVal.setBounds(79, 450, 55, 15);
 				
 				Label lblBluX = new Label(cmpNewGamut, SWT.NONE);
 				lblBluX.setText("Blue X");
@@ -776,11 +462,11 @@ public class MainWindow {
 				Label lblBluXT = new Label(cmpNewGamut, SWT.NONE);
 				lblBluXT.setText("Blue X");
 				lblBluXT.setAlignment(SWT.RIGHT);
-				lblBluXT.setBounds(130, 264, 50, 15);
+				lblBluXT.setBounds(130, 358, 50, 15);
 				
 				Label lblBluXTVal = new Label(cmpNewGamut, SWT.BORDER);
 				lblBluXTVal.setAlignment(SWT.LEFT);
-				lblBluXTVal.setBounds(185, 264, 55, 15);
+				lblBluXTVal.setBounds(185, 358, 55, 15);
 				
 				Label lblBluY = new Label(cmpNewGamut, SWT.NONE);
 				lblBluY.setText("Blue Y");
@@ -790,11 +476,39 @@ public class MainWindow {
 				Label lblBluYT = new Label(cmpNewGamut, SWT.NONE);
 				lblBluYT.setText("Blue X");
 				lblBluYT.setAlignment(SWT.RIGHT);
-				lblBluYT.setBounds(130, 288, 50, 15);
+				lblBluYT.setBounds(130, 382, 50, 15);
 				
 				Label lblBluYTVal = new Label(cmpNewGamut, SWT.BORDER);
 				lblBluYTVal.setAlignment(SWT.LEFT);
-				lblBluYTVal.setBounds(185, 288, 55, 15);
+				lblBluYTVal.setBounds(185, 382, 55, 15);
+				
+				Label lblWhtX = new Label(cmpNewGamut, SWT.NONE);
+				lblWhtX.setText("White X");
+				lblWhtX.setAlignment(SWT.RIGHT);
+				lblWhtX.setBounds(18, 285, 55, 15);
+				
+				Label lblWhtXT = new Label(cmpNewGamut, SWT.NONE);
+				lblWhtXT.setText("White X");
+				lblWhtXT.setAlignment(SWT.RIGHT);
+				lblWhtXT.setBounds(130, 426, 55, 15);
+				
+				Label lblWhtXTVal = new Label(cmpNewGamut, SWT.BORDER);
+				lblWhtXTVal.setAlignment(SWT.LEFT);
+				lblWhtXTVal.setBounds(185, 426, 55, 15);
+				
+				Label lblWhtY = new Label(cmpNewGamut, SWT.NONE);
+				lblWhtY.setText("White Y");
+				lblWhtY.setAlignment(SWT.RIGHT);
+				lblWhtY.setBounds(18, 260, 55, 15);
+				
+				Label lblWhtYT = new Label(cmpNewGamut, SWT.NONE);
+				lblWhtYT.setText("White Y");
+				lblWhtYT.setAlignment(SWT.RIGHT);
+				lblWhtYT.setBounds(130, 450, 55, 15);
+				
+				Label lblWhtYTVal = new Label(cmpNewGamut, SWT.BORDER);
+				lblWhtYTVal.setAlignment(SWT.LEFT);
+				lblWhtYTVal.setBounds(185, 450, 55, 15);
 				
 				//-----------------------------------------------------end of create tab layout-----------------------------------------//
 				
@@ -805,6 +519,8 @@ public class MainWindow {
 				hm.get(testKey).gY = spnGY.getSelection();
 				hm.get(testKey).bX = spnBX.getSelection();
 				hm.get(testKey).bY = spnBY.getSelection();
+				hm.get(testKey).wX = spnWX.getSelection();
+				hm.get(testKey).wY = spnWY.getSelection();
 				
 				hm.get(testKey).rXN = spnRXN.getSelection();
 				hm.get(testKey).rYN = spnRYN.getSelection();
@@ -812,6 +528,8 @@ public class MainWindow {
 				hm.get(testKey).gYN = spnGYN.getSelection();
 				hm.get(testKey).bXN = spnBXN.getSelection();
 				hm.get(testKey).bYN = spnBYN.getSelection();
+				hm.get(testKey).wXN = spnWXN.getSelection();
+				hm.get(testKey).wYN = spnWYN.getSelection();
 				
 				//getCommon();
 				
@@ -871,6 +589,7 @@ public class MainWindow {
 					}
 				});
 				
+				
 				spnRY.addSelectionListener(new SelectionAdapter() {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
@@ -926,6 +645,30 @@ public class MainWindow {
 						eventGam.bYN = spnBYN.getSelection();
 						Gamut.updateNative(eventGam);
 						lblBluYTVal.setText(Integer.toString(eventGam.bYO + comGam.bY));
+						drawTriangle(lblTriangleImage, eventGam);
+						getCommon();
+					}
+				});
+				
+				spnWX.addSelectionListener(new SelectionAdapter() {
+					@Override
+					public void widgetSelected(SelectionEvent e) {
+						eventGam.wX = spnWX.getSelection();
+						eventGam.wXN = spnWXN.getSelection();
+						Gamut.updateNative(eventGam);
+						lblWhtXTVal.setText(Integer.toString(eventGam.wXO + comGam.wX));
+						drawTriangle(lblTriangleImage, eventGam);
+						getCommon();
+					}
+				});
+				
+				spnWY.addSelectionListener(new SelectionAdapter() {
+					@Override
+					public void widgetSelected(SelectionEvent e) {
+						eventGam.wY = spnWY.getSelection();
+						eventGam.wYN = spnWYN.getSelection();
+						Gamut.updateNative(eventGam);
+						lblWhtYTVal.setText(Integer.toString(eventGam.wYO + comGam.wY));
 						drawTriangle(lblTriangleImage, eventGam);
 						getCommon();
 					}
@@ -1089,14 +832,21 @@ public class MainWindow {
 			    gc.drawLine((int)drx, (int)dry, (int)dgx, (int)dgy);
 			    gc.drawLine((int)dgx, (int)dgy, (int)dbx, (int)dby);
 			    gc.drawLine((int)dbx, (int)dby, (int)drx, (int)dry);
+			    gc.setForeground(display.getSystemColor(SWT.COLOR_DARK_BLUE));
+			    gc.fillOval((int)(XOFFSET + hm.get(testKey).wX * XSCALER), (int)(YOFFSET - hm.get(testKey).wY * YSCALER), 4, 4);
+			    gc.drawOval((int)(XOFFSET + hm.get(testKey).wX * XSCALER), (int)(YOFFSET - hm.get(testKey).wY * YSCALER), 4, 4);
+			   
 			    
 			}	
 		}
 		
-		gc.setForeground(display.getSystemColor(comGam.drawColour));
-		gc.fillOval((int)(XOFFSET + comGam.rX * XSCALER), (int)(YOFFSET - comGam.rY * YSCALER), 4, 4);
-		gc.fillOval((int)(XOFFSET + comGam.gX * XSCALER), (int)(YOFFSET - comGam.gY * YSCALER), 4, 4);
-		gc.fillOval((int)(XOFFSET + comGam.bX * XSCALER), (int)(YOFFSET - comGam.bY * YSCALER), 4, 4);
+		gc.setForeground(display.getSystemColor(SWT.COLOR_DARK_BLUE));
+		gc.fillOval((int)((XOFFSET + comGam.rX * XSCALER) - 2), (int)((YOFFSET - comGam.rY * YSCALER) - 2), 4, 4);
+		gc.fillOval((int)((XOFFSET + comGam.gX * XSCALER) - 2), (int)((YOFFSET - comGam.gY * YSCALER) - 2), 4, 4);
+		gc.fillOval((int)((XOFFSET + comGam.bX * XSCALER) - 2), (int)((YOFFSET - comGam.bY * YSCALER) - 2), 4, 4);
+		gc.drawOval((int)((XOFFSET + comGam.rX * XSCALER) - 2), (int)((YOFFSET - comGam.rY * YSCALER) - 2), 4, 4);
+		gc.drawOval((int)((XOFFSET + comGam.gX * XSCALER) - 2), (int)((YOFFSET - comGam.gY * YSCALER) - 2), 4, 4);
+		gc.drawOval((int)((XOFFSET + comGam.bX * XSCALER) - 2), (int)((YOFFSET - comGam.bY * YSCALER) - 2), 4, 4);
 		
 	
 		gc.dispose();
@@ -1107,28 +857,6 @@ public class MainWindow {
 		lblGrnYComVal.setText(Integer.toString(comGam.gY));
 		lblBluXComVal.setText(Integer.toString(comGam.bX));
 		lblBluYComVal.setText(Integer.toString(comGam.bY));
-		
-		lblGam1BgmVal.setText(Double.toString(gam1.bgM));
-		lblGam1GrmVal.setText(Double.toString(gam1.grM));
-		lblGam1RbmVal.setText(Double.toString(gam1.rbM));
-		lblGam2BgmVal.setText(Double.toString(gam2.bgM));
-		lblGam2GrmVal.setText(Double.toString(gam2.grM));
-		lblGam2RbmVal.setText(Double.toString(gam2.rbM));
-		
-		lblGam1BxVal.setText(Integer.toString(gam1.bX));
-		lblGam1GxVal.setText(Integer.toString(gam1.gX));
-		lblGam1RxVal.setText(Integer.toString(gam1.rX));
-		lblGam2BxVal.setText(Integer.toString(gam2.bX));
-		lblGam2GxVal.setText(Integer.toString(gam2.gX));
-		lblGam2RxVal.setText(Integer.toString(gam2.rX));
-		
-		lblGam1BgcVal.setText(Double.toString(gam1.bgC));
-		lblGam1GrcVal.setText(Double.toString(gam1.grC));
-		lblGam1RbcVal.setText(Double.toString(gam1.rbC));
-		lblGam2BgcVal.setText(Double.toString(gam2.bgC));
-		lblGam2GrcVal.setText(Double.toString(gam2.grC));
-		lblGam2RbcVal.setText(Double.toString(gam2.rbC));
-		
 		
 		
 	}

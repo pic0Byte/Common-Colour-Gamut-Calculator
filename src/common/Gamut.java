@@ -1,7 +1,7 @@
 package common;
 
 import org.eclipse.swt.SWT;
-import views.MainWindow;
+
 
 public class Gamut {
 	
@@ -10,13 +10,13 @@ public class Gamut {
 	private static final int Y = 1;
 	private static final double FUDGE = 0.999;
 	
-	public int rX, rY, gX, gY, bX, bY, drawColour; 
+	public int rX, rY, gX, gY, bX, bY, wX, wY, drawColour; 
 	public double bgM, bgC, grM, grC, rbM, rbC;    //---------Coefficients (M) & constants (C) for slope equations------//
-	public int rXN, rYN, gXN, gYN, bXN, bYN;     //---------Native values
-	public int rXO, rYO, gXO, gYO, bXO, bYO;     //---------Offset between native & measured values
+	public int rXN, rYN, gXN, gYN, bXN, bYN, wXN, wYN;     //---------Native values
+	public int rXO, rYO, gXO, gYO, bXO, bYO, wXO, wYO;     //---------Offset between native & measured values
 	
 	
-	public Gamut (int rX, int rY, int gX, int gY, int bX, int bY, int drawColour) {
+	public Gamut (int rX, int rY, int gX, int gY, int bX, int bY, int wX, int wY, int drawColour) {
 		
 		this.rX = rX;
 		this.rY = rY;
@@ -24,6 +24,8 @@ public class Gamut {
 		this.gY = gY;
 		this.bX = bX;
 		this.bY = bY;
+		this.wX = wX;
+		this.wY = wY;
 		this.drawColour = drawColour;
 		
 		this.rXN = rX;
@@ -32,6 +34,8 @@ public class Gamut {
 		this.gYN = gY;
 		this.bXN = bX;
 		this.bYN = bY;
+		this.wXN = wX;
+		this.wYN = wY;
 		
 		this.rXO = rXN - rX;
 		this.rYO = rYN - rY;
@@ -39,6 +43,8 @@ public class Gamut {
 		this.gYO = gYN - gY;
 		this.bXO = bXN - bX;
 		this.bYO = bYN - bY;
+		this.wXO = wXN - wX;
+		this.wYO = wYN - wY;
 		
 		
 	}
@@ -76,7 +82,7 @@ public class Gamut {
 	
 	public static Gamut getCommonArea(Gamut gam1, Gamut gam2) {
 		
-		Gamut common = new Gamut(EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, SWT.COLOR_WHITE);
+		Gamut common = new Gamut(EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, EMPTY, 313, 329, SWT.COLOR_WHITE);
 		
 		//------------------Array of 15 candidate x,y points for the 3 common area triangle corners---------------------//
 		//                [0]=BG1/BG2, [1]=BG1/GR2, [2]=BG1/RB2, [3]=GR1/BG2, [4]=GR1/GR2, [5]=GR1/RB2,                 //
@@ -96,38 +102,6 @@ public class Gamut {
 		
 		getCommonPoints(gam1, gam2, commonPoints);
 		solveBlue (commonPoints, common, gam1, gam2);
-		
-		MainWindow.lblBg1Bg2X.setText(Double.toString(commonPoints[0][X]));
-		MainWindow.lblBg1Gr2X.setText(Double.toString(commonPoints[1][X]));
-		MainWindow.lblBg1Rb2X.setText(Double.toString(commonPoints[2][X]));
-		MainWindow.lblGr1Bg2X.setText(Double.toString(commonPoints[3][X]));
-		MainWindow.lblGr1Gr2X.setText(Double.toString(commonPoints[4][X]));
-		MainWindow.lblGr1Rb2X.setText(Double.toString(commonPoints[5][X]));
-		MainWindow.lblRb1Bg2X.setText(Double.toString(commonPoints[6][X]));
-		MainWindow.lblRb1Gr2X.setText(Double.toString(commonPoints[7][X]));
-		MainWindow.lblRb1Rb2X.setText(Double.toString(commonPoints[8][X]));
-		MainWindow.lblR1x.setText(Double.toString(commonPoints[9][X]));
-		MainWindow.lblG1x.setText(Double.toString(commonPoints[10][X]));
-		MainWindow.lblB1x.setText(Double.toString(commonPoints[11][X]));
-		MainWindow.lblR2x.setText(Double.toString(commonPoints[12][X]));
-		MainWindow.lblG2x.setText(Double.toString(commonPoints[13][X]));
-		MainWindow.lblB2x.setText(Double.toString(commonPoints[14][X]));
-		
-		MainWindow.lblBg1Bg2Y.setText(Double.toString(commonPoints[0][Y]));
-		MainWindow.lblBg1Gr2Y.setText(Double.toString(commonPoints[1][Y]));
-		MainWindow.lblBg1Rb2Y.setText(Double.toString(commonPoints[2][Y]));
-		MainWindow.lblGr1Bg2Y.setText(Double.toString(commonPoints[3][Y]));
-		MainWindow.lblGr1Gr2Y.setText(Double.toString(commonPoints[4][Y]));
-		MainWindow.lblGr1Rb2Y.setText(Double.toString(commonPoints[5][Y]));
-		MainWindow.lblRb1Bg2Y.setText(Double.toString(commonPoints[6][Y]));
-		MainWindow.lblRb1Gr2Y.setText(Double.toString(commonPoints[7][Y]));
-		MainWindow.lblRb1Rb2Y.setText(Double.toString(commonPoints[8][Y]));
-		MainWindow.lblR1y.setText(Double.toString(commonPoints[9][Y]));
-		MainWindow.lblG1y.setText(Double.toString(commonPoints[10][Y]));
-		MainWindow.lblB1y.setText(Double.toString(commonPoints[11][Y]));
-		MainWindow.lblR2y.setText(Double.toString(commonPoints[12][Y]));
-		MainWindow.lblG2y.setText(Double.toString(commonPoints[13][Y]));
-		MainWindow.lblB2y.setText(Double.toString(commonPoints[14][Y]));
 		
 	    
 		return common;
