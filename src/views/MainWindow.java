@@ -23,6 +23,7 @@ import java.util.HashMap;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Spinner;
 import org.eclipse.wb.swt.SWTResourceManager;
+import org.eclipse.swt.custom.CLabel;
 
 
 public class MainWindow {
@@ -39,12 +40,16 @@ public class MainWindow {
 	private CTabFolder tabFolder;
 	
 	private Label lblCommonTriangle;
-	private Label lblBluYComVal;
-	private Label lblBluXComVal;
-	private Label lblGrnYComVal;
-	private Label lblGrnXComVal;
-	private Label lblRedYComVal;
+
 	private Label lblRedXComVal;
+	private Label lblRedYComVal;
+	private Label lblGrnXComVal;
+	private Label lblGrnYComVal;
+	private Label lblBluXComVal;
+	private Label lblBluYComVal;
+	private Label lblWhtXComVal;
+	private Label lblWhtYComVal;
+	
 	
 	protected Gamut comGam, gam1, gam2, gam3, gam4, gam5, gam6, gam7, gam8, gam9, gam10;
 	private HashMap<String, Gamut> hm;
@@ -107,7 +112,7 @@ public class MainWindow {
 		fd_btnNewGamut.top = new FormAttachment(0, 10);
 		fd_btnNewGamut.left = new FormAttachment(0, 10);
 		btnNewGamut.setLayoutData(fd_btnNewGamut);
-		btnNewGamut.setText("Add Gamut");
+		btnNewGamut.setText("Add Display");
 		
 		
 		tabFolder.setLayoutData(fd_tabFolder);
@@ -129,58 +134,73 @@ public class MainWindow {
 		lblCommonTriangle.setBounds(10, 66, 329, 346);
 		
 		Label lblCommonColourGamut = new Label(cmpCom, SWT.NONE);
-		lblCommonColourGamut.setBounds(148, 433, 148, 15);
+		lblCommonColourGamut.setFont(SWTResourceManager.getFont("Segoe UI", 14, SWT.BOLD | SWT.ITALIC));
+		lblCommonColourGamut.setBounds(51, 10, 254, 31);
 		lblCommonColourGamut.setText("Common Colour Gamut:");
 		
 		Label lblRedXCom = new Label(cmpCom, SWT.NONE);
 		lblRedXCom.setAlignment(SWT.RIGHT);
-		lblRedXCom.setBounds(81, 464, 55, 15);
+		lblRedXCom.setBounds(45, 418, 55, 15);
 		lblRedXCom.setText("Red X");
 		
 		Label lblRedYCom = new Label(cmpCom, SWT.NONE);
 		lblRedYCom.setAlignment(SWT.RIGHT);
-		lblRedYCom.setBounds(81, 484, 55, 15);
+		lblRedYCom.setBounds(45, 439, 55, 15);
 		lblRedYCom.setText("Red Y");
 		
 		Label lblGrnXCom = new Label(cmpCom, SWT.NONE);
 		lblGrnXCom.setText("Green X");
 		lblGrnXCom.setAlignment(SWT.RIGHT);
-		lblGrnXCom.setBounds(81, 514, 55, 15);
+		lblGrnXCom.setBounds(45, 474, 55, 15);
 		
 		Label lblGrnYCom = new Label(cmpCom, SWT.NONE);
 		lblGrnYCom.setText("Green Y");
 		lblGrnYCom.setAlignment(SWT.RIGHT);
-		lblGrnYCom.setBounds(81, 534, 55, 15);
+		lblGrnYCom.setBounds(45, 495, 55, 15);
 		
 		Label lblBluXCom = new Label(cmpCom, SWT.NONE);
 		lblBluXCom.setText("Blue X");
 		lblBluXCom.setAlignment(SWT.RIGHT);
-		lblBluXCom.setBounds(203, 464, 55, 15);
+		lblBluXCom.setBounds(190, 418, 55, 15);
 		
 		Label lblBluYCom = new Label(cmpCom, SWT.NONE);
 		lblBluYCom.setText("Blue Y");
 		lblBluYCom.setAlignment(SWT.RIGHT);
-		lblBluYCom.setBounds(203, 484, 55, 15);
+		lblBluYCom.setBounds(190, 439, 55, 15);
+		
+		Label lblWhtXCom = new Label(cmpCom, SWT.NONE);
+		lblWhtXCom.setText("White X");
+		lblWhtXCom.setAlignment(SWT.RIGHT);
+		lblWhtXCom.setBounds(190, 474, 55, 15);
+		
+		Label lblWhtYCom = new Label(cmpCom, SWT.NONE);
+		lblWhtYCom.setText("White Y");
+		lblWhtYCom.setAlignment(SWT.RIGHT);
+		lblWhtYCom.setBounds(190, 495, 55, 15);
 		
 		lblRedXComVal = new Label(cmpCom, SWT.BORDER);
-		lblRedXComVal.setBounds(142, 464, 55, 15);
+		lblRedXComVal.setBounds(106, 418, 55, 15);
 		
 		lblRedYComVal = new Label(cmpCom, SWT.BORDER);
-		lblRedYComVal.setBounds(142, 484, 55, 15);
+		lblRedYComVal.setBounds(106, 438, 55, 15);
 		
 		lblGrnXComVal = new Label(cmpCom, SWT.BORDER);
-		lblGrnXComVal.setBounds(142, 514, 55, 15);
+		lblGrnXComVal.setBounds(106, 473, 55, 15);
 		
 		lblGrnYComVal = new Label(cmpCom, SWT.BORDER);
-		lblGrnYComVal.setBounds(142, 534, 55, 15);
+		lblGrnYComVal.setBounds(106, 494, 55, 15);
 		
 		lblBluXComVal = new Label(cmpCom, SWT.BORDER);
-		lblBluXComVal.setBounds(264, 464, 55, 15);
+		lblBluXComVal.setBounds(251, 418, 55, 15);
 		
 		lblBluYComVal = new Label(cmpCom, SWT.BORDER);
-		lblBluYComVal.setBounds(264, 484, 55, 15);
+		lblBluYComVal.setBounds(251, 438, 55, 15);
 		
+		lblWhtXComVal = new Label(cmpCom, SWT.BORDER);
+		lblWhtXComVal.setBounds(251, 473, 55, 15);
 		
+		lblWhtYComVal = new Label(cmpCom, SWT.BORDER);
+		lblWhtYComVal.setBounds(251, 494, 55, 15);
 		
 		
 
@@ -490,7 +510,7 @@ public class MainWindow {
 				Label lblWhtXT = new Label(cmpNewGamut, SWT.NONE);
 				lblWhtXT.setText("White X");
 				lblWhtXT.setAlignment(SWT.RIGHT);
-				lblWhtXT.setBounds(130, 426, 55, 15);
+				lblWhtXT.setBounds(128, 426, 55, 15);
 				
 				Label lblWhtXTVal = new Label(cmpNewGamut, SWT.BORDER);
 				lblWhtXTVal.setAlignment(SWT.LEFT);
@@ -504,7 +524,7 @@ public class MainWindow {
 				Label lblWhtYT = new Label(cmpNewGamut, SWT.NONE);
 				lblWhtYT.setText("White Y");
 				lblWhtYT.setAlignment(SWT.RIGHT);
-				lblWhtYT.setBounds(130, 450, 55, 15);
+				lblWhtYT.setBounds(128, 450, 55, 15);
 				
 				Label lblWhtYTVal = new Label(cmpNewGamut, SWT.BORDER);
 				lblWhtYTVal.setAlignment(SWT.LEFT);
@@ -809,9 +829,11 @@ public class MainWindow {
 		
 		Image image = new Image(display, MainWindow.class.getResourceAsStream("/resource/cie.gif"));
 		label.setImage(image);
-
 		GC gc = new GC(image);
 		
+		int avgX = 0;
+		int avgY = 0;
+		int count = 0;
 		
 		for (int keySuffix = 1; keySuffix < 11; keySuffix++) {
 			
@@ -835,6 +857,10 @@ public class MainWindow {
 			    gc.setForeground(display.getSystemColor(SWT.COLOR_DARK_BLUE));
 			    gc.fillOval((int)(XOFFSET + hm.get(testKey).wX * XSCALER), (int)(YOFFSET - hm.get(testKey).wY * YSCALER), 4, 4);
 			    gc.drawOval((int)(XOFFSET + hm.get(testKey).wX * XSCALER), (int)(YOFFSET - hm.get(testKey).wY * YSCALER), 4, 4);
+			    
+			    avgX = avgX + hm.get(testKey).wX;
+			    avgY = avgY + hm.get(testKey).wY;
+			    count ++;
 			   
 			    
 			}	
@@ -847,9 +873,12 @@ public class MainWindow {
 		gc.drawOval((int)((XOFFSET + comGam.rX * XSCALER) - 2), (int)((YOFFSET - comGam.rY * YSCALER) - 2), 4, 4);
 		gc.drawOval((int)((XOFFSET + comGam.gX * XSCALER) - 2), (int)((YOFFSET - comGam.gY * YSCALER) - 2), 4, 4);
 		gc.drawOval((int)((XOFFSET + comGam.bX * XSCALER) - 2), (int)((YOFFSET - comGam.bY * YSCALER) - 2), 4, 4);
-		
 	
 		gc.dispose();
+		
+		
+		comGam.wX = avgX / count;
+		comGam.wY = avgY / count;
 		
 		lblRedXComVal.setText(Integer.toString(comGam.rX));
 		lblRedYComVal.setText(Integer.toString(comGam.rY));
@@ -857,9 +886,9 @@ public class MainWindow {
 		lblGrnYComVal.setText(Integer.toString(comGam.gY));
 		lblBluXComVal.setText(Integer.toString(comGam.bX));
 		lblBluYComVal.setText(Integer.toString(comGam.bY));
+		lblWhtXComVal.setText(Integer.toString(comGam.wX));
+		lblWhtYComVal.setText(Integer.toString(comGam.wY));
 		
 		
 	}
-
-
 } //end of class
