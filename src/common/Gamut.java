@@ -76,6 +76,8 @@ public class Gamut {
 		gam.gYO = gam.gYN - gam.gY;
 		gam.bXO = gam.bXN - gam.bX;
 		gam.bYO = gam.bYN - gam.bY;
+		gam.wXO = gam.wXN - gam.wX;
+		gam.wYO= gam.wYN - gam.wY;
 		
 	}
 	

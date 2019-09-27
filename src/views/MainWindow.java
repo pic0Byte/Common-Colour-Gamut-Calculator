@@ -505,7 +505,7 @@ public class MainWindow {
 				Label lblWhtX = new Label(cmpNewGamut, SWT.NONE);
 				lblWhtX.setText("White X");
 				lblWhtX.setAlignment(SWT.RIGHT);
-				lblWhtX.setBounds(18, 285, 55, 15);
+				lblWhtX.setBounds(18, 260, 55, 15);
 				
 				Label lblWhtXT = new Label(cmpNewGamut, SWT.NONE);
 				lblWhtXT.setText("White X");
@@ -519,7 +519,7 @@ public class MainWindow {
 				Label lblWhtY = new Label(cmpNewGamut, SWT.NONE);
 				lblWhtY.setText("White Y");
 				lblWhtY.setAlignment(SWT.RIGHT);
-				lblWhtY.setBounds(18, 260, 55, 15);
+				lblWhtY.setBounds(18, 285, 55, 15);
 				
 				Label lblWhtYT = new Label(cmpNewGamut, SWT.NONE);
 				lblWhtYT.setText("White Y");
@@ -560,6 +560,8 @@ public class MainWindow {
 				lblGrnYTVal.setText(Integer.toString(hm.get(testKey).gYO + comGam.gY));
 				lblBluXTVal.setText(Integer.toString(hm.get(testKey).bXO + comGam.bX));
 				lblBluYTVal.setText(Integer.toString(hm.get(testKey).bYO + comGam.bX));
+				lblWhtXTVal.setText(Integer.toString(hm.get(testKey).wXO + comGam.wX));
+				lblWhtYTVal.setText(Integer.toString(hm.get(testKey).wYO + comGam.wY));
 				//----------------------------------------------------------------------------------------------------------------------//
 				
 				
@@ -775,12 +777,19 @@ public class MainWindow {
 	
 	protected void drawTriangle(Label label, Gamut gam) {
 		
-		double drx = 50 + (gam.rX * 0.316);
-		double dry = 310 - (gam.rY * 0.326);
-		double dgx = 50 + (gam.gX * 0.316);
-		double dgy = 310 - (gam.gY * 0.326);
-		double dbx = 50 + (gam.bX * 0.316);
-		double dby = 310 - (gam.bY * 0.326);
+		double drx = 50 + (gam.rX * XSCALER);
+		double dry = 310 - (gam.rY * YSCALER);
+		double dgx = 50 + (gam.gX * XSCALER);
+		double dgy = 310 - (gam.gY * YSCALER);
+		double dbx = 50 + (gam.bX * XSCALER);
+		double dby = 310 - (gam.bY * YSCALER);
+		
+		double drXn = 50 + (gam.rXN * XSCALER);
+		double drYn = 310 - (gam.rYN * YSCALER);
+		double dgXn = 50 + (gam.gXN * XSCALER);
+		double dgYn = 310 - (gam.gYN * YSCALER);
+		double dbXn = 50 + (gam.bXN * XSCALER);
+		double dbYn = 310 - (gam.bYN * YSCALER);
 		
 		Image image = new Image(display, MainWindow.class.getResourceAsStream("/resource/cie.gif"));
 		label.setImage(image);
@@ -790,11 +799,21 @@ public class MainWindow {
 		int dC = gam.drawColour;
 		
 		gc.setForeground(display.getSystemColor(dC));
+		gc.setLineWidth(2);
 	    gc.drawLine((int)drx, (int)dry, (int)dgx, (int)dgy);
 	    gc.drawLine((int)dgx, (int)dgy, (int)dbx, (int)dby);
 	    gc.drawLine((int)dbx, (int)dby, (int)drx, (int)dry);
 	    
-	    //image.dispose();
+	    gc.setLineWidth(1);
+	    gc.setLineStyle(SWT.LINE_DASHDOT);
+	    gc.drawLine((int)drXn, (int)drYn, (int)dgXn, (int)dgYn);
+	    gc.drawLine((int)dgXn, (int)dgYn, (int)dbXn, (int)dbYn);
+	    gc.drawLine((int)dbXn, (int)dbYn, (int)drXn, (int)drYn);
+	    
+	    gc.setForeground(display.getSystemColor(SWT.COLOR_DARK_BLUE));
+	    gc.fillOval((int)((XOFFSET + gam.wX * XSCALER) - 2), (int)((YOFFSET - gam.wY * YSCALER) - 2), 4, 4);
+	    gc.drawOval((int)((XOFFSET + gam.wX * XSCALER) - 2), (int)((YOFFSET - gam.wY * YSCALER) - 2), 4, 4);
+	    
 	    gc.dispose();
 		
 	}
@@ -851,12 +870,14 @@ public class MainWindow {
 				int x = hm.get(testKey).drawColour;
 				
 				gc.setForeground(display.getSystemColor(x));
+				gc.setLineWidth(2);
 			    gc.drawLine((int)drx, (int)dry, (int)dgx, (int)dgy);
 			    gc.drawLine((int)dgx, (int)dgy, (int)dbx, (int)dby);
 			    gc.drawLine((int)dbx, (int)dby, (int)drx, (int)dry);
+			    gc.setLineWidth(1);
 			    gc.setForeground(display.getSystemColor(SWT.COLOR_DARK_BLUE));
-			    gc.fillOval((int)(XOFFSET + hm.get(testKey).wX * XSCALER), (int)(YOFFSET - hm.get(testKey).wY * YSCALER), 4, 4);
-			    gc.drawOval((int)(XOFFSET + hm.get(testKey).wX * XSCALER), (int)(YOFFSET - hm.get(testKey).wY * YSCALER), 4, 4);
+			    gc.fillOval((int)((XOFFSET + hm.get(testKey).wX * XSCALER) - 2), (int)((YOFFSET - hm.get(testKey).wY * YSCALER) - 2), 4, 4);
+			    gc.drawOval((int)((XOFFSET + hm.get(testKey).wX * XSCALER) - 2), (int)((YOFFSET - hm.get(testKey).wY * YSCALER) - 2), 4, 4);
 			    
 			    avgX = avgX + hm.get(testKey).wX;
 			    avgY = avgY + hm.get(testKey).wY;
