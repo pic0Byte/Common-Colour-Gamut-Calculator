@@ -68,7 +68,7 @@ public class Gamut {
 	}
 	
 	
-	public static void updateNative(Gamut gam) {
+	public static void updateOffsets(Gamut gam) {
 		
 		gam.rXO = gam.rXN - gam.rX;
 		gam.rYO = gam.rYN - gam.rY;
