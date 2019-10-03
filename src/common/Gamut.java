@@ -50,34 +50,34 @@ public class Gamut {
 	}
 	
 	
-	public static void slope(Gamut gam) {
+	public void slope() {
 		
-		if (gam.gX == gam.bX) {
-			gam.bgM = (double)(gam.bY - gam.gY) / (gam.bX - gam.gX - 0.00001);
-			gam.bgC = (double)gam.bY - (gam.bgM * gam.bX);
+		if (this.gX == this.bX) {
+			this.bgM = (double)(this.bY - this.gY) / (this.bX - this.gX - 0.00001);
+			this.bgC = (double)this.bY - (this.bgM * this.bX);
 		} else {
-			gam.bgM = (double)(gam.bY - gam.gY) / (gam.bX - gam.gX);
-			gam.bgC = (double)gam.bY - (gam.bgM * gam.bX);
+			this.bgM = (double)(this.bY - this.gY) / (this.bX - this.gX);
+			this.bgC = (double)this.bY - (this.bgM * this.bX);
 		}
 		
-		gam.grM = (double)(gam.gY - gam.rY) / (gam.gX - gam.rX);
-		gam.grC = (double)gam.gY - (gam.grM * gam.gX);
-		gam.rbM = (double)(gam.rY - gam.bY) / (gam.rX - gam.bX);
-		gam.rbC = (double)gam.rY - (gam.rbM * gam.rX);
+		this.grM = (double)(this.gY - this.rY) / (this.gX - this.rX);
+		this.grC = (double)this.gY - (this.grM * this.gX);
+		this.rbM = (double)(this.rY - this.bY) / (this.rX - this.bX);
+		this.rbC = (double)this.rY - (this.rbM * this.rX);
 		
 	}
 	
 	
-	public static void updateOffsets(Gamut gam) {
+	public void updateOffsets() {
 		
-		gam.rXO = gam.rXN - gam.rX;
-		gam.rYO = gam.rYN - gam.rY;
-		gam.gXO = gam.gXN - gam.gX;
-		gam.gYO = gam.gYN - gam.gY;
-		gam.bXO = gam.bXN - gam.bX;
-		gam.bYO = gam.bYN - gam.bY;
-		gam.wXO = gam.wXN - gam.wX;
-		gam.wYO= gam.wYN - gam.wY;
+		this.rXO = this.rXN - this.rX;
+		this.rYO = this.rYN - this.rY;
+		this.gXO = this.gXN - this.gX;
+		this.gYO = this.gYN - this.gY;
+		this.bXO = this.bXN - this.bX;
+		this.bYO = this.bYN - this.bY;
+		this.wXO = this.wXN - this.wX;
+		this.wYO = this.wYN - this.wY;
 		
 	}
 	
@@ -93,8 +93,8 @@ public class Gamut {
 		
 		double[][] commonPoints = new double[15][2];
 		
-		slope(gam1);
-		slope(gam2);
+		gam1.slope();
+		gam2.slope();
 		
 		getCommonPoints(gam1, gam2, commonPoints);
 		solveRed (commonPoints, common, gam1, gam2);

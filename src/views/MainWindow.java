@@ -24,7 +24,6 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Spinner;
 import org.eclipse.wb.swt.SWTResourceManager;
-import org.eclipse.swt.custom.CLabel;
 
 
 public class MainWindow {
@@ -77,7 +76,6 @@ public class MainWindow {
 		shlCCGC.layout();
 		handleEvents();
 		newGamut();
-		getCommon();
 		while (!shlCCGC.isDisposed()) {
 			if (!display.readAndDispatch()) {
 				display.sleep();
@@ -555,7 +553,8 @@ public class MainWindow {
 				refGam.wXN = spnWXN.getSelection();
 				refGam.wYN = spnWYN.getSelection();
 				
-				Gamut.updateOffsets(hm.get(testKey));
+				getCommon();
+				refGam.updateOffsets();
 				
 				lblRedXTVal.setText(Integer.toString(refGam.rXO + comGam.rX));
 				lblRedYTVal.setText(Integer.toString(refGam.rYO + comGam.rY));
@@ -572,7 +571,7 @@ public class MainWindow {
 				Label lblTriangleImage = new Label(cmpNewGamut, SWT.NONE);
 				lblTriangleImage.setImage(image);
 				lblTriangleImage.setBounds(242, 43, 343, 355);    //------Draw the CIE chart & gamut triangle---------------------------//
-				drawTriangle(lblTriangleImage, hm.get(testKey));       //-----for the first time, & set focus on the tab---------------------//
+				drawTriangle(lblTriangleImage, refGam);       //-----for the first time, & set focus on the tab---------------------//
 				tabFolder.setSelection(tbtGam);
 				tabFolder.forceFocus();
 				
@@ -596,7 +595,7 @@ public class MainWindow {
 							refGam.bYN = spnBYN.getSelection();
 							refGam.wXN = spnWXN.getSelection();
 							refGam.wYN = spnWYN.getSelection();
-							Gamut.updateOffsets(refGam);
+							refGam.updateOffsets();
 							lblRedXTVal.setText(Integer.toString(refGam.rXO + comGam.rX));
 							lblRedYTVal.setText(Integer.toString(refGam.rYO + comGam.rY));
 							lblGrnXTVal.setText(Integer.toString(refGam.gXO + comGam.gX));
@@ -614,7 +613,7 @@ public class MainWindow {
 					public void widgetSelected(SelectionEvent e) {
 						refGam.rX = spnRX.getSelection();
 						refGam.rXN = spnRXN.getSelection();
-						Gamut.updateOffsets(refGam);
+						refGam.updateOffsets();
 						lblRedXTVal.setText(Integer.toString(refGam.rXO + comGam.rX));
 						drawTriangle(lblTriangleImage, refGam);
 						getCommon();
@@ -627,7 +626,7 @@ public class MainWindow {
 					public void widgetSelected(SelectionEvent e) {
 						refGam.rY = spnRY.getSelection();
 						refGam.rYN = spnRYN.getSelection();
-						Gamut.updateOffsets(refGam);
+						refGam.updateOffsets();
 						lblRedYTVal.setText(Integer.toString(refGam.rYO + comGam.rY));
 						drawTriangle(lblTriangleImage, refGam);
 						getCommon();
@@ -639,7 +638,7 @@ public class MainWindow {
 					public void widgetSelected(SelectionEvent e) {
 						refGam.gX = spnGX.getSelection();
 						refGam.gXN = spnGXN.getSelection();
-						Gamut.updateOffsets(refGam);
+						refGam.updateOffsets();
 						lblGrnXTVal.setText(Integer.toString(refGam.gXO + comGam.gX));
 						drawTriangle(lblTriangleImage, refGam);
 						getCommon();
@@ -651,7 +650,7 @@ public class MainWindow {
 					public void widgetSelected(SelectionEvent e) {
 						refGam.gY = spnGY.getSelection();
 						refGam.gYN = spnGYN.getSelection();
-						Gamut.updateOffsets(refGam);
+						refGam.updateOffsets();
 						lblGrnYTVal.setText(Integer.toString(refGam.gYO + comGam.gY));
 						drawTriangle(lblTriangleImage, refGam);
 						getCommon();
@@ -663,7 +662,7 @@ public class MainWindow {
 					public void widgetSelected(SelectionEvent e) {
 						refGam.bX = spnBX.getSelection();
 						refGam.bXN = spnBXN.getSelection();
-						Gamut.updateOffsets(refGam);
+						refGam.updateOffsets();
 						lblBluXTVal.setText(Integer.toString(refGam.bXO + comGam.bX));
 						drawTriangle(lblTriangleImage, refGam);
 						getCommon();
@@ -675,7 +674,7 @@ public class MainWindow {
 					public void widgetSelected(SelectionEvent e) {
 						refGam.bY = spnBY.getSelection();
 						refGam.bYN = spnBYN.getSelection();
-						Gamut.updateOffsets(refGam);
+						refGam.updateOffsets();
 						lblBluYTVal.setText(Integer.toString(refGam.bYO + comGam.bY));
 						drawTriangle(lblTriangleImage, refGam);
 						getCommon();
@@ -687,7 +686,7 @@ public class MainWindow {
 					public void widgetSelected(SelectionEvent e) {
 						refGam.wX = spnWX.getSelection();
 						refGam.wXN = spnWXN.getSelection();
-						Gamut.updateOffsets(refGam);
+						refGam.updateOffsets();
 						lblWhtXTVal.setText(Integer.toString(refGam.wXO + comGam.wX));
 						drawTriangle(lblTriangleImage, refGam);
 						getCommon();
@@ -699,7 +698,7 @@ public class MainWindow {
 					public void widgetSelected(SelectionEvent e) {
 						refGam.wY = spnWY.getSelection();
 						refGam.wYN = spnWYN.getSelection();
-						Gamut.updateOffsets(refGam);
+						refGam.updateOffsets();
 						lblWhtYTVal.setText(Integer.toString(refGam.wYO + comGam.wY));
 						drawTriangle(lblTriangleImage, refGam);
 						getCommon();
@@ -711,7 +710,7 @@ public class MainWindow {
 					public void widgetSelected(SelectionEvent e) {
 						refGam.rX = spnRX.getSelection();
 						refGam.rXN = spnRXN.getSelection();
-						Gamut.updateOffsets(refGam);
+						refGam.updateOffsets();
 						lblRedXTVal.setText(Integer.toString (refGam.rXO + comGam.rX));
 						drawTriangle(lblTriangleImage, refGam);
 					}
@@ -722,7 +721,7 @@ public class MainWindow {
 					public void widgetSelected(SelectionEvent e) {
 						refGam.rY = spnRY.getSelection();
 						refGam.rYN = spnRYN.getSelection();
-						Gamut.updateOffsets(refGam);
+						refGam.updateOffsets();
 						lblRedYTVal.setText(Integer.toString (refGam.rYO + comGam.rY));
 						drawTriangle(lblTriangleImage, refGam);
 					}
@@ -733,7 +732,7 @@ public class MainWindow {
 					public void widgetSelected(SelectionEvent e) {
 						refGam.gX = spnGX.getSelection();
 						refGam.gXN = spnGXN.getSelection();
-						Gamut.updateOffsets(refGam);
+						refGam.updateOffsets();
 						lblGrnXTVal.setText(Integer.toString (refGam.gXO + comGam.gX));
 						drawTriangle(lblTriangleImage, refGam);
 					}
@@ -744,7 +743,7 @@ public class MainWindow {
 					public void widgetSelected(SelectionEvent e) {
 						refGam.gY = spnGY.getSelection();
 						refGam.gYN = spnGYN.getSelection();
-						Gamut.updateOffsets(refGam);
+						refGam.updateOffsets();
 						lblGrnYTVal.setText(Integer.toString (refGam.gYO + comGam.gY));
 						drawTriangle(lblTriangleImage, refGam);
 					}
@@ -755,7 +754,7 @@ public class MainWindow {
 					public void widgetSelected(SelectionEvent e) {
 						refGam.bY = spnBY.getSelection();
 						refGam.bXN = spnBXN.getSelection();
-						Gamut.updateOffsets(refGam);
+						refGam.updateOffsets();
 						lblBluXTVal.setText(Integer.toString (refGam.bXO + comGam.bX));
 						drawTriangle(lblTriangleImage, refGam);
 					}
@@ -766,7 +765,7 @@ public class MainWindow {
 					public void widgetSelected(SelectionEvent e) {
 						refGam.bY = spnBY.getSelection();
 						refGam.bYN = spnBYN.getSelection();
-						Gamut.updateOffsets(refGam);
+						refGam.updateOffsets();
 						lblBluYTVal.setText(Integer.toString (refGam.bYO + comGam.bY));
 						drawTriangle(lblTriangleImage, refGam);
 					}
@@ -777,7 +776,7 @@ public class MainWindow {
 					public void widgetSelected(SelectionEvent e) {
 						refGam.wY = spnWY.getSelection();
 						refGam.wXN = spnWXN.getSelection();
-						Gamut.updateOffsets(refGam);
+						refGam.updateOffsets();
 						lblWhtXTVal.setText(Integer.toString (refGam.wXO + comGam.wX));
 						//drawTriangle(lblTriangleImage, eventGam);
 					}
@@ -788,7 +787,7 @@ public class MainWindow {
 					public void widgetSelected(SelectionEvent e) {
 						refGam.wY = spnWY.getSelection();
 						refGam.wYN = spnWYN.getSelection();
-						Gamut.updateOffsets(refGam);
+						refGam.updateOffsets();
 						lblWhtYTVal.setText(Integer.toString (refGam.wYO + comGam.wY));
 						//drawTriangle(lblTriangleImage, eventGam);
 					}
