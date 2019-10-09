@@ -14,9 +14,12 @@ public class Gamut {
 	public double bgM, bgC, grM, grC, rbM, rbC;    //---------Coefficients (M) & constants (C) for slope equations------//
 	public int rXN, rYN, gXN, gYN, bXN, bYN, wXN, wYN;     //---------Native values
 	public int rXO, rYO, gXO, gYO, bXO, bYO, wXO, wYO;     //---------Offset between native & measured values
+	public boolean nativeLinked;
 	
 	
 	public Gamut (int rX, int rY, int gX, int gY, int bX, int bY, int wX, int wY, int drawColour) {
+		
+		this.nativeLinked = true;
 		
 		this.rX = rX;
 		this.rY = rY;

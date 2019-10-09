@@ -293,9 +293,9 @@ public class MainWindow {
 				spnRX.setSelection(640);
 				spnRX.setBounds(79, 41, 56, 22);
 
-				Button btnLinkRx = new Button(cmpNewGamut, SWT.NONE);
-				btnLinkRx.setBounds(145, 41, 25, 22);
-				btnLinkRx.setImage(SWTResourceManager.getImage(MainWindow.class, "/resource/link.png"));
+				Button btnLinked = new Button(cmpNewGamut, SWT.NONE);
+				btnLinked.setBounds(145, 41, 25, 22);
+				btnLinked.setImage(SWTResourceManager.getImage(MainWindow.class, "/resource/link.png"));
 
 				Spinner spnRXN = new Spinner(cmpNewGamut, SWT.BORDER);
 				spnRXN.setDigits(3);
@@ -609,10 +609,27 @@ public class MainWindow {
 					}
 				});
 
+				btnLinked.addSelectionListener(new SelectionAdapter(){
+					@Override
+					public void widgetSelected(SelectionEvent e) {
+						if (refGam.nativeLinked) {
+							refGam.nativeLinked = false;
+							btnLinked.setImage(SWTResourceManager.getImage(MainWindow.class, "/resource/broken-link.png"));
+						} else {
+							refGam.nativeLinked = true;
+							btnLinked.setImage(SWTResourceManager.getImage(MainWindow.class, "/resource/link.png"));
+						}
+					}
+				});
+				
 				spnRX.addSelectionListener(new SelectionAdapter() {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
 						refGam.rX = spnRX.getSelection();
+						if (refGam.nativeLinked) {
+							refGam.rXN = spnRX.getSelection();
+							spnRXN.setSelection(refGam.rXN);
+						}
 						refGam.updateOffsets();
 						drawTriangle(lblTriangleImage, refGam);
 						getCommon();
@@ -632,6 +649,10 @@ public class MainWindow {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
 						refGam.rY = spnRY.getSelection();
+						if (refGam.nativeLinked) {
+							refGam.rYN = spnRY.getSelection();
+							spnRYN.setSelection(refGam.rYN);
+						}
 						refGam.updateOffsets();
 						drawTriangle(lblTriangleImage, refGam);
 						getCommon();
@@ -650,6 +671,10 @@ public class MainWindow {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
 						refGam.gX = spnGX.getSelection();
+						if (refGam.nativeLinked) {
+							refGam.gXN = spnGX.getSelection();
+							spnGXN.setSelection(refGam.gXN);
+						}
 						refGam.updateOffsets();
 						drawTriangle(lblTriangleImage, refGam);
 						getCommon();
@@ -668,6 +693,10 @@ public class MainWindow {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
 						refGam.gY = spnGY.getSelection();
+						if (refGam.nativeLinked) {
+							refGam.gYN = spnGY.getSelection();
+							spnGYN.setSelection(refGam.gYN);
+						}
 						refGam.updateOffsets();
 						drawTriangle(lblTriangleImage, refGam);
 						getCommon();
@@ -686,6 +715,10 @@ public class MainWindow {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
 						refGam.bX = spnBX.getSelection();
+						if (refGam.nativeLinked) {
+							refGam.bXN = spnBX.getSelection();
+							spnBXN.setSelection(refGam.bXN);
+						}
 						refGam.updateOffsets();
 						drawTriangle(lblTriangleImage, refGam);
 						getCommon();
@@ -704,6 +737,10 @@ public class MainWindow {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
 						refGam.bY = spnBY.getSelection();
+						if (refGam.nativeLinked) {
+							refGam.bYN = spnBY.getSelection();
+							spnBYN.setSelection(refGam.bYN);
+						}
 						refGam.updateOffsets();
 						drawTriangle(lblTriangleImage, refGam);
 						getCommon();
@@ -722,6 +759,10 @@ public class MainWindow {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
 						refGam.wX = spnWX.getSelection();
+						if (refGam.nativeLinked) {
+							refGam.wXN = spnWX.getSelection();
+							spnWXN.setSelection(refGam.wXN);
+						}
 						refGam.updateOffsets();
 						drawTriangle(lblTriangleImage, refGam);
 						getCommon();
@@ -740,6 +781,10 @@ public class MainWindow {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
 						refGam.wY = spnWY.getSelection();
+						if (refGam.nativeLinked) {
+							refGam.wYN = spnWY.getSelection();
+							spnWYN.setSelection(refGam.wYN);
+						}
 						refGam.updateOffsets();
 						drawTriangle(lblTriangleImage, refGam);
 						getCommon();
@@ -758,6 +803,10 @@ public class MainWindow {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
 						refGam.rXN = spnRXN.getSelection();
+						if (refGam.nativeLinked) {
+							refGam.rX = spnRXN.getSelection();
+							spnRX.setSelection(refGam.rX);
+						}
 						refGam.updateOffsets();
 						drawTriangle(lblTriangleImage, refGam);
 						getCommon();
@@ -776,6 +825,10 @@ public class MainWindow {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
 						refGam.rYN = spnRYN.getSelection();
+						if (refGam.nativeLinked) {
+							refGam.rY = spnRYN.getSelection();
+							spnRY.setSelection(refGam.rY);
+						}
 						refGam.updateOffsets();
 						drawTriangle(lblTriangleImage, refGam);
 						getCommon();
@@ -794,6 +847,10 @@ public class MainWindow {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
 						refGam.gXN = spnGXN.getSelection();
+						if (refGam.nativeLinked) {
+							refGam.gX = spnGXN.getSelection();
+							spnGX.setSelection(refGam.gX);
+						}
 						refGam.updateOffsets();
 						drawTriangle(lblTriangleImage, refGam);
 						getCommon();
@@ -812,6 +869,10 @@ public class MainWindow {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
 						refGam.gYN = spnGYN.getSelection();
+						if (refGam.nativeLinked) {
+							refGam.gY = spnGYN.getSelection();
+							spnGY.setSelection(refGam.gY);
+						}
 						refGam.updateOffsets();
 						drawTriangle(lblTriangleImage, refGam);
 						getCommon();
@@ -830,6 +891,10 @@ public class MainWindow {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
 						refGam.bXN = spnBXN.getSelection();
+						if (refGam.nativeLinked) {
+							refGam.bX = spnBXN.getSelection();
+							spnBX.setSelection(refGam.bX);
+						}
 						refGam.updateOffsets();
 						drawTriangle(lblTriangleImage, refGam);
 						getCommon();
@@ -848,6 +913,10 @@ public class MainWindow {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
 						refGam.bYN = spnBYN.getSelection();
+						if (refGam.nativeLinked) {
+							refGam.bY = spnBYN.getSelection();
+							spnBY.setSelection(refGam.bY);
+						}
 						refGam.updateOffsets();
 						drawTriangle(lblTriangleImage, refGam);
 						getCommon();
@@ -866,6 +935,10 @@ public class MainWindow {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
 						refGam.wXN = spnWXN.getSelection();
+						if (refGam.nativeLinked) {
+							refGam.wX = spnWXN.getSelection();
+							spnWX.setSelection(refGam.wX);
+						}
 						refGam.updateOffsets();
 						drawTriangle(lblTriangleImage, refGam);
 						getCommon();
@@ -884,6 +957,10 @@ public class MainWindow {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
 						refGam.wYN = spnWYN.getSelection();
+						if (refGam.nativeLinked) {
+							refGam.wY = spnWYN.getSelection();
+							spnWY.setSelection(refGam.wY);
+						}
 						refGam.updateOffsets();
 						drawTriangle(lblTriangleImage, refGam);
 						getCommon();
@@ -1046,9 +1123,10 @@ public class MainWindow {
 		gc.fillOval((int)((XOFFSET + comGam.rX * XSCALER) - 2), (int)((YOFFSET - comGam.rY * YSCALER) - 2), 4, 4);
 		gc.fillOval((int)((XOFFSET + comGam.gX * XSCALER) - 2), (int)((YOFFSET - comGam.gY * YSCALER) - 2), 4, 4);
 		gc.fillOval((int)((XOFFSET + comGam.bX * XSCALER) - 2), (int)((YOFFSET - comGam.bY * YSCALER) - 2), 4, 4);
-		gc.drawOval((int)((XOFFSET + comGam.rX * XSCALER) - 2), (int)((YOFFSET - comGam.rY * YSCALER) - 2), 4, 4);
-		gc.drawOval((int)((XOFFSET + comGam.gX * XSCALER) - 2), (int)((YOFFSET - comGam.gY * YSCALER) - 2), 4, 4);
-		gc.drawOval((int)((XOFFSET + comGam.bX * XSCALER) - 2), (int)((YOFFSET - comGam.bY * YSCALER) - 2), 4, 4);
+		gc.setLineWidth(2);
+		gc.drawOval((int)((XOFFSET + comGam.rX * XSCALER) - 3), (int)((YOFFSET - comGam.rY * YSCALER) - 3), 6, 6);
+		gc.drawOval((int)((XOFFSET + comGam.gX * XSCALER) - 3), (int)((YOFFSET - comGam.gY * YSCALER) - 3), 6, 6);
+		gc.drawOval((int)((XOFFSET + comGam.bX * XSCALER) - 3), (int)((YOFFSET - comGam.bY * YSCALER) - 3), 6, 6);
 
 		gc.dispose();
 
