@@ -573,12 +573,6 @@ public class MainWindow {
 				lblTriangleImage.setBounds(242, 43, 343, 355);    //------Draw the CIE chart & gamut triangle---------------------------//
 				drawTriangle(lblTriangleImage, refGam);       //-----for the first time, & set focus on the tab---------------------//
 				tabFolder.setSelection(tbtGam);
-				tabFolder.forceFocus();
-
-
-				//getCommon();
-				//final String bm = testKey;            //--testKey needs to be converted to a 'final' to be used in event handler methods//
-
 
 				//--------------------------------add event handlers to update graphic & values when spinners are changed-------------------//
 
@@ -631,8 +625,8 @@ public class MainWindow {
 							spnRXN.setSelection(refGam.rXN);
 						}
 						refGam.updateOffsets();
-						drawTriangle(lblTriangleImage, refGam);
 						getCommon();
+						drawTriangle(lblTriangleImage, refGam);
 						lblRedXTVal.setText(Integer.toString(refGam.rXO + comGam.rX));
 						lblRedYTVal.setText(Integer.toString(refGam.rYO + comGam.rY));
 						lblGrnXTVal.setText(Integer.toString(refGam.gXO + comGam.gX));
@@ -654,8 +648,8 @@ public class MainWindow {
 							spnRYN.setSelection(refGam.rYN);
 						}
 						refGam.updateOffsets();
-						drawTriangle(lblTriangleImage, refGam);
 						getCommon();
+						drawTriangle(lblTriangleImage, refGam);
 						lblRedXTVal.setText(Integer.toString(refGam.rXO + comGam.rX));
 						lblRedYTVal.setText(Integer.toString(refGam.rYO + comGam.rY));
 						lblGrnXTVal.setText(Integer.toString(refGam.gXO + comGam.gX));
@@ -676,8 +670,8 @@ public class MainWindow {
 							spnGXN.setSelection(refGam.gXN);
 						}
 						refGam.updateOffsets();
-						drawTriangle(lblTriangleImage, refGam);
 						getCommon();
+						drawTriangle(lblTriangleImage, refGam);
 						lblRedXTVal.setText(Integer.toString(refGam.rXO + comGam.rX));
 						lblRedYTVal.setText(Integer.toString(refGam.rYO + comGam.rY));
 						lblGrnXTVal.setText(Integer.toString(refGam.gXO + comGam.gX));
@@ -698,8 +692,8 @@ public class MainWindow {
 							spnGYN.setSelection(refGam.gYN);
 						}
 						refGam.updateOffsets();
-						drawTriangle(lblTriangleImage, refGam);
 						getCommon();
+						drawTriangle(lblTriangleImage, refGam);
 						lblRedXTVal.setText(Integer.toString(refGam.rXO + comGam.rX));
 						lblRedYTVal.setText(Integer.toString(refGam.rYO + comGam.rY));
 						lblGrnXTVal.setText(Integer.toString(refGam.gXO + comGam.gX));
@@ -720,8 +714,8 @@ public class MainWindow {
 							spnBXN.setSelection(refGam.bXN);
 						}
 						refGam.updateOffsets();
-						drawTriangle(lblTriangleImage, refGam);
 						getCommon();
+						drawTriangle(lblTriangleImage, refGam);
 						lblRedXTVal.setText(Integer.toString(refGam.rXO + comGam.rX));
 						lblRedYTVal.setText(Integer.toString(refGam.rYO + comGam.rY));
 						lblGrnXTVal.setText(Integer.toString(refGam.gXO + comGam.gX));
@@ -742,8 +736,8 @@ public class MainWindow {
 							spnBYN.setSelection(refGam.bYN);
 						}
 						refGam.updateOffsets();
-						drawTriangle(lblTriangleImage, refGam);
 						getCommon();
+						drawTriangle(lblTriangleImage, refGam);
 						lblRedXTVal.setText(Integer.toString(refGam.rXO + comGam.rX));
 						lblRedYTVal.setText(Integer.toString(refGam.rYO + comGam.rY));
 						lblGrnXTVal.setText(Integer.toString(refGam.gXO + comGam.gX));
@@ -764,8 +758,8 @@ public class MainWindow {
 							spnWXN.setSelection(refGam.wXN);
 						}
 						refGam.updateOffsets();
-						drawTriangle(lblTriangleImage, refGam);
 						getCommon();
+						drawTriangle(lblTriangleImage, refGam);
 						lblRedXTVal.setText(Integer.toString(refGam.rXO + comGam.rX));
 						lblRedYTVal.setText(Integer.toString(refGam.rYO + comGam.rY));
 						lblGrnXTVal.setText(Integer.toString(refGam.gXO + comGam.gX));
@@ -786,8 +780,8 @@ public class MainWindow {
 							spnWYN.setSelection(refGam.wYN);
 						}
 						refGam.updateOffsets();
-						drawTriangle(lblTriangleImage, refGam);
 						getCommon();
+						drawTriangle(lblTriangleImage, refGam);
 						lblRedXTVal.setText(Integer.toString(refGam.rXO + comGam.rX));
 						lblRedYTVal.setText(Integer.toString(refGam.rYO + comGam.rY));
 						lblGrnXTVal.setText(Integer.toString(refGam.gXO + comGam.gX));
@@ -808,8 +802,8 @@ public class MainWindow {
 							spnRX.setSelection(refGam.rX);
 						}
 						refGam.updateOffsets();
-						drawTriangle(lblTriangleImage, refGam);
 						getCommon();
+						drawTriangle(lblTriangleImage, refGam);
 						lblRedXTVal.setText(Integer.toString(refGam.rXO + comGam.rX));
 						lblRedYTVal.setText(Integer.toString(refGam.rYO + comGam.rY));
 						lblGrnXTVal.setText(Integer.toString(refGam.gXO + comGam.gX));
@@ -830,8 +824,8 @@ public class MainWindow {
 							spnRY.setSelection(refGam.rY);
 						}
 						refGam.updateOffsets();
-						drawTriangle(lblTriangleImage, refGam);
 						getCommon();
+						drawTriangle(lblTriangleImage, refGam);
 						lblRedXTVal.setText(Integer.toString(refGam.rXO + comGam.rX));
 						lblRedYTVal.setText(Integer.toString(refGam.rYO + comGam.rY));
 						lblGrnXTVal.setText(Integer.toString(refGam.gXO + comGam.gX));
@@ -852,8 +846,8 @@ public class MainWindow {
 							spnGX.setSelection(refGam.gX);
 						}
 						refGam.updateOffsets();
-						drawTriangle(lblTriangleImage, refGam);
 						getCommon();
+						drawTriangle(lblTriangleImage, refGam);
 						lblRedXTVal.setText(Integer.toString(refGam.rXO + comGam.rX));
 						lblRedYTVal.setText(Integer.toString(refGam.rYO + comGam.rY));
 						lblGrnXTVal.setText(Integer.toString(refGam.gXO + comGam.gX));
@@ -874,8 +868,8 @@ public class MainWindow {
 							spnGY.setSelection(refGam.gY);
 						}
 						refGam.updateOffsets();
-						drawTriangle(lblTriangleImage, refGam);
 						getCommon();
+						drawTriangle(lblTriangleImage, refGam);
 						lblRedXTVal.setText(Integer.toString(refGam.rXO + comGam.rX));
 						lblRedYTVal.setText(Integer.toString(refGam.rYO + comGam.rY));
 						lblGrnXTVal.setText(Integer.toString(refGam.gXO + comGam.gX));
@@ -896,8 +890,8 @@ public class MainWindow {
 							spnBX.setSelection(refGam.bX);
 						}
 						refGam.updateOffsets();
-						drawTriangle(lblTriangleImage, refGam);
 						getCommon();
+						drawTriangle(lblTriangleImage, refGam);
 						lblRedXTVal.setText(Integer.toString(refGam.rXO + comGam.rX));
 						lblRedYTVal.setText(Integer.toString(refGam.rYO + comGam.rY));
 						lblGrnXTVal.setText(Integer.toString(refGam.gXO + comGam.gX));
@@ -918,8 +912,8 @@ public class MainWindow {
 							spnBY.setSelection(refGam.bY);
 						}
 						refGam.updateOffsets();
-						drawTriangle(lblTriangleImage, refGam);
 						getCommon();
+						drawTriangle(lblTriangleImage, refGam);
 						lblRedXTVal.setText(Integer.toString(refGam.rXO + comGam.rX));
 						lblRedYTVal.setText(Integer.toString(refGam.rYO + comGam.rY));
 						lblGrnXTVal.setText(Integer.toString(refGam.gXO + comGam.gX));
@@ -940,8 +934,8 @@ public class MainWindow {
 							spnWX.setSelection(refGam.wX);
 						}
 						refGam.updateOffsets();
-						drawTriangle(lblTriangleImage, refGam);
 						getCommon();
+						drawTriangle(lblTriangleImage, refGam);
 						lblRedXTVal.setText(Integer.toString(refGam.rXO + comGam.rX));
 						lblRedYTVal.setText(Integer.toString(refGam.rYO + comGam.rY));
 						lblGrnXTVal.setText(Integer.toString(refGam.gXO + comGam.gX));
@@ -962,8 +956,8 @@ public class MainWindow {
 							spnWY.setSelection(refGam.wY);
 						}
 						refGam.updateOffsets();
-						drawTriangle(lblTriangleImage, refGam);
 						getCommon();
+						drawTriangle(lblTriangleImage, refGam);
 						lblRedXTVal.setText(Integer.toString(refGam.rXO + comGam.rX));
 						lblRedYTVal.setText(Integer.toString(refGam.rYO + comGam.rY));
 						lblGrnXTVal.setText(Integer.toString(refGam.gXO + comGam.gX));
@@ -1029,23 +1023,54 @@ public class MainWindow {
 		int dC = gam.drawColour;
 
 		gc.setLineWidth(1);
-	    gc.setLineStyle(SWT.LINE_DASHDOT);
 	    gc.setForeground(display.getSystemColor(SWT.COLOR_BLACK));
+	    
 	    gc.drawLine((int)drXn, (int)drYn, (int)dgXn, (int)dgYn);
 	    gc.drawLine((int)dgXn, (int)dgYn, (int)dbXn, (int)dbYn);
 	    gc.drawLine((int)dbXn, (int)dbYn, (int)drXn, (int)drYn);
-
-	    gc.setLineStyle(SWT.LINE_SOLID);
-	    gc.setForeground(display.getSystemColor(SWT.COLOR_DARK_BLUE));
-	    gc.fillOval((int)((XOFFSET + gam.wX * XSCALER) - 2), (int)((YOFFSET - gam.wY * YSCALER) - 2), 4, 4);
-	    gc.drawOval((int)((XOFFSET + gam.wX * XSCALER) - 2), (int)((YOFFSET - gam.wY * YSCALER) - 2), 4, 4);
-
-		gc.setForeground(display.getSystemColor(dC));
+	    
+	    gc.setForeground(display.getSystemColor(dC));
 		gc.setLineWidth(2);
+		
 	    gc.drawLine((int)drx, (int)dry, (int)dgx, (int)dgy);
 	    gc.drawLine((int)dgx, (int)dgy, (int)dbx, (int)dby);
 	    gc.drawLine((int)dbx, (int)dby, (int)drx, (int)dry);
 
+	    gc.setForeground(display.getSystemColor(SWT.COLOR_DARK_BLUE));
+	    gc.setLineWidth(1);
+	    gc.setBackground(display.getSystemColor(SWT.COLOR_GRAY));
+	    
+		gc.fillOval((int)((XOFFSET + (gam.rXO + comGam.rX) * XSCALER) - 2), (int)((YOFFSET - (gam.rYO + comGam.rY) * YSCALER) - 2), 4, 4);
+		gc.fillOval((int)((XOFFSET + (gam.gXO + comGam.gX) * XSCALER) - 2), (int)((YOFFSET - (gam.gYO + comGam.gY) * YSCALER) - 2), 4, 4);
+		gc.fillOval((int)((XOFFSET + (gam.bXO + comGam.bX) * XSCALER) - 2), (int)((YOFFSET - (gam.bYO + comGam.bY) * YSCALER) - 2), 4, 4);
+		gc.drawOval((int)((XOFFSET + (gam.rXO + comGam.rX) * XSCALER) - 2), (int)((YOFFSET - (gam.rYO + comGam.rY) * YSCALER) - 2), 4, 4);
+		gc.drawOval((int)((XOFFSET + (gam.gXO + comGam.gX) * XSCALER) - 2), (int)((YOFFSET - (gam.gYO + comGam.gY) * YSCALER) - 2), 4, 4);
+		gc.drawOval((int)((XOFFSET + (gam.bXO + comGam.bX) * XSCALER) - 2), (int)((YOFFSET - (gam.bYO + comGam.bY) * YSCALER) - 2), 4, 4);
+		
+		gc.setBackground(display.getSystemColor(SWT.COLOR_DARK_GRAY));
+		
+		gc.fillOval((int)((XOFFSET + comGam.wX * XSCALER) - 2), (int)((YOFFSET - comGam.wY * YSCALER) - 2), 4, 4);
+		gc.drawOval((int)((XOFFSET + comGam.wX * XSCALER) - 2), (int)((YOFFSET - comGam.wY * YSCALER) - 2), 4, 4);
+
+	    
+	    gc.setBackground(display.getSystemColor(SWT.COLOR_WHITE));
+	    
+		gc.fillOval((int)((XOFFSET + gam.wX * XSCALER) - 2), (int)((YOFFSET - gam.wY * YSCALER) - 2), 4, 4);
+	    gc.drawOval((int)((XOFFSET + gam.wX * XSCALER) - 2), (int)((YOFFSET - gam.wY * YSCALER) - 2), 4, 4);
+	    
+		gc.setLineWidth(2);
+	    
+		gc.fillOval((int)((XOFFSET + comGam.rX * XSCALER) - 2), (int)((YOFFSET - comGam.rY * YSCALER) - 2), 4, 4);
+		gc.fillOval((int)((XOFFSET + comGam.gX * XSCALER) - 2), (int)((YOFFSET - comGam.gY * YSCALER) - 2), 4, 4);
+		gc.fillOval((int)((XOFFSET + comGam.bX * XSCALER) - 2), (int)((YOFFSET - comGam.bY * YSCALER) - 2), 4, 4);
+
+		gc.drawOval((int)((XOFFSET + comGam.rX * XSCALER) - 3), (int)((YOFFSET - comGam.rY * YSCALER) - 3), 6, 6);
+		gc.drawOval((int)((XOFFSET + comGam.gX * XSCALER) - 3), (int)((YOFFSET - comGam.gY * YSCALER) - 3), 6, 6);
+		gc.drawOval((int)((XOFFSET + comGam.bX * XSCALER) - 3), (int)((YOFFSET - comGam.bY * YSCALER) - 3), 6, 6);
+		
+
+		
+		
 	    gc.dispose();
 
 	}
