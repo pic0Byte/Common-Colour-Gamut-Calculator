@@ -310,92 +310,67 @@ public class MainWindow {
 				Spinner spnGXN = new Spinner(cmpNewGamut, SWT.BORDER);
 				tabContents.spnGXN = spnGXN;
 				
-				
-				tabContents.layout();
-				
-
-				
-
-				
-				
-
-				
-
-				
-
-				
-
-				
-
 				Spinner spnGY = new Spinner(cmpNewGamut, SWT.BORDER);
-				spnGY.setDigits(3);
-				spnGY.setMaximum(850);
-				spnGY.setMinimum(401);
-				spnGY.setSelection(600);
-				spnGY.setBounds(79, 135, 56, 22);
-
+				tabContents.spnGY = spnGY;
+				
 				Spinner spnGYN = new Spinner(cmpNewGamut, SWT.BORDER);
-				spnGYN.setDigits(3);
-				spnGYN.setMaximum(850);
-				spnGYN.setMinimum(401);
-				spnGYN.setSelection(600);
-				spnGYN.setBounds(179, 135, 56, 22);
-
+				tabContents.spnGYN = spnGYN;
+				
 				Spinner spnBX = new Spinner(cmpNewGamut, SWT.BORDER);
-				spnBX.setMaximum(299);
-				spnBX.setMinimum(20);
-				spnBX.setSelection(150);
-				spnBX.setDigits(3);
-				spnBX.setBounds(79, 184, 56, 22);
-
+				tabContents.spnBX = spnBX;
+				
 				Spinner spnBXN = new Spinner(cmpNewGamut, SWT.BORDER);
-				spnBXN.setMaximum(299);
-				spnBXN.setMinimum(20);
-				spnBXN.setSelection(150);
-				spnBXN.setDigits(3);
-				spnBXN.setBounds(179, 184, 56, 22);
+				tabContents.spnBXN = spnBXN;
 
 				Spinner spnBY = new Spinner(cmpNewGamut, SWT.BORDER);
-				spnBY.setMaximum(209);
-				spnBY.setMinimum(20);
-				spnBY.setSelection(60);
-				spnBY.setDigits(3);
-				spnBY.setBounds(79, 209, 56, 22);
+				tabContents.spnBY = spnBY;
 
 				Spinner spnBYN = new Spinner(cmpNewGamut, SWT.BORDER);
-				spnBYN.setMaximum(209);
-				spnBYN.setMinimum(20);
-				spnBYN.setSelection(60);
-				spnBYN.setDigits(3);
-				spnBYN.setBounds(179, 209, 56, 22);
+				tabContents.spnBYN = spnBYN;
 
 				Spinner spnWX = new Spinner(cmpNewGamut, SWT.BORDER);
-				spnWX.setMaximum(400);
-				spnWX.setMinimum(250);
-				spnWX.setSelection(313);
-				spnWX.setDigits(3);
-				spnWX.setBounds(79, 258, 56, 22);
+				tabContents.spnWX = spnWX;
 
 				Spinner spnWXN = new Spinner(cmpNewGamut, SWT.BORDER);
-				spnWXN.setMaximum(400);
-				spnWXN.setMinimum(250);
-				spnWXN.setSelection(313);
-				spnWXN.setDigits(3);
-				spnWXN.setBounds(179, 258, 56, 22);
+				tabContents.spnWXN = spnWXN;
 
 				Spinner spnWY = new Spinner(cmpNewGamut, SWT.BORDER);
-				spnWY.setMaximum(400);
-				spnWY.setMinimum(250);
-				spnWY.setSelection(329);
-				spnWY.setDigits(3);
-				spnWY.setBounds(79, 283, 56, 22);
+				tabContents.spnWY = spnWY;
 
 				Spinner spnWYN = new Spinner(cmpNewGamut, SWT.BORDER);
-				spnWYN.setMaximum(400);
-				spnWYN.setMinimum(250);
-				spnWYN.setSelection(329);
-				spnWYN.setDigits(3);
-				spnWYN.setBounds(179, 283, 56, 22);
+				tabContents.spnWYN = spnWYN;
+				
+				
+				tabContents.layoutSpinners();
+				
+				
+				Label lblRedXTVal = new Label(cmpNewGamut, SWT.BORDER);
+				tabContents.lblRedXTVal = lblRedXTVal;
+				
+				Label lblRedYTVal = new Label(cmpNewGamut, SWT.BORDER);
+				tabContents.lblRedYTVal = lblRedYTVal;
+				
+				Label lblGrnXTVal = new Label(cmpNewGamut, SWT.BORDER);
+				tabContents.lblGrnXTVal = lblGrnXTVal;
+				
+				Label lblGrnYTVal = new Label(cmpNewGamut, SWT.BORDER);
+				tabContents.lblGrnYTVal = lblGrnYTVal;
+				
+				Label lblBluXTVal = new Label(cmpNewGamut, SWT.BORDER);
+				tabContents.lblBluXTVal = lblBluXTVal;
+				
+				Label lblBluYTVal = new Label(cmpNewGamut, SWT.BORDER);
+				tabContents.lblBluYTVal = lblBluYTVal;
+				
+				Label lblWhtXTVal = new Label(cmpNewGamut, SWT.BORDER);
+				tabContents.lblWhtXTVal = lblWhtXTVal;
+				
+				Label lblWhtYTVal = new Label(cmpNewGamut, SWT.BORDER);
+				tabContents.lblWhtYTVal = lblWhtYTVal;
+		
+				
+				tabContents.layoutLabels();
+
 
 				Label lblMeasured = new Label(cmpNewGamut, SWT.NONE);
 				lblMeasured.setAlignment(SWT.LEFT);
@@ -422,10 +397,6 @@ public class MainWindow {
 				lblRedXT.setBounds(18, 358, 55, 15);
 				lblRedXT.setText("Red X");
 
-				Label lblRedXTVal = new Label(cmpNewGamut, SWT.BORDER);
-				lblRedXTVal.setAlignment(SWT.LEFT);
-				lblRedXTVal.setBounds(79, 358, 55, 15);
-
 				Label lblRedY = new Label(cmpNewGamut, SWT.NONE);
 				lblRedY.setText("Red Y");
 				lblRedY.setAlignment(SWT.RIGHT);
@@ -435,10 +406,6 @@ public class MainWindow {
 				lblRedYT.setText("Red Y");
 				lblRedYT.setAlignment(SWT.RIGHT);
 				lblRedYT.setBounds(18, 382, 55, 15);
-
-				Label lblRedYTVal = new Label(cmpNewGamut, SWT.BORDER);
-				lblRedYTVal.setAlignment(SWT.LEFT);
-				lblRedYTVal.setBounds(79, 382, 55, 15);
 
 				Label lblGrnX = new Label(cmpNewGamut, SWT.NONE);
 				lblGrnX.setText("Green X");
@@ -450,10 +417,6 @@ public class MainWindow {
 				lblGrnXT.setAlignment(SWT.RIGHT);
 				lblGrnXT.setBounds(18, 426, 55, 15);
 
-				Label lblGrnXTVal = new Label(cmpNewGamut, SWT.BORDER);
-				lblGrnXTVal.setAlignment(SWT.LEFT);
-				lblGrnXTVal.setBounds(79, 426, 55, 15);
-
 				Label lblGrnY = new Label(cmpNewGamut, SWT.NONE);
 				lblGrnY.setText("Green Y");
 				lblGrnY.setAlignment(SWT.RIGHT);
@@ -463,10 +426,6 @@ public class MainWindow {
 				lblGrnYT.setText("Green Y");
 				lblGrnYT.setAlignment(SWT.RIGHT);
 				lblGrnYT.setBounds(18, 450, 55, 15);
-
-				Label lblGrnYTVal = new Label(cmpNewGamut, SWT.BORDER);
-				lblGrnYTVal.setAlignment(SWT.LEFT);
-				lblGrnYTVal.setBounds(79, 450, 55, 15);
 
 				Label lblBluX = new Label(cmpNewGamut, SWT.NONE);
 				lblBluX.setText("Blue X");
@@ -478,10 +437,6 @@ public class MainWindow {
 				lblBluXT.setAlignment(SWT.RIGHT);
 				lblBluXT.setBounds(130, 358, 50, 15);
 
-				Label lblBluXTVal = new Label(cmpNewGamut, SWT.BORDER);
-				lblBluXTVal.setAlignment(SWT.LEFT);
-				lblBluXTVal.setBounds(185, 358, 55, 15);
-
 				Label lblBluY = new Label(cmpNewGamut, SWT.NONE);
 				lblBluY.setText("Blue Y");
 				lblBluY.setAlignment(SWT.RIGHT);
@@ -491,10 +446,6 @@ public class MainWindow {
 				lblBluYT.setText("Blue Y");
 				lblBluYT.setAlignment(SWT.RIGHT);
 				lblBluYT.setBounds(130, 382, 50, 15);
-
-				Label lblBluYTVal = new Label(cmpNewGamut, SWT.BORDER);
-				lblBluYTVal.setAlignment(SWT.LEFT);
-				lblBluYTVal.setBounds(185, 382, 55, 15);
 
 				Label lblWhtX = new Label(cmpNewGamut, SWT.NONE);
 				lblWhtX.setText("White X");
@@ -506,10 +457,6 @@ public class MainWindow {
 				lblWhtXT.setAlignment(SWT.RIGHT);
 				lblWhtXT.setBounds(128, 426, 55, 15);
 
-				Label lblWhtXTVal = new Label(cmpNewGamut, SWT.BORDER);
-				lblWhtXTVal.setAlignment(SWT.LEFT);
-				lblWhtXTVal.setBounds(185, 426, 55, 15);
-
 				Label lblWhtY = new Label(cmpNewGamut, SWT.NONE);
 				lblWhtY.setText("White Y");
 				lblWhtY.setAlignment(SWT.RIGHT);
@@ -520,9 +467,6 @@ public class MainWindow {
 				lblWhtYT.setAlignment(SWT.RIGHT);
 				lblWhtYT.setBounds(128, 450, 55, 15);
 
-				Label lblWhtYTVal = new Label(cmpNewGamut, SWT.BORDER);
-				lblWhtYTVal.setAlignment(SWT.LEFT);
-				lblWhtYTVal.setBounds(185, 450, 55, 15);
 
 				//-----------------------------------------------------end of create tab layout-----------------------------------------//
 
