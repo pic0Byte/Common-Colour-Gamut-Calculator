@@ -285,52 +285,47 @@ public class MainWindow {
 				Composite cmpNewGamut = new Composite(tabFolder, SWT.NONE);
 				tbtGam.setControl(cmpNewGamut);
 				tbtGam.setText(testKey);
-
-				Spinner spnRX = new Spinner(cmpNewGamut, SWT.BORDER);
-				spnRX.setDigits(3);
-				spnRX.setMaximum(750);
-				spnRX.setMinimum(401);
-				spnRX.setSelection(640);
-				spnRX.setBounds(79, 41, 56, 22);
-
+				
 				Button btnLinked = new Button(cmpNewGamut, SWT.NONE);
 				btnLinked.setBounds(145, 41, 25, 22);
 				btnLinked.setImage(SWTResourceManager.getImage(MainWindow.class, "/resource/link.png"));
+				
+				TabContents tabContents = new TabContents();
 
+				Spinner spnRX = new Spinner(cmpNewGamut, SWT.BORDER);
+				tabContents.spnRX = spnRX;
+				
 				Spinner spnRXN = new Spinner(cmpNewGamut, SWT.BORDER);
-				spnRXN.setDigits(3);
-				spnRXN.setMaximum(750);
-				spnRXN.setMinimum(401);
-				spnRXN.setSelection(640);
-				spnRXN.setBounds(179, 41, 56, 22);
-
+				tabContents.spnRXN = spnRXN;
+				
 				Spinner spnRY = new Spinner(cmpNewGamut, SWT.BORDER);
-				spnRY.setDigits(3);
-				spnRY.setMaximum(399);
-				spnRY.setMinimum(211);
-				spnRY.setSelection(330);
-				spnRY.setBounds(79, 66, 56, 22);
-
+				tabContents.spnRY = spnRY;
+				
 				Spinner spnRYN = new Spinner(cmpNewGamut, SWT.BORDER);
-				spnRYN.setDigits(3);
-				spnRYN.setMaximum(399);
-				spnRYN.setMinimum(211);
-				spnRYN.setSelection(330);
-				spnRYN.setBounds(179, 66, 56, 22);
-
+				tabContents.spnRYN = spnRYN;
+				
 				Spinner spnGX = new Spinner(cmpNewGamut, SWT.BORDER);
-				spnGX.setMaximum(399);
-				spnGX.setMinimum(20);
-				spnGX.setSelection(300);
-				spnGX.setDigits(3);
-				spnGX.setBounds(79, 110, 56, 22);
-
+				tabContents.spnGX = spnGX;
+				
 				Spinner spnGXN = new Spinner(cmpNewGamut, SWT.BORDER);
-				spnGXN.setMaximum(399);
-				spnGXN.setMinimum(20);
-				spnGXN.setSelection(300);
-				spnGXN.setDigits(3);
-				spnGXN.setBounds(179, 110, 56, 22);
+				tabContents.spnGXN = spnGXN;
+				
+				
+				tabContents.layout();
+				
+
+				
+
+				
+				
+
+				
+
+				
+
+				
+
+				
 
 				Spinner spnGY = new Spinner(cmpNewGamut, SWT.BORDER);
 				spnGY.setDigits(3);
