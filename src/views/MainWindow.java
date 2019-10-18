@@ -520,24 +520,12 @@ public class MainWindow {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
 						if (tabFolder.getSelection() == tbtGam) {
-							refGam.rXN = spnRXN.getSelection();
-							refGam.rYN = spnRYN.getSelection();
-							refGam.gXN = spnGXN.getSelection();
-							refGam.gYN = spnGYN.getSelection();
-							refGam.bXN = spnBXN.getSelection();
-							refGam.bYN = spnBYN.getSelection();
-							refGam.wXN = spnWXN.getSelection();
-							refGam.wYN = spnWYN.getSelection();
-							refGam.updateOffsets();
+							
+							tabContents.setVals(refGam);
+							tabContents.setNVals(refGam);
 							getCommon();
-							lblRedXTVal.setText(Integer.toString(refGam.rXO + comGam.rX));
-							lblRedYTVal.setText(Integer.toString(refGam.rYO + comGam.rY));
-							lblGrnXTVal.setText(Integer.toString(refGam.gXO + comGam.gX));
-							lblGrnYTVal.setText(Integer.toString(refGam.gYO + comGam.gY));
-							lblBluXTVal.setText(Integer.toString(refGam.bXO + comGam.bX));
-							lblBluYTVal.setText(Integer.toString(refGam.bYO + comGam.bY));
-							lblWhtXTVal.setText(Integer.toString(refGam.wXO + comGam.wX));
-							lblWhtYTVal.setText(Integer.toString(refGam.wYO + comGam.wY));
+							tabContents.setOffsets(refGam, comGam);
+							drawTriangle(lblTriangleImage, refGam);	
 						}
 					}
 				});
@@ -558,22 +546,11 @@ public class MainWindow {
 				spnRX.addSelectionListener(new SelectionAdapter() {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
-						refGam.rX = spnRX.getSelection();
-						if (refGam.nativeLinked) {
-							refGam.rXN = spnRX.getSelection();
-							spnRXN.setSelection(refGam.rXN);
-						}
-						refGam.updateOffsets();
+						
+						tabContents.setVals(refGam);
 						getCommon();
-						drawTriangle(lblTriangleImage, refGam);
-						lblRedXTVal.setText(Integer.toString(refGam.rXO + comGam.rX));
-						lblRedYTVal.setText(Integer.toString(refGam.rYO + comGam.rY));
-						lblGrnXTVal.setText(Integer.toString(refGam.gXO + comGam.gX));
-						lblGrnYTVal.setText(Integer.toString(refGam.gYO + comGam.gY));
-						lblBluXTVal.setText(Integer.toString(refGam.bXO + comGam.bX));
-						lblBluYTVal.setText(Integer.toString(refGam.bYO + comGam.bY));
-						lblWhtXTVal.setText(Integer.toString(refGam.wXO + comGam.wX));
-						lblWhtYTVal.setText(Integer.toString(refGam.wYO + comGam.wY));
+						tabContents.setOffsets(refGam, comGam);
+						drawTriangle(lblTriangleImage, refGam);	
 					}
 				});
 
@@ -581,330 +558,166 @@ public class MainWindow {
 				spnRY.addSelectionListener(new SelectionAdapter() {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
-						refGam.rY = spnRY.getSelection();
-						if (refGam.nativeLinked) {
-							refGam.rYN = spnRY.getSelection();
-							spnRYN.setSelection(refGam.rYN);
-						}
-						refGam.updateOffsets();
+						
+						tabContents.setVals(refGam);
 						getCommon();
+						tabContents.setOffsets(refGam, comGam);
 						drawTriangle(lblTriangleImage, refGam);
-						lblRedXTVal.setText(Integer.toString(refGam.rXO + comGam.rX));
-						lblRedYTVal.setText(Integer.toString(refGam.rYO + comGam.rY));
-						lblGrnXTVal.setText(Integer.toString(refGam.gXO + comGam.gX));
-						lblGrnYTVal.setText(Integer.toString(refGam.gYO + comGam.gY));
-						lblBluXTVal.setText(Integer.toString(refGam.bXO + comGam.bX));
-						lblBluYTVal.setText(Integer.toString(refGam.bYO + comGam.bY));
-						lblWhtXTVal.setText(Integer.toString(refGam.wXO + comGam.wX));
-						lblWhtYTVal.setText(Integer.toString(refGam.wYO + comGam.wY));
 					}
 				});
 
 				spnGX.addSelectionListener(new SelectionAdapter() {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
-						refGam.gX = spnGX.getSelection();
-						if (refGam.nativeLinked) {
-							refGam.gXN = spnGX.getSelection();
-							spnGXN.setSelection(refGam.gXN);
-						}
-						refGam.updateOffsets();
+						
+						tabContents.setVals(refGam);
 						getCommon();
+						tabContents.setOffsets(refGam, comGam);
 						drawTriangle(lblTriangleImage, refGam);
-						lblRedXTVal.setText(Integer.toString(refGam.rXO + comGam.rX));
-						lblRedYTVal.setText(Integer.toString(refGam.rYO + comGam.rY));
-						lblGrnXTVal.setText(Integer.toString(refGam.gXO + comGam.gX));
-						lblGrnYTVal.setText(Integer.toString(refGam.gYO + comGam.gY));
-						lblBluXTVal.setText(Integer.toString(refGam.bXO + comGam.bX));
-						lblBluYTVal.setText(Integer.toString(refGam.bYO + comGam.bY));
-						lblWhtXTVal.setText(Integer.toString(refGam.wXO + comGam.wX));
-						lblWhtYTVal.setText(Integer.toString(refGam.wYO + comGam.wY));
 					}
 				});
 
 				spnGY.addSelectionListener(new SelectionAdapter() {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
-						refGam.gY = spnGY.getSelection();
-						if (refGam.nativeLinked) {
-							refGam.gYN = spnGY.getSelection();
-							spnGYN.setSelection(refGam.gYN);
-						}
-						refGam.updateOffsets();
+						
+						tabContents.setVals(refGam);
 						getCommon();
+						tabContents.setOffsets(refGam, comGam);
 						drawTriangle(lblTriangleImage, refGam);
-						lblRedXTVal.setText(Integer.toString(refGam.rXO + comGam.rX));
-						lblRedYTVal.setText(Integer.toString(refGam.rYO + comGam.rY));
-						lblGrnXTVal.setText(Integer.toString(refGam.gXO + comGam.gX));
-						lblGrnYTVal.setText(Integer.toString(refGam.gYO + comGam.gY));
-						lblBluXTVal.setText(Integer.toString(refGam.bXO + comGam.bX));
-						lblBluYTVal.setText(Integer.toString(refGam.bYO + comGam.bY));
-						lblWhtXTVal.setText(Integer.toString(refGam.wXO + comGam.wX));
-						lblWhtYTVal.setText(Integer.toString(refGam.wYO + comGam.wY));
 					}
 				});
 
 				spnBX.addSelectionListener(new SelectionAdapter() {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
-						refGam.bX = spnBX.getSelection();
-						if (refGam.nativeLinked) {
-							refGam.bXN = spnBX.getSelection();
-							spnBXN.setSelection(refGam.bXN);
-						}
-						refGam.updateOffsets();
+						
+						tabContents.setVals(refGam);
 						getCommon();
+						tabContents.setOffsets(refGam, comGam);
 						drawTriangle(lblTriangleImage, refGam);
-						lblRedXTVal.setText(Integer.toString(refGam.rXO + comGam.rX));
-						lblRedYTVal.setText(Integer.toString(refGam.rYO + comGam.rY));
-						lblGrnXTVal.setText(Integer.toString(refGam.gXO + comGam.gX));
-						lblGrnYTVal.setText(Integer.toString(refGam.gYO + comGam.gY));
-						lblBluXTVal.setText(Integer.toString(refGam.bXO + comGam.bX));
-						lblBluYTVal.setText(Integer.toString(refGam.bYO + comGam.bY));
-						lblWhtXTVal.setText(Integer.toString(refGam.wXO + comGam.wX));
-						lblWhtYTVal.setText(Integer.toString(refGam.wYO + comGam.wY));
 					}
 				});
 
 				spnBY.addSelectionListener(new SelectionAdapter() {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
-						refGam.bY = spnBY.getSelection();
-						if (refGam.nativeLinked) {
-							refGam.bYN = spnBY.getSelection();
-							spnBYN.setSelection(refGam.bYN);
-						}
-						refGam.updateOffsets();
+						
+						tabContents.setVals(refGam);
 						getCommon();
+						tabContents.setOffsets(refGam, comGam);
 						drawTriangle(lblTriangleImage, refGam);
-						lblRedXTVal.setText(Integer.toString(refGam.rXO + comGam.rX));
-						lblRedYTVal.setText(Integer.toString(refGam.rYO + comGam.rY));
-						lblGrnXTVal.setText(Integer.toString(refGam.gXO + comGam.gX));
-						lblGrnYTVal.setText(Integer.toString(refGam.gYO + comGam.gY));
-						lblBluXTVal.setText(Integer.toString(refGam.bXO + comGam.bX));
-						lblBluYTVal.setText(Integer.toString(refGam.bYO + comGam.bY));
-						lblWhtXTVal.setText(Integer.toString(refGam.wXO + comGam.wX));
-						lblWhtYTVal.setText(Integer.toString(refGam.wYO + comGam.wY));
 					}
 				});
 
 				spnWX.addSelectionListener(new SelectionAdapter() {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
-						refGam.wX = spnWX.getSelection();
-						if (refGam.nativeLinked) {
-							refGam.wXN = spnWX.getSelection();
-							spnWXN.setSelection(refGam.wXN);
-						}
-						refGam.updateOffsets();
+						
+						tabContents.setVals(refGam);
 						getCommon();
+						tabContents.setOffsets(refGam, comGam);
 						drawTriangle(lblTriangleImage, refGam);
-						lblRedXTVal.setText(Integer.toString(refGam.rXO + comGam.rX));
-						lblRedYTVal.setText(Integer.toString(refGam.rYO + comGam.rY));
-						lblGrnXTVal.setText(Integer.toString(refGam.gXO + comGam.gX));
-						lblGrnYTVal.setText(Integer.toString(refGam.gYO + comGam.gY));
-						lblBluXTVal.setText(Integer.toString(refGam.bXO + comGam.bX));
-						lblBluYTVal.setText(Integer.toString(refGam.bYO + comGam.bY));
-						lblWhtXTVal.setText(Integer.toString(refGam.wXO + comGam.wX));
-						lblWhtYTVal.setText(Integer.toString(refGam.wYO + comGam.wY));
 					}
 				});
 
 				spnWY.addSelectionListener(new SelectionAdapter() {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
-						refGam.wY = spnWY.getSelection();
-						if (refGam.nativeLinked) {
-							refGam.wYN = spnWY.getSelection();
-							spnWYN.setSelection(refGam.wYN);
-						}
-						refGam.updateOffsets();
+						
+						tabContents.setVals(refGam);
 						getCommon();
+						tabContents.setOffsets(refGam, comGam);
 						drawTriangle(lblTriangleImage, refGam);
-						lblRedXTVal.setText(Integer.toString(refGam.rXO + comGam.rX));
-						lblRedYTVal.setText(Integer.toString(refGam.rYO + comGam.rY));
-						lblGrnXTVal.setText(Integer.toString(refGam.gXO + comGam.gX));
-						lblGrnYTVal.setText(Integer.toString(refGam.gYO + comGam.gY));
-						lblBluXTVal.setText(Integer.toString(refGam.bXO + comGam.bX));
-						lblBluYTVal.setText(Integer.toString(refGam.bYO + comGam.bY));
-						lblWhtXTVal.setText(Integer.toString(refGam.wXO + comGam.wX));
-						lblWhtYTVal.setText(Integer.toString(refGam.wYO + comGam.wY));
+						
 					}
 				});
 
 				spnRXN.addSelectionListener(new SelectionAdapter() {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
-						refGam.rXN = spnRXN.getSelection();
-						if (refGam.nativeLinked) {
-							refGam.rX = spnRXN.getSelection();
-							spnRX.setSelection(refGam.rX);
-						}
-						refGam.updateOffsets();
+						
+						tabContents.setNVals(refGam);
 						getCommon();
+						tabContents.setOffsets(refGam, comGam);
 						drawTriangle(lblTriangleImage, refGam);
-						lblRedXTVal.setText(Integer.toString(refGam.rXO + comGam.rX));
-						lblRedYTVal.setText(Integer.toString(refGam.rYO + comGam.rY));
-						lblGrnXTVal.setText(Integer.toString(refGam.gXO + comGam.gX));
-						lblGrnYTVal.setText(Integer.toString(refGam.gYO + comGam.gY));
-						lblBluXTVal.setText(Integer.toString(refGam.bXO + comGam.bX));
-						lblBluYTVal.setText(Integer.toString(refGam.bYO + comGam.bY));
-						lblWhtXTVal.setText(Integer.toString(refGam.wXO + comGam.wX));
-						lblWhtYTVal.setText(Integer.toString(refGam.wYO + comGam.wY));
 					}
 				});
 
 				spnRYN.addSelectionListener(new SelectionAdapter() {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
-						refGam.rYN = spnRYN.getSelection();
-						if (refGam.nativeLinked) {
-							refGam.rY = spnRYN.getSelection();
-							spnRY.setSelection(refGam.rY);
-						}
-						refGam.updateOffsets();
+
+						tabContents.setNVals(refGam);
 						getCommon();
+						tabContents.setOffsets(refGam, comGam);
 						drawTriangle(lblTriangleImage, refGam);
-						lblRedXTVal.setText(Integer.toString(refGam.rXO + comGam.rX));
-						lblRedYTVal.setText(Integer.toString(refGam.rYO + comGam.rY));
-						lblGrnXTVal.setText(Integer.toString(refGam.gXO + comGam.gX));
-						lblGrnYTVal.setText(Integer.toString(refGam.gYO + comGam.gY));
-						lblBluXTVal.setText(Integer.toString(refGam.bXO + comGam.bX));
-						lblBluYTVal.setText(Integer.toString(refGam.bYO + comGam.bY));
-						lblWhtXTVal.setText(Integer.toString(refGam.wXO + comGam.wX));
-						lblWhtYTVal.setText(Integer.toString(refGam.wYO + comGam.wY));
 					}
 				});
 
 				spnGXN.addSelectionListener(new SelectionAdapter() {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
-						refGam.gXN = spnGXN.getSelection();
-						if (refGam.nativeLinked) {
-							refGam.gX = spnGXN.getSelection();
-							spnGX.setSelection(refGam.gX);
-						}
-						refGam.updateOffsets();
+
+						tabContents.setNVals(refGam);
 						getCommon();
+						tabContents.setOffsets(refGam, comGam);
 						drawTriangle(lblTriangleImage, refGam);
-						lblRedXTVal.setText(Integer.toString(refGam.rXO + comGam.rX));
-						lblRedYTVal.setText(Integer.toString(refGam.rYO + comGam.rY));
-						lblGrnXTVal.setText(Integer.toString(refGam.gXO + comGam.gX));
-						lblGrnYTVal.setText(Integer.toString(refGam.gYO + comGam.gY));
-						lblBluXTVal.setText(Integer.toString(refGam.bXO + comGam.bX));
-						lblBluYTVal.setText(Integer.toString(refGam.bYO + comGam.bY));
-						lblWhtXTVal.setText(Integer.toString(refGam.wXO + comGam.wX));
-						lblWhtYTVal.setText(Integer.toString(refGam.wYO + comGam.wY));
 					}
 				});
 
 				spnGYN.addSelectionListener(new SelectionAdapter() {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
-						refGam.gYN = spnGYN.getSelection();
-						if (refGam.nativeLinked) {
-							refGam.gY = spnGYN.getSelection();
-							spnGY.setSelection(refGam.gY);
-						}
-						refGam.updateOffsets();
+
+						tabContents.setNVals(refGam);
 						getCommon();
+						tabContents.setOffsets(refGam, comGam);
 						drawTriangle(lblTriangleImage, refGam);
-						lblRedXTVal.setText(Integer.toString(refGam.rXO + comGam.rX));
-						lblRedYTVal.setText(Integer.toString(refGam.rYO + comGam.rY));
-						lblGrnXTVal.setText(Integer.toString(refGam.gXO + comGam.gX));
-						lblGrnYTVal.setText(Integer.toString(refGam.gYO + comGam.gY));
-						lblBluXTVal.setText(Integer.toString(refGam.bXO + comGam.bX));
-						lblBluYTVal.setText(Integer.toString(refGam.bYO + comGam.bY));
-						lblWhtXTVal.setText(Integer.toString(refGam.wXO + comGam.wX));
-						lblWhtYTVal.setText(Integer.toString(refGam.wYO + comGam.wY));
 					}
 				});
 
 				spnBXN.addSelectionListener(new SelectionAdapter() {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
-						refGam.bXN = spnBXN.getSelection();
-						if (refGam.nativeLinked) {
-							refGam.bX = spnBXN.getSelection();
-							spnBX.setSelection(refGam.bX);
-						}
-						refGam.updateOffsets();
+
+						tabContents.setNVals(refGam);
 						getCommon();
+						tabContents.setOffsets(refGam, comGam);
 						drawTriangle(lblTriangleImage, refGam);
-						lblRedXTVal.setText(Integer.toString(refGam.rXO + comGam.rX));
-						lblRedYTVal.setText(Integer.toString(refGam.rYO + comGam.rY));
-						lblGrnXTVal.setText(Integer.toString(refGam.gXO + comGam.gX));
-						lblGrnYTVal.setText(Integer.toString(refGam.gYO + comGam.gY));
-						lblBluXTVal.setText(Integer.toString(refGam.bXO + comGam.bX));
-						lblBluYTVal.setText(Integer.toString(refGam.bYO + comGam.bY));
-						lblWhtXTVal.setText(Integer.toString(refGam.wXO + comGam.wX));
-						lblWhtYTVal.setText(Integer.toString(refGam.wYO + comGam.wY));
 					}
 				});
 
 				spnBYN.addSelectionListener(new SelectionAdapter() {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
-						refGam.bYN = spnBYN.getSelection();
-						if (refGam.nativeLinked) {
-							refGam.bY = spnBYN.getSelection();
-							spnBY.setSelection(refGam.bY);
-						}
-						refGam.updateOffsets();
+
+						tabContents.setNVals(refGam);
 						getCommon();
+						tabContents.setOffsets(refGam, comGam);
 						drawTriangle(lblTriangleImage, refGam);
-						lblRedXTVal.setText(Integer.toString(refGam.rXO + comGam.rX));
-						lblRedYTVal.setText(Integer.toString(refGam.rYO + comGam.rY));
-						lblGrnXTVal.setText(Integer.toString(refGam.gXO + comGam.gX));
-						lblGrnYTVal.setText(Integer.toString(refGam.gYO + comGam.gY));
-						lblBluXTVal.setText(Integer.toString(refGam.bXO + comGam.bX));
-						lblBluYTVal.setText(Integer.toString(refGam.bYO + comGam.bY));
-						lblWhtXTVal.setText(Integer.toString(refGam.wXO + comGam.wX));
-						lblWhtYTVal.setText(Integer.toString(refGam.wYO + comGam.wY));
 					}
 				});
 
 				spnWXN.addSelectionListener(new SelectionAdapter() {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
-						refGam.wXN = spnWXN.getSelection();
-						if (refGam.nativeLinked) {
-							refGam.wX = spnWXN.getSelection();
-							spnWX.setSelection(refGam.wX);
-						}
-						refGam.updateOffsets();
+
+						tabContents.setNVals(refGam);
 						getCommon();
+						tabContents.setOffsets(refGam, comGam);
 						drawTriangle(lblTriangleImage, refGam);
-						lblRedXTVal.setText(Integer.toString(refGam.rXO + comGam.rX));
-						lblRedYTVal.setText(Integer.toString(refGam.rYO + comGam.rY));
-						lblGrnXTVal.setText(Integer.toString(refGam.gXO + comGam.gX));
-						lblGrnYTVal.setText(Integer.toString(refGam.gYO + comGam.gY));
-						lblBluXTVal.setText(Integer.toString(refGam.bXO + comGam.bX));
-						lblBluYTVal.setText(Integer.toString(refGam.bYO + comGam.bY));
-						lblWhtXTVal.setText(Integer.toString(refGam.wXO + comGam.wX));
-						lblWhtYTVal.setText(Integer.toString(refGam.wYO + comGam.wY));
 					}
 				});
 
 				spnWYN.addSelectionListener(new SelectionAdapter() {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
-						refGam.wYN = spnWYN.getSelection();
-						if (refGam.nativeLinked) {
-							refGam.wY = spnWYN.getSelection();
-							spnWY.setSelection(refGam.wY);
-						}
-						refGam.updateOffsets();
+
+						tabContents.setNVals(refGam);
 						getCommon();
+						tabContents.setOffsets(refGam, comGam);
 						drawTriangle(lblTriangleImage, refGam);
-						lblRedXTVal.setText(Integer.toString(refGam.rXO + comGam.rX));
-						lblRedYTVal.setText(Integer.toString(refGam.rYO + comGam.rY));
-						lblGrnXTVal.setText(Integer.toString(refGam.gXO + comGam.gX));
-						lblGrnYTVal.setText(Integer.toString(refGam.gYO + comGam.gY));
-						lblBluXTVal.setText(Integer.toString(refGam.bXO + comGam.bX));
-						lblBluYTVal.setText(Integer.toString(refGam.bYO + comGam.bY));
-						lblWhtXTVal.setText(Integer.toString(refGam.wXO + comGam.wX));
-						lblWhtYTVal.setText(Integer.toString(refGam.wYO + comGam.wY));
 					}
 				});
 
@@ -1015,7 +828,7 @@ public class MainWindow {
 	}
 
 
-	protected void getCommon() {
+	public void getCommon() {
 
 		boolean firstGamut = true;
 

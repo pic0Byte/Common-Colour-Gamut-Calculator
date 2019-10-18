@@ -4,6 +4,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Spinner;
 
+
 public class TabContents {
 	
 	private static final int COLUMN1 = 79;
@@ -208,9 +209,98 @@ public class TabContents {
 		}
 	}
 	
-	public void updateVals(Gamut gam) {
+	public void setVals(Gamut tabGam) {
 		
+		tabGam.rX = spnRX.getSelection();
+		tabGam.rY = spnRY.getSelection();
+		tabGam.gX = spnGX.getSelection();
+		tabGam.gY = spnGY.getSelection();
+		tabGam.bX = spnBX.getSelection();
+		tabGam.bY = spnBY.getSelection();
+		tabGam.wX = spnWX.getSelection();
+		tabGam.wY = spnWY.getSelection();
 		
+		if (tabGam.nativeLinked) {
+			
+			tabGam.rXN = spnRX.getSelection();
+			spnRXN.setSelection(tabGam.rXN);
+			
+			tabGam.rYN = spnRY.getSelection();
+			spnRYN.setSelection(tabGam.rYN);
+			
+			tabGam.gXN = spnGX.getSelection();
+			spnGXN.setSelection(tabGam.gXN);
+			
+			tabGam.gYN = spnGY.getSelection();
+			spnGYN.setSelection(tabGam.gYN);
+			
+			tabGam.bXN = spnBX.getSelection();
+			spnBXN.setSelection(tabGam.bXN);
+			
+			tabGam.bYN = spnBY.getSelection();
+			spnBYN.setSelection(tabGam.bYN);
+			
+			tabGam.wXN = spnWX.getSelection();
+			spnWXN.setSelection(tabGam.wXN);
+			
+			tabGam.wYN = spnWY.getSelection();
+			spnWYN.setSelection(tabGam.wYN);
+			
+		}
+	}
+	
+	public void setNVals(Gamut tabGam) {
+		
+		tabGam.rXN = spnRXN.getSelection();
+		tabGam.rYN = spnRYN.getSelection();
+		tabGam.gXN = spnGXN.getSelection();
+		tabGam.gYN = spnGYN.getSelection();
+		tabGam.bXN = spnBXN.getSelection();
+		tabGam.bYN = spnBYN.getSelection();
+		tabGam.wXN = spnWXN.getSelection();
+		tabGam.wYN = spnWYN.getSelection();
+		
+		if (tabGam.nativeLinked) {
+			
+			tabGam.rX = spnRXN.getSelection();
+			spnRX.setSelection(tabGam.rX);
+			
+			tabGam.rY = spnRYN.getSelection();
+			spnRY.setSelection(tabGam.rY);
+			
+			tabGam.gX = spnGXN.getSelection();
+			spnGX.setSelection(tabGam.gX);
+			
+			tabGam.gY = spnGYN.getSelection();
+			spnGY.setSelection(tabGam.gY);
+			
+			tabGam.bX = spnBXN.getSelection();
+			spnBX.setSelection(tabGam.bX);
+			
+			tabGam.bY = spnBYN.getSelection();
+			spnBY.setSelection(tabGam.bY);
+			
+			tabGam.wX = spnWXN.getSelection();
+			spnWX.setSelection(tabGam.wX);
+			
+			tabGam.wY = spnWYN.getSelection();
+			spnWY.setSelection(tabGam.wY);
+			
+		}
+	}
+	
+	public void setOffsets (Gamut tabGam, Gamut comGam) {
+		
+		tabGam.updateOffsets();
+		
+		lblRedXTVal.setText(Integer.toString(tabGam.rXO + comGam.rX));
+		lblRedYTVal.setText(Integer.toString(tabGam.rYO + comGam.rY));
+		lblGrnXTVal.setText(Integer.toString(tabGam.gXO + comGam.gX));
+		lblGrnYTVal.setText(Integer.toString(tabGam.gYO + comGam.gY));
+		lblBluXTVal.setText(Integer.toString(tabGam.bXO + comGam.bX));
+		lblBluYTVal.setText(Integer.toString(tabGam.bYO + comGam.bY));
+		lblWhtXTVal.setText(Integer.toString(tabGam.wXO + comGam.wX));
+		lblWhtYTVal.setText(Integer.toString(tabGam.wYO + comGam.wY));
 		
 	}
 
