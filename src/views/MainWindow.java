@@ -344,9 +344,6 @@ public class MainWindow {
 				tabContents.layoutSpinners();
 				
 				
-				Label lblRedXTVal = new Label(cmpNewGamut, SWT.BORDER);
-				tabContents.lblRedXTVal = lblRedXTVal;
-				
 				Label lblRedYTVal = new Label(cmpNewGamut, SWT.BORDER);
 				tabContents.lblRedYTVal = lblRedYTVal;
 				
@@ -369,103 +366,12 @@ public class MainWindow {
 				tabContents.lblWhtYTVal = lblWhtYTVal;
 		
 				
-				tabContents.layoutLabels();
+				tabContents.layoutLabels(cmpNewGamut);
 
+				tabContents.layoutFields(cmpNewGamut);
+				
 
-				Label lblMeasured = new Label(cmpNewGamut, SWT.NONE);
-				lblMeasured.setAlignment(SWT.LEFT);
-				lblMeasured.setBounds(80, 19, 55, 15);
-				lblMeasured.setText("Measured");
-
-				Label lblNative = new Label(cmpNewGamut, SWT.NONE);
-				lblNative.setAlignment(SWT.LEFT);
-				lblNative.setBounds(180, 19, 55, 15);
-				lblNative.setText("Native");
-
-				Label lblDesVal = new Label(cmpNewGamut, SWT.NONE);
-				lblDesVal.setAlignment(SWT.LEFT);
-				lblDesVal.setBounds(80, 334, 170, 15);
-				lblDesVal.setText("Target Values (offsets)");
-
-				Label lblRedX = new Label(cmpNewGamut, SWT.NONE);
-				lblRedX.setAlignment(SWT.RIGHT);
-				lblRedX.setBounds(18, 43, 55, 15);
-				lblRedX.setText("Red X");
-
-				Label lblRedXT = new Label(cmpNewGamut, SWT.NONE);
-				lblRedXT.setAlignment(SWT.RIGHT);
-				lblRedXT.setBounds(18, 358, 55, 15);
-				lblRedXT.setText("Red X");
-
-				Label lblRedY = new Label(cmpNewGamut, SWT.NONE);
-				lblRedY.setText("Red Y");
-				lblRedY.setAlignment(SWT.RIGHT);
-				lblRedY.setBounds(18, 68, 55, 15);
-
-				Label lblRedYT = new Label(cmpNewGamut, SWT.NONE);
-				lblRedYT.setText("Red Y");
-				lblRedYT.setAlignment(SWT.RIGHT);
-				lblRedYT.setBounds(18, 382, 55, 15);
-
-				Label lblGrnX = new Label(cmpNewGamut, SWT.NONE);
-				lblGrnX.setText("Green X");
-				lblGrnX.setAlignment(SWT.RIGHT);
-				lblGrnX.setBounds(18, 112, 55, 15);
-
-				Label lblGrnXT = new Label(cmpNewGamut, SWT.NONE);
-				lblGrnXT.setText("Green X");
-				lblGrnXT.setAlignment(SWT.RIGHT);
-				lblGrnXT.setBounds(18, 426, 55, 15);
-
-				Label lblGrnY = new Label(cmpNewGamut, SWT.NONE);
-				lblGrnY.setText("Green Y");
-				lblGrnY.setAlignment(SWT.RIGHT);
-				lblGrnY.setBounds(18, 137, 55, 15);
-
-				Label lblGrnYT = new Label(cmpNewGamut, SWT.NONE);
-				lblGrnYT.setText("Green Y");
-				lblGrnYT.setAlignment(SWT.RIGHT);
-				lblGrnYT.setBounds(18, 450, 55, 15);
-
-				Label lblBluX = new Label(cmpNewGamut, SWT.NONE);
-				lblBluX.setText("Blue X");
-				lblBluX.setAlignment(SWT.RIGHT);
-				lblBluX.setBounds(18, 186, 55, 15);
-
-				Label lblBluXT = new Label(cmpNewGamut, SWT.NONE);
-				lblBluXT.setText("Blue X");
-				lblBluXT.setAlignment(SWT.RIGHT);
-				lblBluXT.setBounds(130, 358, 50, 15);
-
-				Label lblBluY = new Label(cmpNewGamut, SWT.NONE);
-				lblBluY.setText("Blue Y");
-				lblBluY.setAlignment(SWT.RIGHT);
-				lblBluY.setBounds(18, 211, 55, 15);
-
-				Label lblBluYT = new Label(cmpNewGamut, SWT.NONE);
-				lblBluYT.setText("Blue Y");
-				lblBluYT.setAlignment(SWT.RIGHT);
-				lblBluYT.setBounds(130, 382, 50, 15);
-
-				Label lblWhtX = new Label(cmpNewGamut, SWT.NONE);
-				lblWhtX.setText("White X");
-				lblWhtX.setAlignment(SWT.RIGHT);
-				lblWhtX.setBounds(18, 260, 55, 15);
-
-				Label lblWhtXT = new Label(cmpNewGamut, SWT.NONE);
-				lblWhtXT.setText("White X");
-				lblWhtXT.setAlignment(SWT.RIGHT);
-				lblWhtXT.setBounds(128, 426, 55, 15);
-
-				Label lblWhtY = new Label(cmpNewGamut, SWT.NONE);
-				lblWhtY.setText("White Y");
-				lblWhtY.setAlignment(SWT.RIGHT);
-				lblWhtY.setBounds(18, 285, 55, 15);
-
-				Label lblWhtYT = new Label(cmpNewGamut, SWT.NONE);
-				lblWhtYT.setText("White Y");
-				lblWhtYT.setAlignment(SWT.RIGHT);
-				lblWhtYT.setBounds(128, 450, 55, 15);
+				
 
 
 				//-----------------------------------------------------end of create tab layout-----------------------------------------//
@@ -474,35 +380,35 @@ public class MainWindow {
 
 				//-------------------------------------------set gamut to initial spinner values----------------------------------------//
 
-				refGam.rX = spnRX.getSelection();
-				refGam.rY = spnRY.getSelection();
-				refGam.gX = spnGX.getSelection();
-				refGam.gY = spnGY.getSelection();
-				refGam.bX = spnBX.getSelection();
-				refGam.bY = spnBY.getSelection();
-				refGam.wX = spnWX.getSelection();
-				refGam.wY = spnWY.getSelection();
+				refGam.rX = tabContents.spnRX.getSelection();
+				refGam.rY = tabContents.spnRY.getSelection();
+				refGam.gX = tabContents.spnGX.getSelection();
+				refGam.gY = tabContents.spnGY.getSelection();
+				refGam.bX = tabContents.spnBX.getSelection();
+				refGam.bY = tabContents.spnBY.getSelection();
+				refGam.wX = tabContents.spnWX.getSelection();
+				refGam.wY = tabContents.spnWY.getSelection();
 
-				refGam.rXN = spnRXN.getSelection();
-				refGam.rYN = spnRYN.getSelection();
-				refGam.gXN = spnGXN.getSelection();
-				refGam.gYN = spnGYN.getSelection();
-				refGam.bXN = spnBXN.getSelection();
-				refGam.bYN = spnBYN.getSelection();
-				refGam.wXN = spnWXN.getSelection();
-				refGam.wYN = spnWYN.getSelection();
+				refGam.rXN = tabContents.spnRXN.getSelection();
+				refGam.rYN = tabContents.spnRYN.getSelection();
+				refGam.gXN = tabContents.spnGXN.getSelection();
+				refGam.gYN = tabContents.spnGYN.getSelection();
+				refGam.bXN = tabContents.spnBXN.getSelection();
+				refGam.bYN = tabContents.spnBYN.getSelection();
+				refGam.wXN = tabContents.spnWXN.getSelection();
+				refGam.wYN = tabContents.spnWYN.getSelection();
 
 				getCommon();
 				refGam.updateOffsets();
 
-				lblRedXTVal.setText(Integer.toString(refGam.rXO + comGam.rX));
-				lblRedYTVal.setText(Integer.toString(refGam.rYO + comGam.rY));
-				lblGrnXTVal.setText(Integer.toString(refGam.gXO + comGam.gX));
-				lblGrnYTVal.setText(Integer.toString(refGam.gYO + comGam.gY));
-				lblBluXTVal.setText(Integer.toString(refGam.bXO + comGam.bX));
-				lblBluYTVal.setText(Integer.toString(refGam.bYO + comGam.bY));
-				lblWhtXTVal.setText(Integer.toString(refGam.wXO + comGam.wX));
-				lblWhtYTVal.setText(Integer.toString(refGam.wYO + comGam.wY));
+				tabContents.lblRedXTVal.setText(Integer.toString(refGam.rXO + comGam.rX));
+				tabContents.lblRedYTVal.setText(Integer.toString(refGam.rYO + comGam.rY));
+				tabContents.lblGrnXTVal.setText(Integer.toString(refGam.gXO + comGam.gX));
+				tabContents.lblGrnYTVal.setText(Integer.toString(refGam.gYO + comGam.gY));
+				tabContents.lblBluXTVal.setText(Integer.toString(refGam.bXO + comGam.bX));
+				tabContents.lblBluYTVal.setText(Integer.toString(refGam.bYO + comGam.bY));
+				tabContents.lblWhtXTVal.setText(Integer.toString(refGam.wXO + comGam.wX));
+				tabContents.lblWhtYTVal.setText(Integer.toString(refGam.wYO + comGam.wY));
 				//----------------------------------------------------------------------------------------------------------------------//
 
 
@@ -543,7 +449,7 @@ public class MainWindow {
 					}
 				});
 				
-				spnRX.addSelectionListener(new SelectionAdapter() {
+				tabContents.spnRX.addSelectionListener(new SelectionAdapter() {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
 						
