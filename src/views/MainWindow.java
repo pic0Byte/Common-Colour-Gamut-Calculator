@@ -22,7 +22,6 @@ import org.eclipse.swt.events.DisposeEvent;
 import java.util.HashMap;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.MessageBox;
-import org.eclipse.swt.widgets.Spinner;
 import org.eclipse.wb.swt.SWTResourceManager;
 
 
@@ -286,93 +285,16 @@ public class MainWindow {
 				tbtGam.setControl(cmpNewGamut);
 				tbtGam.setText(testKey);
 				
-				Button btnLinked = new Button(cmpNewGamut, SWT.NONE);
-				btnLinked.setBounds(145, 41, 25, 22);
-				btnLinked.setImage(SWTResourceManager.getImage(MainWindow.class, "/resource/link.png"));
+				TabContents tabContents = new TabContents();								
 				
-				TabContents tabContents = new TabContents();
-
-				Spinner spnRX = new Spinner(cmpNewGamut, SWT.BORDER);
-				tabContents.spnRX = spnRX;
-				
-				Spinner spnRXN = new Spinner(cmpNewGamut, SWT.BORDER);
-				tabContents.spnRXN = spnRXN;
-				
-				Spinner spnRY = new Spinner(cmpNewGamut, SWT.BORDER);
-				tabContents.spnRY = spnRY;
-				
-				Spinner spnRYN = new Spinner(cmpNewGamut, SWT.BORDER);
-				tabContents.spnRYN = spnRYN;
-				
-				Spinner spnGX = new Spinner(cmpNewGamut, SWT.BORDER);
-				tabContents.spnGX = spnGX;
-				
-				Spinner spnGXN = new Spinner(cmpNewGamut, SWT.BORDER);
-				tabContents.spnGXN = spnGXN;
-				
-				Spinner spnGY = new Spinner(cmpNewGamut, SWT.BORDER);
-				tabContents.spnGY = spnGY;
-				
-				Spinner spnGYN = new Spinner(cmpNewGamut, SWT.BORDER);
-				tabContents.spnGYN = spnGYN;
-				
-				Spinner spnBX = new Spinner(cmpNewGamut, SWT.BORDER);
-				tabContents.spnBX = spnBX;
-				
-				Spinner spnBXN = new Spinner(cmpNewGamut, SWT.BORDER);
-				tabContents.spnBXN = spnBXN;
-
-				Spinner spnBY = new Spinner(cmpNewGamut, SWT.BORDER);
-				tabContents.spnBY = spnBY;
-
-				Spinner spnBYN = new Spinner(cmpNewGamut, SWT.BORDER);
-				tabContents.spnBYN = spnBYN;
-
-				Spinner spnWX = new Spinner(cmpNewGamut, SWT.BORDER);
-				tabContents.spnWX = spnWX;
-
-				Spinner spnWXN = new Spinner(cmpNewGamut, SWT.BORDER);
-				tabContents.spnWXN = spnWXN;
-
-				Spinner spnWY = new Spinner(cmpNewGamut, SWT.BORDER);
-				tabContents.spnWY = spnWY;
-
-				Spinner spnWYN = new Spinner(cmpNewGamut, SWT.BORDER);
-				tabContents.spnWYN = spnWYN;
-				
-				
-				tabContents.layoutSpinners();
-				
-				
-				Label lblRedYTVal = new Label(cmpNewGamut, SWT.BORDER);
-				tabContents.lblRedYTVal = lblRedYTVal;
-				
-				Label lblGrnXTVal = new Label(cmpNewGamut, SWT.BORDER);
-				tabContents.lblGrnXTVal = lblGrnXTVal;
-				
-				Label lblGrnYTVal = new Label(cmpNewGamut, SWT.BORDER);
-				tabContents.lblGrnYTVal = lblGrnYTVal;
-				
-				Label lblBluXTVal = new Label(cmpNewGamut, SWT.BORDER);
-				tabContents.lblBluXTVal = lblBluXTVal;
-				
-				Label lblBluYTVal = new Label(cmpNewGamut, SWT.BORDER);
-				tabContents.lblBluYTVal = lblBluYTVal;
-				
-				Label lblWhtXTVal = new Label(cmpNewGamut, SWT.BORDER);
-				tabContents.lblWhtXTVal = lblWhtXTVal;
-				
-				Label lblWhtYTVal = new Label(cmpNewGamut, SWT.BORDER);
-				tabContents.lblWhtYTVal = lblWhtYTVal;
-		
+				tabContents.layoutSpinners(cmpNewGamut);
 				
 				tabContents.layoutLabels(cmpNewGamut);
 
 				tabContents.layoutFields(cmpNewGamut);
 				
-
+				tabContents.layoutButtons(cmpNewGamut);
 				
-
 
 				//-----------------------------------------------------end of create tab layout-----------------------------------------//
 
@@ -380,35 +302,11 @@ public class MainWindow {
 
 				//-------------------------------------------set gamut to initial spinner values----------------------------------------//
 
-				refGam.rX = tabContents.spnRX.getSelection();
-				refGam.rY = tabContents.spnRY.getSelection();
-				refGam.gX = tabContents.spnGX.getSelection();
-				refGam.gY = tabContents.spnGY.getSelection();
-				refGam.bX = tabContents.spnBX.getSelection();
-				refGam.bY = tabContents.spnBY.getSelection();
-				refGam.wX = tabContents.spnWX.getSelection();
-				refGam.wY = tabContents.spnWY.getSelection();
-
-				refGam.rXN = tabContents.spnRXN.getSelection();
-				refGam.rYN = tabContents.spnRYN.getSelection();
-				refGam.gXN = tabContents.spnGXN.getSelection();
-				refGam.gYN = tabContents.spnGYN.getSelection();
-				refGam.bXN = tabContents.spnBXN.getSelection();
-				refGam.bYN = tabContents.spnBYN.getSelection();
-				refGam.wXN = tabContents.spnWXN.getSelection();
-				refGam.wYN = tabContents.spnWYN.getSelection();
-
+				
+				tabContents.setVals(refGam);
 				getCommon();
-				refGam.updateOffsets();
-
-				tabContents.lblRedXTVal.setText(Integer.toString(refGam.rXO + comGam.rX));
-				tabContents.lblRedYTVal.setText(Integer.toString(refGam.rYO + comGam.rY));
-				tabContents.lblGrnXTVal.setText(Integer.toString(refGam.gXO + comGam.gX));
-				tabContents.lblGrnYTVal.setText(Integer.toString(refGam.gYO + comGam.gY));
-				tabContents.lblBluXTVal.setText(Integer.toString(refGam.bXO + comGam.bX));
-				tabContents.lblBluYTVal.setText(Integer.toString(refGam.bYO + comGam.bY));
-				tabContents.lblWhtXTVal.setText(Integer.toString(refGam.wXO + comGam.wX));
-				tabContents.lblWhtYTVal.setText(Integer.toString(refGam.wYO + comGam.wY));
+				tabContents.setOffsets(refGam, comGam);
+				
 				//----------------------------------------------------------------------------------------------------------------------//
 
 
@@ -436,15 +334,15 @@ public class MainWindow {
 					}
 				});
 
-				btnLinked.addSelectionListener(new SelectionAdapter(){
+				tabContents.btnLinked.addSelectionListener(new SelectionAdapter(){
 					@Override
 					public void widgetSelected(SelectionEvent e) {
 						if (refGam.nativeLinked) {
 							refGam.nativeLinked = false;
-							btnLinked.setImage(SWTResourceManager.getImage(MainWindow.class, "/resource/broken-link.png"));
+							tabContents.btnLinked.setImage(SWTResourceManager.getImage(MainWindow.class, "/resource/broken-link.png"));
 						} else {
 							refGam.nativeLinked = true;
-							btnLinked.setImage(SWTResourceManager.getImage(MainWindow.class, "/resource/link.png"));
+							tabContents.btnLinked.setImage(SWTResourceManager.getImage(MainWindow.class, "/resource/link.png"));
 						}
 					}
 				});
@@ -461,7 +359,7 @@ public class MainWindow {
 				});
 
 
-				spnRY.addSelectionListener(new SelectionAdapter() {
+				tabContents.spnRY.addSelectionListener(new SelectionAdapter() {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
 						
@@ -472,7 +370,7 @@ public class MainWindow {
 					}
 				});
 
-				spnGX.addSelectionListener(new SelectionAdapter() {
+				tabContents.spnGX.addSelectionListener(new SelectionAdapter() {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
 						
@@ -483,7 +381,7 @@ public class MainWindow {
 					}
 				});
 
-				spnGY.addSelectionListener(new SelectionAdapter() {
+				tabContents.spnGY.addSelectionListener(new SelectionAdapter() {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
 						
@@ -494,7 +392,7 @@ public class MainWindow {
 					}
 				});
 
-				spnBX.addSelectionListener(new SelectionAdapter() {
+				tabContents.spnBX.addSelectionListener(new SelectionAdapter() {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
 						
@@ -505,7 +403,7 @@ public class MainWindow {
 					}
 				});
 
-				spnBY.addSelectionListener(new SelectionAdapter() {
+				tabContents.spnBY.addSelectionListener(new SelectionAdapter() {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
 						
@@ -516,7 +414,7 @@ public class MainWindow {
 					}
 				});
 
-				spnWX.addSelectionListener(new SelectionAdapter() {
+				tabContents.spnWX.addSelectionListener(new SelectionAdapter() {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
 						
@@ -527,7 +425,7 @@ public class MainWindow {
 					}
 				});
 
-				spnWY.addSelectionListener(new SelectionAdapter() {
+				tabContents.spnWY.addSelectionListener(new SelectionAdapter() {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
 						
@@ -539,7 +437,7 @@ public class MainWindow {
 					}
 				});
 
-				spnRXN.addSelectionListener(new SelectionAdapter() {
+				tabContents.spnRXN.addSelectionListener(new SelectionAdapter() {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
 						
@@ -550,7 +448,7 @@ public class MainWindow {
 					}
 				});
 
-				spnRYN.addSelectionListener(new SelectionAdapter() {
+				tabContents.spnRYN.addSelectionListener(new SelectionAdapter() {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
 
@@ -561,7 +459,7 @@ public class MainWindow {
 					}
 				});
 
-				spnGXN.addSelectionListener(new SelectionAdapter() {
+				tabContents.spnGXN.addSelectionListener(new SelectionAdapter() {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
 
@@ -572,7 +470,7 @@ public class MainWindow {
 					}
 				});
 
-				spnGYN.addSelectionListener(new SelectionAdapter() {
+				tabContents.spnGYN.addSelectionListener(new SelectionAdapter() {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
 
@@ -583,7 +481,7 @@ public class MainWindow {
 					}
 				});
 
-				spnBXN.addSelectionListener(new SelectionAdapter() {
+				tabContents.spnBXN.addSelectionListener(new SelectionAdapter() {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
 
@@ -594,7 +492,7 @@ public class MainWindow {
 					}
 				});
 
-				spnBYN.addSelectionListener(new SelectionAdapter() {
+				tabContents.spnBYN.addSelectionListener(new SelectionAdapter() {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
 
@@ -605,7 +503,7 @@ public class MainWindow {
 					}
 				});
 
-				spnWXN.addSelectionListener(new SelectionAdapter() {
+				tabContents.spnWXN.addSelectionListener(new SelectionAdapter() {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
 
@@ -616,7 +514,7 @@ public class MainWindow {
 					}
 				});
 
-				spnWYN.addSelectionListener(new SelectionAdapter() {
+				tabContents.spnWYN.addSelectionListener(new SelectionAdapter() {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
 
