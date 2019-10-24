@@ -283,6 +283,7 @@ public class MainWindow {
 				tbtGam.setControl(cmpNewGamut);
 				tbtGam.setText(testKey);
 				
+				
 				TabContents tabContents = new TabContents(cmpNewGamut, (hm.get(testKey)), display);								
 				Gamut refGam = hm.get(testKey);
 
@@ -290,15 +291,7 @@ public class MainWindow {
 				tabContents.setVals();
 				getCommon();
 				tabContents.setOffsets(comGam);
-				
-
-
-				//Image image = new Image(display, MainWindow.class.getResourceAsStream("/resource/cie.gif"));
-				//Label lblTriangleImage = new Label(cmpNewGamut, SWT.NONE);
-				//lblTriangleImage.setImage(image);
-				//lblTriangleImage.setBounds(242, 43, 343, 355); 
-				
-				drawTriangle(lblTriangleImage, refGam);    
+				tabContents.drawTriangle(comGam);    
 				tabFolder.setSelection(tbtGam);
 
 				//--------------------------------add event handlers to update graphic & values when spinners are changed-------------------//
@@ -313,12 +306,12 @@ public class MainWindow {
 							tabContents.setNVals();
 							getCommon();
 							tabContents.setOffsets(comGam);
-							drawTriangle(lblTriangleImage, refGam);	
+							tabContents.drawTriangle(comGam);	
 						}
 					}
 				});
 
-				tabContents.btnLinked.addSelectionListener(new SelectionAdapter(){
+				/*tabContents.btnLinked.addSelectionListener(new SelectionAdapter(){
 					@Override
 					public void widgetSelected(SelectionEvent e) {
 						if (refGam.nativeLinked) {
@@ -329,8 +322,8 @@ public class MainWindow {
 							tabContents.btnLinked.setImage(SWTResourceManager.getImage(MainWindow.class, "/resource/link.png"));
 						}
 					}
-				});
-				
+				});*/
+
 				tabContents.spnRX.addSelectionListener(new SelectionAdapter() {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
@@ -338,9 +331,10 @@ public class MainWindow {
 						tabContents.setVals();
 						getCommon();
 						tabContents.setOffsets(comGam);
-						drawTriangle(lblTriangleImage, refGam);	
+						tabContents.drawTriangle(comGam);	
 					}
 				});
+
 
 				tabContents.spnRY.addSelectionListener(new SelectionAdapter() {
 					@Override
@@ -349,7 +343,7 @@ public class MainWindow {
 						tabContents.setVals();
 						getCommon();
 						tabContents.setOffsets(comGam);
-						drawTriangle(lblTriangleImage, refGam);
+						tabContents.drawTriangle(comGam);
 					}
 				});
 
@@ -360,7 +354,7 @@ public class MainWindow {
 						tabContents.setVals();
 						getCommon();
 						tabContents.setOffsets(comGam);
-						drawTriangle(lblTriangleImage, refGam);
+						tabContents.drawTriangle(comGam);
 					}
 				});
 
@@ -371,7 +365,7 @@ public class MainWindow {
 						tabContents.setVals();
 						getCommon();
 						tabContents.setOffsets(comGam);
-						drawTriangle(lblTriangleImage, refGam);
+						tabContents.drawTriangle(comGam);
 					}
 				});
 
@@ -382,7 +376,7 @@ public class MainWindow {
 						tabContents.setVals();
 						getCommon();
 						tabContents.setOffsets(comGam);
-						drawTriangle(lblTriangleImage, refGam);
+						tabContents.drawTriangle(comGam);
 					}
 				});
 
@@ -393,7 +387,7 @@ public class MainWindow {
 						tabContents.setVals();
 						getCommon();
 						tabContents.setOffsets(comGam);
-						drawTriangle(lblTriangleImage, refGam);
+						tabContents.drawTriangle(comGam);
 					}
 				});
 
@@ -404,7 +398,7 @@ public class MainWindow {
 						tabContents.setVals();
 						getCommon();
 						tabContents.setOffsets(comGam);
-						drawTriangle(lblTriangleImage, refGam);
+						tabContents.drawTriangle(comGam);
 					}
 				});
 
@@ -415,7 +409,7 @@ public class MainWindow {
 						tabContents.setVals();
 						getCommon();
 						tabContents.setOffsets(comGam);
-						drawTriangle(lblTriangleImage, refGam);
+						tabContents.drawTriangle(comGam);
 						
 					}
 				});
@@ -427,7 +421,7 @@ public class MainWindow {
 						tabContents.setNVals();
 						getCommon();
 						tabContents.setOffsets(comGam);
-						drawTriangle(lblTriangleImage, refGam);
+						tabContents.drawTriangle(comGam);
 					}
 				});
 
@@ -438,7 +432,7 @@ public class MainWindow {
 						tabContents.setNVals();
 						getCommon();
 						tabContents.setOffsets(comGam);
-						drawTriangle(lblTriangleImage, refGam);
+						tabContents.drawTriangle(comGam);
 					}
 				});
 
@@ -449,7 +443,7 @@ public class MainWindow {
 						tabContents.setNVals();
 						getCommon();
 						tabContents.setOffsets(comGam);
-						drawTriangle(lblTriangleImage, refGam);
+						tabContents.drawTriangle(comGam);
 					}
 				});
 
@@ -460,7 +454,7 @@ public class MainWindow {
 						tabContents.setNVals();
 						getCommon();
 						tabContents.setOffsets(comGam);
-						drawTriangle(lblTriangleImage, refGam);
+						tabContents.drawTriangle(comGam);
 					}
 				});
 
@@ -471,7 +465,7 @@ public class MainWindow {
 						tabContents.setNVals();
 						getCommon();
 						tabContents.setOffsets(comGam);
-						drawTriangle(lblTriangleImage, refGam);
+						tabContents.drawTriangle(comGam);
 					}
 				});
 
@@ -482,7 +476,7 @@ public class MainWindow {
 						tabContents.setNVals();
 						getCommon();
 						tabContents.setOffsets(comGam);
-						drawTriangle(lblTriangleImage, refGam);
+						tabContents.drawTriangle(comGam);
 					}
 				});
 
@@ -493,7 +487,7 @@ public class MainWindow {
 						tabContents.setNVals();
 						getCommon();
 						tabContents.setOffsets(comGam);
-						drawTriangle(lblTriangleImage, refGam);
+						tabContents.drawTriangle(comGam);
 					}
 				});
 
@@ -504,7 +498,7 @@ public class MainWindow {
 						tabContents.setNVals();
 						getCommon();
 						tabContents.setOffsets(comGam);
-						drawTriangle(lblTriangleImage, refGam);
+						tabContents.drawTriangle(comGam);
 					}
 				});
 

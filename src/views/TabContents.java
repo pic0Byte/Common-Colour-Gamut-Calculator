@@ -1,6 +1,9 @@
 package views;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
@@ -10,6 +13,7 @@ import org.eclipse.swt.widgets.Spinner;
 import org.eclipse.wb.swt.SWTResourceManager;
 
 import common.Gamut;
+import views.MainWindow;
 
 
 public class TabContents {
@@ -19,14 +23,20 @@ public class TabContents {
 	private static final int SPN_COLUMN1 = 79;
 	private static final int ROW1 = 41;
 	
+	final static double XSCALER = 0.316;
+	final static double YSCALER = 0.326;
+	final static int XOFFSET = 50;
+	final static int YOFFSET = 310;
+
+	
 	public Label lblRedXTVal, lblRedYTVal, lblGrnXTVal, lblGrnYTVal, lblBluXTVal, lblBluYTVal, lblWhtXTVal, lblWhtYTVal, lblTriangleImage;
 	public Spinner spnRX, spnRY, spnGX, spnGY, spnBX, spnBY, spnWX, spnWY;
 	public Spinner spnRXN, spnRYN, spnGXN, spnGYN, spnBXN, spnBYN, spnWXN, spnWYN;
 	public Button btnLinked;
 	public Composite cmp;
 	public Gamut gam;
-	public Image image;
 	public Display display;
+	
 	
 	public TabContents(Composite cmp, Gamut gam, Display display) {
 		
@@ -44,8 +54,11 @@ public class TabContents {
 		
 		this.layoutImage();
 		
+		this.handleEvents();
+		
 
 	}
+	
 	
 	public void layoutSpinners() {
 		
@@ -170,8 +183,6 @@ public class TabContents {
 	}
 	
 	
-	
-	
 	public void layoutFields() {
 		
 		this.lblRedXTVal = new Label(this.cmp, SWT.BORDER);
@@ -207,8 +218,6 @@ public class TabContents {
 		this.lblWhtYTVal.setBounds(185, 450, 55, 15);
 		
 	}
-	
-	
 	
 	
 	public void layoutLabels() {
@@ -314,8 +323,6 @@ public class TabContents {
 	}
 	
 	
-	
-	
 	public void layoutButtons() {
 		
 		this.btnLinked = new Button(this.cmp, SWT.NONE);
@@ -327,10 +334,30 @@ public class TabContents {
 	
 	public void layoutImage() {
 		
-		this.image = new Image(display, MainWindow.class.getResourceAsStream("/resource/cie.gif"));
+		Image image = new Image(display, MainWindow.class.getResourceAsStream("/resource/cie.gif"));
 		this.lblTriangleImage = new Label(this.cmp, SWT.NONE);
-		this.lblTriangleImage.setImage(this.image);
+		this.lblTriangleImage.setImage(image);
 		this.lblTriangleImage.setBounds(242, 43, 343, 355); 
+		
+	}
+	
+	
+	public void handleEvents() {
+		
+		
+		this.btnLinked.addSelectionListener(new SelectionAdapter(){
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				if (gam.nativeLinked) {
+					gam.nativeLinked = false;
+					btnLinked.setImage(SWTResourceManager.getImage(MainWindow.class, "/resource/broken-link.png"));
+				} else {
+					gam.nativeLinked = true;
+					btnLinked.setImage(SWTResourceManager.getImage(MainWindow.class, "/resource/link.png"));
+				}
+			}
+		});
+
 		
 	}
 	
@@ -376,8 +403,6 @@ public class TabContents {
 	}
 	
 	
-	
-	
 	public void setNVals() {
 		
 		this.gam.rXN = this.spnRXN.getSelection();
@@ -419,8 +444,6 @@ public class TabContents {
 	}
 	
 	
-	
-	
 	public void setOffsets (Gamut comGam) {
 		
 		this.gam.updateOffsets();
@@ -436,4 +459,80 @@ public class TabContents {
 		
 	}
 
+	
+	protected void drawTriangle(Gamut comGam) {
+
+		double drx = 50 + (this.gam.rX * XSCALER);
+		double dry = 310 - (this.gam.rY * YSCALER);
+		double dgx = 50 + (this.gam.gX * XSCALER);
+		double dgy = 310 - (this.gam.gY * YSCALER);
+		double dbx = 50 + (this.gam.bX * XSCALER);
+		double dby = 310 - (this.gam.bY * YSCALER);
+
+		double drXn = 50 + (this.gam.rXN * XSCALER);
+		double drYn = 310 - (this.gam.rYN * YSCALER);
+		double dgXn = 50 + (this.gam.gXN * XSCALER);
+		double dgYn = 310 - (this.gam.gYN * YSCALER);
+		double dbXn = 50 + (this.gam.bXN * XSCALER);
+		double dbYn = 310 - (this.gam.bYN * YSCALER);
+
+		Image image = new Image(display, MainWindow.class.getResourceAsStream("/resource/cie.gif"));
+		this.lblTriangleImage.setImage(image);
+
+		GC gc = new GC(image);
+
+		int dC = this.gam.drawColour;
+
+		gc.setLineWidth(1);
+	    gc.setForeground(this.display.getSystemColor(SWT.COLOR_BLACK));
+	    
+	    gc.drawLine((int)drXn, (int)drYn, (int)dgXn, (int)dgYn);
+	    gc.drawLine((int)dgXn, (int)dgYn, (int)dbXn, (int)dbYn);
+	    gc.drawLine((int)dbXn, (int)dbYn, (int)drXn, (int)drYn);
+	    
+	    gc.setForeground(this.display.getSystemColor(dC));
+		gc.setLineWidth(2);
+		
+	    gc.drawLine((int)drx, (int)dry, (int)dgx, (int)dgy);
+	    gc.drawLine((int)dgx, (int)dgy, (int)dbx, (int)dby);
+	    gc.drawLine((int)dbx, (int)dby, (int)drx, (int)dry);
+
+	    gc.setForeground(this.display.getSystemColor(SWT.COLOR_DARK_BLUE));
+	    gc.setLineWidth(1);
+	    gc.setBackground(this.display.getSystemColor(SWT.COLOR_GRAY));
+	    
+		gc.fillOval((int)((XOFFSET + (this.gam.rXO + comGam.rX) * XSCALER) - 2), (int)((YOFFSET - (this.gam.rYO + comGam.rY) * YSCALER) - 2), 4, 4);
+		gc.fillOval((int)((XOFFSET + (this.gam.gXO + comGam.gX) * XSCALER) - 2), (int)((YOFFSET - (this.gam.gYO + comGam.gY) * YSCALER) - 2), 4, 4);
+		gc.fillOval((int)((XOFFSET + (this.gam.bXO + comGam.bX) * XSCALER) - 2), (int)((YOFFSET - (this.gam.bYO + comGam.bY) * YSCALER) - 2), 4, 4);
+		gc.drawOval((int)((XOFFSET + (this.gam.rXO + comGam.rX) * XSCALER) - 2), (int)((YOFFSET - (this.gam.rYO + comGam.rY) * YSCALER) - 2), 4, 4);
+		gc.drawOval((int)((XOFFSET + (this.gam.gXO + comGam.gX) * XSCALER) - 2), (int)((YOFFSET - (this.gam.gYO + comGam.gY) * YSCALER) - 2), 4, 4);
+		gc.drawOval((int)((XOFFSET + (this.gam.bXO + comGam.bX) * XSCALER) - 2), (int)((YOFFSET - (this.gam.bYO + comGam.bY) * YSCALER) - 2), 4, 4);
+		
+		gc.setBackground(this.display.getSystemColor(SWT.COLOR_DARK_GRAY));
+		
+		gc.fillOval((int)((XOFFSET + comGam.wX * XSCALER) - 2), (int)((YOFFSET - comGam.wY * YSCALER) - 2), 4, 4);
+		gc.drawOval((int)((XOFFSET + comGam.wX * XSCALER) - 2), (int)((YOFFSET - comGam.wY * YSCALER) - 2), 4, 4);
+
+	    
+	    gc.setBackground(this.display.getSystemColor(SWT.COLOR_WHITE));
+	    
+		gc.fillOval((int)((XOFFSET + this.gam.wX * XSCALER) - 2), (int)((YOFFSET - this.gam.wY * YSCALER) - 2), 4, 4);
+	    gc.drawOval((int)((XOFFSET + this.gam.wX * XSCALER) - 2), (int)((YOFFSET - this.gam.wY * YSCALER) - 2), 4, 4);
+	    
+		gc.setLineWidth(2);
+	    
+		gc.fillOval((int)((XOFFSET + comGam.rX * XSCALER) - 2), (int)((YOFFSET - comGam.rY * YSCALER) - 2), 4, 4);
+		gc.fillOval((int)((XOFFSET + comGam.gX * XSCALER) - 2), (int)((YOFFSET - comGam.gY * YSCALER) - 2), 4, 4);
+		gc.fillOval((int)((XOFFSET + comGam.bX * XSCALER) - 2), (int)((YOFFSET - comGam.bY * YSCALER) - 2), 4, 4);
+
+		gc.drawOval((int)((XOFFSET + comGam.rX * XSCALER) - 3), (int)((YOFFSET - comGam.rY * YSCALER) - 3), 6, 6);
+		gc.drawOval((int)((XOFFSET + comGam.gX * XSCALER) - 3), (int)((YOFFSET - comGam.gY * YSCALER) - 3), 6, 6);
+		gc.drawOval((int)((XOFFSET + comGam.bX * XSCALER) - 3), (int)((YOFFSET - comGam.bY * YSCALER) - 3), 6, 6);
+		
+
+		
+		
+	    gc.dispose();
+
+	}
 }
