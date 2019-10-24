@@ -1,0 +1,7 @@
+Should have a native reference to the composite class passed in at construction, not one passed to methods. -----done
+
+Should have a native reference to the  gamut passed in at construction, not passed to methods         -----done
+
+Draw triangle method etc should live here   -----   cant seem to make it work, the Display object complains about being statically referenced
+
+Event handlers for spinners, labels & buttons should also live here.

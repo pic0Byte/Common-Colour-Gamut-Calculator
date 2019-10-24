@@ -34,7 +34,7 @@ public class MainWindow {
 	final static int YOFFSET = 310;
 
 	private Shell shlCCGC;
-	private Display display;
+	public Display display;
 	private Button btnNewGamut;
 	private CTabFolder tabFolder;
 
@@ -276,45 +276,29 @@ public class MainWindow {
 			testKey = keyPrefix + keySuffix;
 
 			if (hm.get(testKey).rX == Gamut.EMPTY) {
-
-
-				//---------------------------------Create Tab layout--------------------------------------------------------------------//
+				
 
 				tbtGam = new CTabItem(tabFolder, SWT.CLOSE);
 				Composite cmpNewGamut = new Composite(tabFolder, SWT.NONE);
 				tbtGam.setControl(cmpNewGamut);
 				tbtGam.setText(testKey);
 				
-				TabContents tabContents = new TabContents();								
-				
-				tabContents.layoutSpinners(cmpNewGamut);
-				
-				tabContents.layoutLabels(cmpNewGamut);
-
-				tabContents.layoutFields(cmpNewGamut);
-				
-				tabContents.layoutButtons(cmpNewGamut);
-				
-
-				//-----------------------------------------------------end of create tab layout-----------------------------------------//
-
-				Gamut refGam = hm.get(testKey);     //Create a non-instance reference to Gamut retrieved from hashmap
-
-				//-------------------------------------------set gamut to initial spinner values----------------------------------------//
+				TabContents tabContents = new TabContents(cmpNewGamut, (hm.get(testKey)), display);								
+				Gamut refGam = hm.get(testKey);
 
 				
-				tabContents.setVals(refGam);
+				tabContents.setVals();
 				getCommon();
-				tabContents.setOffsets(refGam, comGam);
+				tabContents.setOffsets(comGam);
 				
-				//----------------------------------------------------------------------------------------------------------------------//
 
 
-				Image image = new Image(display, MainWindow.class.getResourceAsStream("/resource/cie.gif"));
-				Label lblTriangleImage = new Label(cmpNewGamut, SWT.NONE);
-				lblTriangleImage.setImage(image);
-				lblTriangleImage.setBounds(242, 43, 343, 355);    //------Draw the CIE chart & gamut triangle---------------------------//
-				drawTriangle(lblTriangleImage, refGam);       //-----for the first time, & set focus on the tab---------------------//
+				//Image image = new Image(display, MainWindow.class.getResourceAsStream("/resource/cie.gif"));
+				//Label lblTriangleImage = new Label(cmpNewGamut, SWT.NONE);
+				//lblTriangleImage.setImage(image);
+				//lblTriangleImage.setBounds(242, 43, 343, 355); 
+				
+				drawTriangle(lblTriangleImage, refGam);    
 				tabFolder.setSelection(tbtGam);
 
 				//--------------------------------add event handlers to update graphic & values when spinners are changed-------------------//
@@ -325,10 +309,10 @@ public class MainWindow {
 					public void widgetSelected(SelectionEvent e) {
 						if (tabFolder.getSelection() == tbtGam) {
 							
-							tabContents.setVals(refGam);
-							tabContents.setNVals(refGam);
+							tabContents.setVals();
+							tabContents.setNVals();
 							getCommon();
-							tabContents.setOffsets(refGam, comGam);
+							tabContents.setOffsets(comGam);
 							drawTriangle(lblTriangleImage, refGam);	
 						}
 					}
@@ -351,21 +335,20 @@ public class MainWindow {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
 						
-						tabContents.setVals(refGam);
+						tabContents.setVals();
 						getCommon();
-						tabContents.setOffsets(refGam, comGam);
+						tabContents.setOffsets(comGam);
 						drawTriangle(lblTriangleImage, refGam);	
 					}
 				});
-
 
 				tabContents.spnRY.addSelectionListener(new SelectionAdapter() {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
 						
-						tabContents.setVals(refGam);
+						tabContents.setVals();
 						getCommon();
-						tabContents.setOffsets(refGam, comGam);
+						tabContents.setOffsets(comGam);
 						drawTriangle(lblTriangleImage, refGam);
 					}
 				});
@@ -374,9 +357,9 @@ public class MainWindow {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
 						
-						tabContents.setVals(refGam);
+						tabContents.setVals();
 						getCommon();
-						tabContents.setOffsets(refGam, comGam);
+						tabContents.setOffsets(comGam);
 						drawTriangle(lblTriangleImage, refGam);
 					}
 				});
@@ -385,9 +368,9 @@ public class MainWindow {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
 						
-						tabContents.setVals(refGam);
+						tabContents.setVals();
 						getCommon();
-						tabContents.setOffsets(refGam, comGam);
+						tabContents.setOffsets(comGam);
 						drawTriangle(lblTriangleImage, refGam);
 					}
 				});
@@ -396,9 +379,9 @@ public class MainWindow {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
 						
-						tabContents.setVals(refGam);
+						tabContents.setVals();
 						getCommon();
-						tabContents.setOffsets(refGam, comGam);
+						tabContents.setOffsets(comGam);
 						drawTriangle(lblTriangleImage, refGam);
 					}
 				});
@@ -407,9 +390,9 @@ public class MainWindow {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
 						
-						tabContents.setVals(refGam);
+						tabContents.setVals();
 						getCommon();
-						tabContents.setOffsets(refGam, comGam);
+						tabContents.setOffsets(comGam);
 						drawTriangle(lblTriangleImage, refGam);
 					}
 				});
@@ -418,9 +401,9 @@ public class MainWindow {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
 						
-						tabContents.setVals(refGam);
+						tabContents.setVals();
 						getCommon();
-						tabContents.setOffsets(refGam, comGam);
+						tabContents.setOffsets(comGam);
 						drawTriangle(lblTriangleImage, refGam);
 					}
 				});
@@ -429,9 +412,9 @@ public class MainWindow {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
 						
-						tabContents.setVals(refGam);
+						tabContents.setVals();
 						getCommon();
-						tabContents.setOffsets(refGam, comGam);
+						tabContents.setOffsets(comGam);
 						drawTriangle(lblTriangleImage, refGam);
 						
 					}
@@ -441,9 +424,9 @@ public class MainWindow {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
 						
-						tabContents.setNVals(refGam);
+						tabContents.setNVals();
 						getCommon();
-						tabContents.setOffsets(refGam, comGam);
+						tabContents.setOffsets(comGam);
 						drawTriangle(lblTriangleImage, refGam);
 					}
 				});
@@ -452,9 +435,9 @@ public class MainWindow {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
 
-						tabContents.setNVals(refGam);
+						tabContents.setNVals();
 						getCommon();
-						tabContents.setOffsets(refGam, comGam);
+						tabContents.setOffsets(comGam);
 						drawTriangle(lblTriangleImage, refGam);
 					}
 				});
@@ -463,9 +446,9 @@ public class MainWindow {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
 
-						tabContents.setNVals(refGam);
+						tabContents.setNVals();
 						getCommon();
-						tabContents.setOffsets(refGam, comGam);
+						tabContents.setOffsets(comGam);
 						drawTriangle(lblTriangleImage, refGam);
 					}
 				});
@@ -474,9 +457,9 @@ public class MainWindow {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
 
-						tabContents.setNVals(refGam);
+						tabContents.setNVals();
 						getCommon();
-						tabContents.setOffsets(refGam, comGam);
+						tabContents.setOffsets(comGam);
 						drawTriangle(lblTriangleImage, refGam);
 					}
 				});
@@ -485,9 +468,9 @@ public class MainWindow {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
 
-						tabContents.setNVals(refGam);
+						tabContents.setNVals();
 						getCommon();
-						tabContents.setOffsets(refGam, comGam);
+						tabContents.setOffsets(comGam);
 						drawTriangle(lblTriangleImage, refGam);
 					}
 				});
@@ -496,9 +479,9 @@ public class MainWindow {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
 
-						tabContents.setNVals(refGam);
+						tabContents.setNVals();
 						getCommon();
-						tabContents.setOffsets(refGam, comGam);
+						tabContents.setOffsets(comGam);
 						drawTriangle(lblTriangleImage, refGam);
 					}
 				});
@@ -507,9 +490,9 @@ public class MainWindow {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
 
-						tabContents.setNVals(refGam);
+						tabContents.setNVals();
 						getCommon();
-						tabContents.setOffsets(refGam, comGam);
+						tabContents.setOffsets(comGam);
 						drawTriangle(lblTriangleImage, refGam);
 					}
 				});
@@ -518,9 +501,9 @@ public class MainWindow {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
 
-						tabContents.setNVals(refGam);
+						tabContents.setNVals();
 						getCommon();
-						tabContents.setOffsets(refGam, comGam);
+						tabContents.setOffsets(comGam);
 						drawTriangle(lblTriangleImage, refGam);
 					}
 				});
