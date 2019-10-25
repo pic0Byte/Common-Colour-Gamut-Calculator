@@ -32,7 +32,8 @@ public class MainWindow {
 	final static double YSCALER = 0.326;
 	final static int XOFFSET = 50;
 	final static int YOFFSET = 310;
-
+	
+	public MainWindow mw = this;
 	private Shell shlCCGC;
 	public Display display;
 	private Button btnNewGamut;
@@ -50,7 +51,7 @@ public class MainWindow {
 	private Label lblWhtYComVal;
 
 
-	protected Gamut comGam, gam1, gam2, gam3, gam4, gam5, gam6, gam7, gam8, gam9, gam10;
+	public Gamut comGam, gam1, gam2, gam3, gam4, gam5, gam6, gam7, gam8, gam9, gam10;
 	private HashMap<String, Gamut> hm;
 	private String keyPrefix = "Display ";
 	private String testKey;
@@ -284,7 +285,7 @@ public class MainWindow {
 				tbtGam.setText(testKey);
 				
 				
-				TabContents tabContents = new TabContents(cmpNewGamut, (hm.get(testKey)), display);								
+				TabContents tabContents = new TabContents(cmpNewGamut, (hm.get(testKey)), display, mw);								
 				Gamut refGam = hm.get(testKey);
 
 				
@@ -322,7 +323,7 @@ public class MainWindow {
 							tabContents.btnLinked.setImage(SWTResourceManager.getImage(MainWindow.class, "/resource/link.png"));
 						}
 					}
-				});*/
+				});
 
 				tabContents.spnRX.addSelectionListener(new SelectionAdapter() {
 					@Override
@@ -333,7 +334,7 @@ public class MainWindow {
 						tabContents.setOffsets(comGam);
 						tabContents.drawTriangle(comGam);	
 					}
-				});
+				});*/
 
 
 				tabContents.spnRY.addSelectionListener(new SelectionAdapter() {
@@ -514,6 +515,7 @@ public class MainWindow {
 						refGam.bY = Gamut.EMPTY;
 						refGam.wX = Gamut.EMPTY;
 						refGam.wY = Gamut.EMPTY;
+						refGam.nativeLinked = true;
 
 					}
 				});
@@ -532,7 +534,7 @@ public class MainWindow {
 	}
 
 
-	protected void drawTriangle(Label label, Gamut gam) {
+	/*protected void drawTriangle(Label label, Gamut gam) {
 
 		double drx = 50 + (gam.rX * XSCALER);
 		double dry = 310 - (gam.rY * YSCALER);
@@ -606,7 +608,7 @@ public class MainWindow {
 		
 	    gc.dispose();
 
-	}
+	}*/
 
 
 	public void getCommon() {

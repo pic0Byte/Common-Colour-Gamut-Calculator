@@ -36,13 +36,15 @@ public class TabContents {
 	public Composite cmp;
 	public Gamut gam;
 	public Display display;
+	public MainWindow mw;
 	
 	
-	public TabContents(Composite cmp, Gamut gam, Display display) {
+	public TabContents(Composite cmp, Gamut gam, Display display, MainWindow mw) {
 		
 		this.cmp = cmp;
 		this.gam = gam;
 		this.display = display;
+		this.mw = mw;
 		
 		this.layoutSpinners();
 		
@@ -54,7 +56,7 @@ public class TabContents {
 		
 		this.layoutImage();
 		
-		this.handleEvents();
+		handleEvents();
 		
 
 	}
@@ -334,7 +336,7 @@ public class TabContents {
 	
 	public void layoutImage() {
 		
-		Image image = new Image(display, MainWindow.class.getResourceAsStream("/resource/cie.gif"));
+		Image image = new Image(mw.display, MainWindow.class.getResourceAsStream("/resource/cie.gif"));
 		this.lblTriangleImage = new Label(this.cmp, SWT.NONE);
 		this.lblTriangleImage.setImage(image);
 		this.lblTriangleImage.setBounds(242, 43, 343, 355); 
@@ -358,6 +360,16 @@ public class TabContents {
 			}
 		});
 
+		this.spnRX.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				
+				setVals();
+				mw.getCommon();
+				setOffsets(mw.comGam);
+				drawTriangle(mw.comGam);	
+			}
+		});
 		
 	}
 	
@@ -476,7 +488,7 @@ public class TabContents {
 		double dbXn = 50 + (this.gam.bXN * XSCALER);
 		double dbYn = 310 - (this.gam.bYN * YSCALER);
 
-		Image image = new Image(display, MainWindow.class.getResourceAsStream("/resource/cie.gif"));
+		Image image = new Image(this.mw.display, MainWindow.class.getResourceAsStream("/resource/cie.gif"));
 		this.lblTriangleImage.setImage(image);
 
 		GC gc = new GC(image);
@@ -484,22 +496,22 @@ public class TabContents {
 		int dC = this.gam.drawColour;
 
 		gc.setLineWidth(1);
-	    gc.setForeground(this.display.getSystemColor(SWT.COLOR_BLACK));
+	    gc.setForeground(this.mw.display.getSystemColor(SWT.COLOR_BLACK));
 	    
 	    gc.drawLine((int)drXn, (int)drYn, (int)dgXn, (int)dgYn);
 	    gc.drawLine((int)dgXn, (int)dgYn, (int)dbXn, (int)dbYn);
 	    gc.drawLine((int)dbXn, (int)dbYn, (int)drXn, (int)drYn);
 	    
-	    gc.setForeground(this.display.getSystemColor(dC));
+	    gc.setForeground(this.mw.display.getSystemColor(dC));
 		gc.setLineWidth(2);
 		
 	    gc.drawLine((int)drx, (int)dry, (int)dgx, (int)dgy);
 	    gc.drawLine((int)dgx, (int)dgy, (int)dbx, (int)dby);
 	    gc.drawLine((int)dbx, (int)dby, (int)drx, (int)dry);
 
-	    gc.setForeground(this.display.getSystemColor(SWT.COLOR_DARK_BLUE));
+	    gc.setForeground(this.mw.display.getSystemColor(SWT.COLOR_DARK_BLUE));
 	    gc.setLineWidth(1);
-	    gc.setBackground(this.display.getSystemColor(SWT.COLOR_GRAY));
+	    gc.setBackground(this.mw.display.getSystemColor(SWT.COLOR_GRAY));
 	    
 		gc.fillOval((int)((XOFFSET + (this.gam.rXO + comGam.rX) * XSCALER) - 2), (int)((YOFFSET - (this.gam.rYO + comGam.rY) * YSCALER) - 2), 4, 4);
 		gc.fillOval((int)((XOFFSET + (this.gam.gXO + comGam.gX) * XSCALER) - 2), (int)((YOFFSET - (this.gam.gYO + comGam.gY) * YSCALER) - 2), 4, 4);
@@ -508,13 +520,13 @@ public class TabContents {
 		gc.drawOval((int)((XOFFSET + (this.gam.gXO + comGam.gX) * XSCALER) - 2), (int)((YOFFSET - (this.gam.gYO + comGam.gY) * YSCALER) - 2), 4, 4);
 		gc.drawOval((int)((XOFFSET + (this.gam.bXO + comGam.bX) * XSCALER) - 2), (int)((YOFFSET - (this.gam.bYO + comGam.bY) * YSCALER) - 2), 4, 4);
 		
-		gc.setBackground(this.display.getSystemColor(SWT.COLOR_DARK_GRAY));
+		gc.setBackground(this.mw.display.getSystemColor(SWT.COLOR_DARK_GRAY));
 		
 		gc.fillOval((int)((XOFFSET + comGam.wX * XSCALER) - 2), (int)((YOFFSET - comGam.wY * YSCALER) - 2), 4, 4);
 		gc.drawOval((int)((XOFFSET + comGam.wX * XSCALER) - 2), (int)((YOFFSET - comGam.wY * YSCALER) - 2), 4, 4);
 
 	    
-	    gc.setBackground(this.display.getSystemColor(SWT.COLOR_WHITE));
+	    gc.setBackground(this.mw.display.getSystemColor(SWT.COLOR_WHITE));
 	    
 		gc.fillOval((int)((XOFFSET + this.gam.wX * XSCALER) - 2), (int)((YOFFSET - this.gam.wY * YSCALER) - 2), 4, 4);
 	    gc.drawOval((int)((XOFFSET + this.gam.wX * XSCALER) - 2), (int)((YOFFSET - this.gam.wY * YSCALER) - 2), 4, 4);
