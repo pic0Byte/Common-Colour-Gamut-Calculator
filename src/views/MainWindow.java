@@ -285,7 +285,7 @@ public class MainWindow {
 				tbtGam.setText(testKey);
 				
 				
-				TabContents tabContents = new TabContents(cmpNewGamut, (hm.get(testKey)), display, mw);								
+				TabContents tabContents = new TabContents(cmpNewGamut, (hm.get(testKey)), mw);								
 				Gamut refGam = hm.get(testKey);
 
 				
@@ -295,215 +295,17 @@ public class MainWindow {
 				tabContents.drawTriangle(comGam);    
 				tabFolder.setSelection(tbtGam);
 
-				//--------------------------------add event handlers to update graphic & values when spinners are changed-------------------//
-
+				//--------------------------------add event handlers ---------------------//
 
 				tabFolder.addSelectionListener(new SelectionAdapter() {
 					@Override
 					public void widgetSelected(SelectionEvent e) {
 						if (tabFolder.getSelection() == tbtGam) {
 							
-							tabContents.setVals();
-							tabContents.setNVals();
-							getCommon();
-							tabContents.setOffsets(comGam);
-							tabContents.drawTriangle(comGam);	
+							tabContents.updateTab();
 						}
 					}
 				});
-
-				/*tabContents.btnLinked.addSelectionListener(new SelectionAdapter(){
-					@Override
-					public void widgetSelected(SelectionEvent e) {
-						if (refGam.nativeLinked) {
-							refGam.nativeLinked = false;
-							tabContents.btnLinked.setImage(SWTResourceManager.getImage(MainWindow.class, "/resource/broken-link.png"));
-						} else {
-							refGam.nativeLinked = true;
-							tabContents.btnLinked.setImage(SWTResourceManager.getImage(MainWindow.class, "/resource/link.png"));
-						}
-					}
-				});
-
-				tabContents.spnRX.addSelectionListener(new SelectionAdapter() {
-					@Override
-					public void widgetSelected(SelectionEvent e) {
-						
-						tabContents.setVals();
-						getCommon();
-						tabContents.setOffsets(comGam);
-						tabContents.drawTriangle(comGam);	
-					}
-				});*/
-
-
-				tabContents.spnRY.addSelectionListener(new SelectionAdapter() {
-					@Override
-					public void widgetSelected(SelectionEvent e) {
-						
-						tabContents.setVals();
-						getCommon();
-						tabContents.setOffsets(comGam);
-						tabContents.drawTriangle(comGam);
-					}
-				});
-
-				tabContents.spnGX.addSelectionListener(new SelectionAdapter() {
-					@Override
-					public void widgetSelected(SelectionEvent e) {
-						
-						tabContents.setVals();
-						getCommon();
-						tabContents.setOffsets(comGam);
-						tabContents.drawTriangle(comGam);
-					}
-				});
-
-				tabContents.spnGY.addSelectionListener(new SelectionAdapter() {
-					@Override
-					public void widgetSelected(SelectionEvent e) {
-						
-						tabContents.setVals();
-						getCommon();
-						tabContents.setOffsets(comGam);
-						tabContents.drawTriangle(comGam);
-					}
-				});
-
-				tabContents.spnBX.addSelectionListener(new SelectionAdapter() {
-					@Override
-					public void widgetSelected(SelectionEvent e) {
-						
-						tabContents.setVals();
-						getCommon();
-						tabContents.setOffsets(comGam);
-						tabContents.drawTriangle(comGam);
-					}
-				});
-
-				tabContents.spnBY.addSelectionListener(new SelectionAdapter() {
-					@Override
-					public void widgetSelected(SelectionEvent e) {
-						
-						tabContents.setVals();
-						getCommon();
-						tabContents.setOffsets(comGam);
-						tabContents.drawTriangle(comGam);
-					}
-				});
-
-				tabContents.spnWX.addSelectionListener(new SelectionAdapter() {
-					@Override
-					public void widgetSelected(SelectionEvent e) {
-						
-						tabContents.setVals();
-						getCommon();
-						tabContents.setOffsets(comGam);
-						tabContents.drawTriangle(comGam);
-					}
-				});
-
-				tabContents.spnWY.addSelectionListener(new SelectionAdapter() {
-					@Override
-					public void widgetSelected(SelectionEvent e) {
-						
-						tabContents.setVals();
-						getCommon();
-						tabContents.setOffsets(comGam);
-						tabContents.drawTriangle(comGam);
-						
-					}
-				});
-
-				tabContents.spnRXN.addSelectionListener(new SelectionAdapter() {
-					@Override
-					public void widgetSelected(SelectionEvent e) {
-						
-						tabContents.setNVals();
-						getCommon();
-						tabContents.setOffsets(comGam);
-						tabContents.drawTriangle(comGam);
-					}
-				});
-
-				tabContents.spnRYN.addSelectionListener(new SelectionAdapter() {
-					@Override
-					public void widgetSelected(SelectionEvent e) {
-
-						tabContents.setNVals();
-						getCommon();
-						tabContents.setOffsets(comGam);
-						tabContents.drawTriangle(comGam);
-					}
-				});
-
-				tabContents.spnGXN.addSelectionListener(new SelectionAdapter() {
-					@Override
-					public void widgetSelected(SelectionEvent e) {
-
-						tabContents.setNVals();
-						getCommon();
-						tabContents.setOffsets(comGam);
-						tabContents.drawTriangle(comGam);
-					}
-				});
-
-				tabContents.spnGYN.addSelectionListener(new SelectionAdapter() {
-					@Override
-					public void widgetSelected(SelectionEvent e) {
-
-						tabContents.setNVals();
-						getCommon();
-						tabContents.setOffsets(comGam);
-						tabContents.drawTriangle(comGam);
-					}
-				});
-
-				tabContents.spnBXN.addSelectionListener(new SelectionAdapter() {
-					@Override
-					public void widgetSelected(SelectionEvent e) {
-
-						tabContents.setNVals();
-						getCommon();
-						tabContents.setOffsets(comGam);
-						tabContents.drawTriangle(comGam);
-					}
-				});
-
-				tabContents.spnBYN.addSelectionListener(new SelectionAdapter() {
-					@Override
-					public void widgetSelected(SelectionEvent e) {
-
-						tabContents.setNVals();
-						getCommon();
-						tabContents.setOffsets(comGam);
-						tabContents.drawTriangle(comGam);
-					}
-				});
-
-				tabContents.spnWXN.addSelectionListener(new SelectionAdapter() {
-					@Override
-					public void widgetSelected(SelectionEvent e) {
-
-						tabContents.setNVals();
-						getCommon();
-						tabContents.setOffsets(comGam);
-						tabContents.drawTriangle(comGam);
-					}
-				});
-
-				tabContents.spnWYN.addSelectionListener(new SelectionAdapter() {
-					@Override
-					public void widgetSelected(SelectionEvent e) {
-
-						tabContents.setNVals();
-						getCommon();
-						tabContents.setOffsets(comGam);
-						tabContents.drawTriangle(comGam);
-					}
-				});
-
-				//----------------------------------------------------------------------------------------------------------------------//
 
 				tbtGam.addDisposeListener(new DisposeListener() {           //----set gamut back to all zero values if tab is closed----//
 					public void widgetDisposed(DisposeEvent arg0) {
@@ -520,6 +322,8 @@ public class MainWindow {
 					}
 				});
 
+				//----------------------------------------------------------------------------------------------------------------------//
+
 				break;
 
 			} else if (keySuffix == 10){
@@ -532,83 +336,6 @@ public class MainWindow {
 		}
 
 	}
-
-
-	/*protected void drawTriangle(Label label, Gamut gam) {
-
-		double drx = 50 + (gam.rX * XSCALER);
-		double dry = 310 - (gam.rY * YSCALER);
-		double dgx = 50 + (gam.gX * XSCALER);
-		double dgy = 310 - (gam.gY * YSCALER);
-		double dbx = 50 + (gam.bX * XSCALER);
-		double dby = 310 - (gam.bY * YSCALER);
-
-		double drXn = 50 + (gam.rXN * XSCALER);
-		double drYn = 310 - (gam.rYN * YSCALER);
-		double dgXn = 50 + (gam.gXN * XSCALER);
-		double dgYn = 310 - (gam.gYN * YSCALER);
-		double dbXn = 50 + (gam.bXN * XSCALER);
-		double dbYn = 310 - (gam.bYN * YSCALER);
-
-		Image image = new Image(display, MainWindow.class.getResourceAsStream("/resource/cie.gif"));
-		label.setImage(image);
-
-		GC gc = new GC(image);
-
-		int dC = gam.drawColour;
-
-		gc.setLineWidth(1);
-	    gc.setForeground(display.getSystemColor(SWT.COLOR_BLACK));
-	    
-	    gc.drawLine((int)drXn, (int)drYn, (int)dgXn, (int)dgYn);
-	    gc.drawLine((int)dgXn, (int)dgYn, (int)dbXn, (int)dbYn);
-	    gc.drawLine((int)dbXn, (int)dbYn, (int)drXn, (int)drYn);
-	    
-	    gc.setForeground(display.getSystemColor(dC));
-		gc.setLineWidth(2);
-		
-	    gc.drawLine((int)drx, (int)dry, (int)dgx, (int)dgy);
-	    gc.drawLine((int)dgx, (int)dgy, (int)dbx, (int)dby);
-	    gc.drawLine((int)dbx, (int)dby, (int)drx, (int)dry);
-
-	    gc.setForeground(display.getSystemColor(SWT.COLOR_DARK_BLUE));
-	    gc.setLineWidth(1);
-	    gc.setBackground(display.getSystemColor(SWT.COLOR_GRAY));
-	    
-		gc.fillOval((int)((XOFFSET + (gam.rXO + comGam.rX) * XSCALER) - 2), (int)((YOFFSET - (gam.rYO + comGam.rY) * YSCALER) - 2), 4, 4);
-		gc.fillOval((int)((XOFFSET + (gam.gXO + comGam.gX) * XSCALER) - 2), (int)((YOFFSET - (gam.gYO + comGam.gY) * YSCALER) - 2), 4, 4);
-		gc.fillOval((int)((XOFFSET + (gam.bXO + comGam.bX) * XSCALER) - 2), (int)((YOFFSET - (gam.bYO + comGam.bY) * YSCALER) - 2), 4, 4);
-		gc.drawOval((int)((XOFFSET + (gam.rXO + comGam.rX) * XSCALER) - 2), (int)((YOFFSET - (gam.rYO + comGam.rY) * YSCALER) - 2), 4, 4);
-		gc.drawOval((int)((XOFFSET + (gam.gXO + comGam.gX) * XSCALER) - 2), (int)((YOFFSET - (gam.gYO + comGam.gY) * YSCALER) - 2), 4, 4);
-		gc.drawOval((int)((XOFFSET + (gam.bXO + comGam.bX) * XSCALER) - 2), (int)((YOFFSET - (gam.bYO + comGam.bY) * YSCALER) - 2), 4, 4);
-		
-		gc.setBackground(display.getSystemColor(SWT.COLOR_DARK_GRAY));
-		
-		gc.fillOval((int)((XOFFSET + comGam.wX * XSCALER) - 2), (int)((YOFFSET - comGam.wY * YSCALER) - 2), 4, 4);
-		gc.drawOval((int)((XOFFSET + comGam.wX * XSCALER) - 2), (int)((YOFFSET - comGam.wY * YSCALER) - 2), 4, 4);
-
-	    
-	    gc.setBackground(display.getSystemColor(SWT.COLOR_WHITE));
-	    
-		gc.fillOval((int)((XOFFSET + gam.wX * XSCALER) - 2), (int)((YOFFSET - gam.wY * YSCALER) - 2), 4, 4);
-	    gc.drawOval((int)((XOFFSET + gam.wX * XSCALER) - 2), (int)((YOFFSET - gam.wY * YSCALER) - 2), 4, 4);
-	    
-		gc.setLineWidth(2);
-	    
-		gc.fillOval((int)((XOFFSET + comGam.rX * XSCALER) - 2), (int)((YOFFSET - comGam.rY * YSCALER) - 2), 4, 4);
-		gc.fillOval((int)((XOFFSET + comGam.gX * XSCALER) - 2), (int)((YOFFSET - comGam.gY * YSCALER) - 2), 4, 4);
-		gc.fillOval((int)((XOFFSET + comGam.bX * XSCALER) - 2), (int)((YOFFSET - comGam.bY * YSCALER) - 2), 4, 4);
-
-		gc.drawOval((int)((XOFFSET + comGam.rX * XSCALER) - 3), (int)((YOFFSET - comGam.rY * YSCALER) - 3), 6, 6);
-		gc.drawOval((int)((XOFFSET + comGam.gX * XSCALER) - 3), (int)((YOFFSET - comGam.gY * YSCALER) - 3), 6, 6);
-		gc.drawOval((int)((XOFFSET + comGam.bX * XSCALER) - 3), (int)((YOFFSET - comGam.bY * YSCALER) - 3), 6, 6);
-		
-
-		
-		
-	    gc.dispose();
-
-	}*/
 
 
 	public void getCommon() {
@@ -705,4 +432,6 @@ public class MainWindow {
 
 
 	}
+
+
 } //end of class

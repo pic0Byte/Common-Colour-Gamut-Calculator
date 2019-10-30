@@ -21,7 +21,19 @@ public class TabContents {
 	private static final int LBL_COLUMN1 = 18;
 	private static final int LBL_COLUMN2 = 128;
 	private static final int SPN_COLUMN1 = 79;
+	private static final int SPN_COLUMN2 = 179;
 	private static final int ROW1 = 41;
+	private static final int ROW2 = 66;
+	private static final int ROW3 = 110;
+	private static final int ROW4 = 135;
+	private static final int ROW5 = 184;
+	private static final int ROW6 = 209;
+	private static final int ROW7 = 258;
+	private static final int ROW8 = 283;
+	private static final int ROW9 = 358;
+	private static final int ROW10 = 382;
+	private static final int ROW11 = 426;
+	private static final int ROW12 = 450;
 	
 	final static double XSCALER = 0.316;
 	final static double YSCALER = 0.326;
@@ -39,11 +51,10 @@ public class TabContents {
 	public MainWindow mw;
 	
 	
-	public TabContents(Composite cmp, Gamut gam, Display display, MainWindow mw) {
+	public TabContents(Composite cmp, Gamut gam, MainWindow mw) {
 		
 		this.cmp = cmp;
 		this.gam = gam;
-		this.display = display;
 		this.mw = mw;
 		
 		this.layoutSpinners();
@@ -56,7 +67,7 @@ public class TabContents {
 		
 		this.layoutImage();
 		
-		handleEvents();
+		this.handleEvents();
 		
 
 	}
@@ -78,35 +89,35 @@ public class TabContents {
 		this.spnRY.setMaximum(399);
 		this.spnRY.setMinimum(211);
 		this.spnRY.setSelection(330);
-		this.spnRY.setBounds(SPN_COLUMN1, 66, 56, 22);
+		this.spnRY.setBounds(SPN_COLUMN1, ROW2, 56, 22);
 				
 		this.spnGX = new Spinner(this.cmp, SWT.BORDER);
 		this.spnGX.setMaximum(399);
 		this.spnGX.setMinimum(20);
 		this.spnGX.setSelection(300);
 		this.spnGX.setDigits(3);
-		this.spnGX.setBounds(SPN_COLUMN1, 110, 56, 22);	
+		this.spnGX.setBounds(SPN_COLUMN1, ROW3, 56, 22);	
 		
 		this.spnGY = new Spinner(this.cmp, SWT.BORDER);
 		this.spnGY.setDigits(3);
 		this.spnGY.setMaximum(850);
 		this.spnGY.setMinimum(401);
 		this.spnGY.setSelection(600);
-		this.spnGY.setBounds(SPN_COLUMN1, 135, 56, 22);	
+		this.spnGY.setBounds(SPN_COLUMN1, ROW4, 56, 22);	
 		
 		this.spnBX = new Spinner(this.cmp, SWT.BORDER);
 		this.spnBX.setMaximum(299);
 		this.spnBX.setMinimum(20);
 		this.spnBX.setSelection(150);
 		this.spnBX.setDigits(3);
-		this.spnBX.setBounds(SPN_COLUMN1, 184, 56, 22);
+		this.spnBX.setBounds(SPN_COLUMN1, ROW5, 56, 22);
 		
 		this.spnBY = new Spinner(this.cmp, SWT.BORDER);
 		this.spnBY.setMaximum(209);
 		this.spnBY.setMinimum(20);
 		this.spnBY.setSelection(60);
 		this.spnBY.setDigits(3);
-		this.spnBY.setBounds(79, 209, 56, 22);
+		this.spnBY.setBounds(SPN_COLUMN1, ROW6, 56, 22);
 		
 		
 		this.spnWX = new Spinner(this.cmp, SWT.BORDER);
@@ -114,7 +125,7 @@ public class TabContents {
 		this.spnWX.setMinimum(250);
 		this.spnWX.setSelection(313);
 		this.spnWX.setDigits(3);
-		this.spnWX.setBounds(79, 258, 56, 22);
+		this.spnWX.setBounds(SPN_COLUMN1, ROW7, 56, 22);
 		
 		
 		this.spnWY = new Spinner(this.cmp, SWT.BORDER);
@@ -122,7 +133,7 @@ public class TabContents {
 		this.spnWY.setMinimum(250);
 		this.spnWY.setSelection(329);
 		this.spnWY.setDigits(3);
-		this.spnWY.setBounds(79, 283, 56, 22);
+		this.spnWY.setBounds(SPN_COLUMN1, ROW8, 56, 22);
 		
 		//----------------------------Spinners for native values-------------------------------------//
 		
@@ -131,56 +142,56 @@ public class TabContents {
 		this.spnRXN.setMaximum(750);
 		this.spnRXN.setMinimum(401);
 		this.spnRXN.setSelection(640);
-		this.spnRXN.setBounds(179, 41, 56, 22);
+		this.spnRXN.setBounds(SPN_COLUMN2, ROW1, 56, 22);
 		
 		this.spnRYN = new Spinner(this.cmp, SWT.BORDER);
 		this.spnRYN.setDigits(3);
 		this.spnRYN.setMaximum(399);
 		this.spnRYN.setMinimum(211);
 		this.spnRYN.setSelection(330);
-		this.spnRYN.setBounds(179, 66, 56, 22);
+		this.spnRYN.setBounds(SPN_COLUMN2, ROW2, 56, 22);
 		
 		this.spnGXN = new Spinner(this.cmp, SWT.BORDER);
 		this.spnGXN.setMaximum(399);
 		this.spnGXN.setMinimum(20);
 		this.spnGXN.setSelection(300);
 		this.spnGXN.setDigits(3);
-		this.spnGXN.setBounds(179, 110, 56, 22);	
+		this.spnGXN.setBounds(SPN_COLUMN2, ROW3, 56, 22);	
 		
 		this.spnGYN = new Spinner(this.cmp, SWT.BORDER);
 		this.spnGYN.setDigits(3);
 		this.spnGYN.setMaximum(850);
 		this.spnGYN.setMinimum(401);
 		this.spnGYN.setSelection(600);
-		this.spnGYN.setBounds(179, 135, 56, 22);
+		this.spnGYN.setBounds(SPN_COLUMN2, ROW4, 56, 22);
 		
 		this.spnBXN = new Spinner(this.cmp, SWT.BORDER);
 		this.spnBXN.setMaximum(299);
 		this.spnBXN.setMinimum(20);
 		this.spnBXN.setSelection(150);
 		this.spnBXN.setDigits(3);
-		this.spnBXN.setBounds(179, 184, 56, 22);
+		this.spnBXN.setBounds(SPN_COLUMN2, ROW5, 56, 22);
 
 		this.spnBYN = new Spinner(this.cmp, SWT.BORDER);
 		this.spnBYN.setMaximum(209);
 		this.spnBYN.setMinimum(20);
 		this.spnBYN.setSelection(60);
 		this.spnBYN.setDigits(3);
-		this.spnBYN.setBounds(179, 209, 56, 22);
+		this.spnBYN.setBounds(SPN_COLUMN2, ROW6, 56, 22);
 
 		this.spnWXN = new Spinner(this.cmp, SWT.BORDER);
 		this.spnWXN.setMaximum(400);
 		this.spnWXN.setMinimum(250);
 		this.spnWXN.setSelection(313);
 		this.spnWXN.setDigits(3);
-		this.spnWXN.setBounds(179, 258, 56, 22);
+		this.spnWXN.setBounds(SPN_COLUMN2, ROW7, 56, 22);
 
 		this.spnWYN = new Spinner(this.cmp, SWT.BORDER);
 		this.spnWYN.setMaximum(400);
 		this.spnWYN.setMinimum(250);
 		this.spnWYN.setSelection(329);
 		this.spnWYN.setDigits(3);
-		this.spnWYN.setBounds(179, 283, 56, 22);
+		this.spnWYN.setBounds(SPN_COLUMN2, ROW8, 56, 22);
 		
 	}
 	
@@ -189,19 +200,19 @@ public class TabContents {
 		
 		this.lblRedXTVal = new Label(this.cmp, SWT.BORDER);
 		this.lblRedXTVal.setAlignment(SWT.LEFT);
-		this.lblRedXTVal.setBounds(79, 358, 55, 15);
+		this.lblRedXTVal.setBounds(SPN_COLUMN1, 358, 55, 15);
 		
 		this.lblRedYTVal = new Label(this.cmp, SWT.BORDER);
 		this.lblRedYTVal.setAlignment(SWT.LEFT);
-		this.lblRedYTVal.setBounds(79, 382, 55, 15);
+		this.lblRedYTVal.setBounds(SPN_COLUMN1, 382, 55, 15);
 		
 		this.lblGrnXTVal = new Label(this.cmp, SWT.BORDER);
 		this.lblGrnXTVal.setAlignment(SWT.LEFT);
-		this.lblGrnXTVal.setBounds(79, 426, 55, 15);
+		this.lblGrnXTVal.setBounds(SPN_COLUMN1, 426, 55, 15);
 		
 		this.lblGrnYTVal = new Label(this.cmp, SWT.BORDER);
 		this.lblGrnYTVal.setAlignment(SWT.LEFT);
-		this.lblGrnYTVal.setBounds(79, 450, 55, 15);
+		this.lblGrnYTVal.setBounds(SPN_COLUMN1, 450, 55, 15);
 		
 		this.lblBluXTVal = new Label(this.cmp, SWT.BORDER);
 		this.lblBluXTVal.setAlignment(SWT.LEFT);
@@ -238,43 +249,43 @@ public class TabContents {
 		
 		Label lblRedX = new Label(this.cmp, SWT.NONE);
 		lblRedX.setAlignment(SWT.RIGHT);
-		lblRedX.setBounds(LBL_COLUMN1, 43, 55, 15);
+		lblRedX.setBounds(LBL_COLUMN1, (ROW1 + 2), 55, 15);
 		lblRedX.setText("Red X");
 
 		Label lblRedY = new Label(this.cmp, SWT.NONE);
 		lblRedY.setText("Red Y");
 		lblRedY.setAlignment(SWT.RIGHT);
-		lblRedY.setBounds(LBL_COLUMN1, 68, 55, 15);
+		lblRedY.setBounds(LBL_COLUMN1, (ROW2 + 2), 55, 15);
 
 		Label lblGrnX = new Label(this.cmp, SWT.NONE);
 		lblGrnX.setText("Green X");
 		lblGrnX.setAlignment(SWT.RIGHT);
-		lblGrnX.setBounds(LBL_COLUMN1, 112, 55, 15);
+		lblGrnX.setBounds(LBL_COLUMN1, (ROW3 + 2), 55, 15);
 
 		Label lblGrnY = new Label(this.cmp, SWT.NONE);
 		lblGrnY.setText("Green Y");
 		lblGrnY.setAlignment(SWT.RIGHT);
-		lblGrnY.setBounds(LBL_COLUMN1, 137, 55, 15);
+		lblGrnY.setBounds(LBL_COLUMN1, (ROW4 + 2), 55, 15);
 
 		Label lblBluX = new Label(this.cmp, SWT.NONE);
 		lblBluX.setText("Blue X");
 		lblBluX.setAlignment(SWT.RIGHT);
-		lblBluX.setBounds(LBL_COLUMN1, 186, 55, 15);
+		lblBluX.setBounds(LBL_COLUMN1, (ROW5 + 2), 55, 15);
 
 		Label lblBluY = new Label(this.cmp, SWT.NONE);
 		lblBluY.setText("Blue Y");
 		lblBluY.setAlignment(SWT.RIGHT);
-		lblBluY.setBounds(LBL_COLUMN1, 211, 55, 15);
+		lblBluY.setBounds(LBL_COLUMN1, (ROW6 + 2), 55, 15);
 
 		Label lblWhtX = new Label(this.cmp, SWT.NONE);
 		lblWhtX.setText("White X");
 		lblWhtX.setAlignment(SWT.RIGHT);
-		lblWhtX.setBounds(LBL_COLUMN1, 260, 55, 15);
+		lblWhtX.setBounds(LBL_COLUMN1, (ROW7 + 2), 55, 15);
 
 		Label lblWhtY = new Label(this.cmp, SWT.NONE);
 		lblWhtY.setText("White Y");
 		lblWhtY.setAlignment(SWT.RIGHT);
-		lblWhtY.setBounds(18, 285, 55, 15);
+		lblWhtY.setBounds(LBL_COLUMN1, (ROW8 + 2), 55, 15);
 		
 		//-------------------Target value labels------------------------------------------------------//
 		
@@ -285,43 +296,43 @@ public class TabContents {
 		
 		Label lblRedXT = new Label(this.cmp, SWT.NONE);
 		lblRedXT.setAlignment(SWT.RIGHT);
-		lblRedXT.setBounds(LBL_COLUMN1, 358, 55, 15);
+		lblRedXT.setBounds(LBL_COLUMN1, ROW9, 55, 15);
 		lblRedXT.setText("Red X");
 		
 		Label lblRedYT = new Label(this.cmp, SWT.NONE);
 		lblRedYT.setText("Red Y");
 		lblRedYT.setAlignment(SWT.RIGHT);
-		lblRedYT.setBounds(LBL_COLUMN1, 382, 55, 15);
+		lblRedYT.setBounds(LBL_COLUMN1, ROW10, 55, 15);
 		
 		Label lblGrnXT = new Label(this.cmp, SWT.NONE);
 		lblGrnXT.setText("Green X");
 		lblGrnXT.setAlignment(SWT.RIGHT);
-		lblGrnXT.setBounds(LBL_COLUMN1, 426, 55, 15);
+		lblGrnXT.setBounds(LBL_COLUMN1, ROW11, 55, 15);
 		
 		Label lblGrnYT = new Label(this.cmp, SWT.NONE);
 		lblGrnYT.setText("Green Y");
 		lblGrnYT.setAlignment(SWT.RIGHT);
-		lblGrnYT.setBounds(LBL_COLUMN1, 450, 55, 15);
+		lblGrnYT.setBounds(LBL_COLUMN1, ROW12, 55, 15);
 		
 		Label lblBluXT = new Label(this.cmp, SWT.NONE);
 		lblBluXT.setText("Blue X");
 		lblBluXT.setAlignment(SWT.RIGHT);
-		lblBluXT.setBounds(LBL_COLUMN2, 358, 50, 15);
+		lblBluXT.setBounds(LBL_COLUMN2, ROW9, 50, 15);
 		
 		Label lblBluYT = new Label(this.cmp, SWT.NONE);
 		lblBluYT.setText("Blue Y");
 		lblBluYT.setAlignment(SWT.RIGHT);
-		lblBluYT.setBounds(LBL_COLUMN2, 382, 50, 15);
+		lblBluYT.setBounds(LBL_COLUMN2, ROW10, 50, 15);
 		
 		Label lblWhtXT = new Label(this.cmp, SWT.NONE);
 		lblWhtXT.setText("White X");
 		lblWhtXT.setAlignment(SWT.RIGHT);
-		lblWhtXT.setBounds(128, 426, 55, 15);
+		lblWhtXT.setBounds(LBL_COLUMN2, ROW11, 55, 15);
 
 		Label lblWhtYT = new Label(this.cmp, SWT.NONE);
 		lblWhtYT.setText("White Y");
 		lblWhtYT.setAlignment(SWT.RIGHT);
-		lblWhtYT.setBounds(128, 450, 55, 15);
+		lblWhtYT.setBounds(LBL_COLUMN2, ROW12, 55, 15);
 	}
 	
 	
@@ -364,13 +375,140 @@ public class TabContents {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				
-				setVals();
-				mw.getCommon();
-				setOffsets(mw.comGam);
-				drawTriangle(mw.comGam);	
+				updateTab();	
 			}
 		});
 		
+		this.spnRY.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				
+				updateTab();
+			}
+		});
+
+		this.spnGX.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				
+				updateTab();
+			}
+		});
+		
+		this.spnGY.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				
+				updateTab();
+			}
+		});
+		
+		this.spnBX.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				
+				updateTab();
+			}
+		});
+		
+		this.spnBY.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				
+				updateTab();			}
+		});
+
+		this.spnWX.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				
+				updateTab();			}
+		});
+
+		this.spnWY.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				
+				updateTab();				
+			}
+		});
+
+		this.spnRXN.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				
+				updateTabN();
+			}
+		});
+
+		this.spnRYN.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+
+				updateTabN();			}
+		});
+
+		this.spnGXN.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+
+				updateTabN();			}
+		});
+
+		this.spnGYN.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+
+				updateTabN();			}
+		});
+
+		this.spnBXN.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+
+				updateTabN();			}
+		});
+
+		this.spnBYN.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+
+				updateTabN();			}
+		});
+
+		this.spnWXN.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+
+				updateTabN();			}
+		});
+
+		this.spnWYN.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+
+				updateTabN();			}
+		});
+
+
+	}
+	
+	
+	public void updateTab() {
+		
+		this.setVals();
+		mw.getCommon();
+		this.setOffsets(mw.comGam);
+		this.drawTriangle(mw.comGam);
+	}
+	
+	
+	public void updateTabN() {
+		
+		this.setNVals();
+		mw.getCommon();
+		this.setOffsets(mw.comGam);
+		this.drawTriangle(mw.comGam);
 	}
 	
 	

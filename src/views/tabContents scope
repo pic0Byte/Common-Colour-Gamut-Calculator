@@ -1,7 +1,0 @@
-Should have a native reference to the composite class passed in at construction, not one passed to methods. -----done
-
-Should have a native reference to the  gamut passed in at construction, not passed to methods         -----done
-
-Draw triangle method etc should live here   ------- done
-
-Event handlers for spinners, labels & buttons should also live here.     ------ Having trouble with errors about static references to getCommon() & comGam
