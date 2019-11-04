@@ -12,7 +12,7 @@ public class Gamut {
 		
 	public int rX, rY, gX, gY, bX, bY, wX, wY, drawColour; 
 	public double bgM, bgC, grM, grC, rbM, rbC;    //---------Coefficients (M) & constants (C) for slope equations------//
-	public int rXN, rYN, gXN, gYN, bXN, bYN, wXN, wYN;     //---------Native values
+	//public int rXN, rYN, gXN, gYN, bXN, bYN, wXN, wYN;     //---------Native values
 	public int rXO, rYO, gXO, gYO, bXO, bYO, wXO, wYO;     //---------Offset between native & measured values
 	public boolean nativeLinked;
 	
@@ -40,7 +40,7 @@ public class Gamut {
 		this.wY = wY;
 		this.drawColour = drawColour;
 		
-		this.rXN = rX;
+		/*this.rXN = rX;
 		this.rYN = rY;
 		this.gXN = gX;
 		this.gYN = gY;
@@ -56,14 +56,23 @@ public class Gamut {
 		this.bXO = bXN - bX;
 		this.bYO = bYN - bY;
 		this.wXO = wXN - wX;
-		this.wYO = wYN - wY;
+		this.wYO = wYN - wY;*/
 		
-		nat = new Gamut();
+		this.nat = new Gamut(this);
 		
 	}
 	
 	
-	private Gamut() {
+	private Gamut(Gamut gam) {
+		
+		this.rX = gam.rX;
+		this.rY = gam.rY;
+		this.gX = gam.gX;
+		this.gY = gam.gY;
+		this.bX = gam.bX;
+		this.bY = gam.bY;
+		this.wX = gam.wX;
+		this.wY = gam.wY;
 		
 		this.drawColour = 2;
 		
@@ -90,14 +99,14 @@ public class Gamut {
 	
 	public void updateOffsets() {
 		
-		this.rXO = this.rXN - this.rX;
-		this.rYO = this.rYN - this.rY;
-		this.gXO = this.gXN - this.gX;
-		this.gYO = this.gYN - this.gY;
-		this.bXO = this.bXN - this.bX;
-		this.bYO = this.bYN - this.bY;
-		this.wXO = this.wXN - this.wX;
-		this.wYO = this.wYN - this.wY;
+		this.rXO = this.nat.rX - this.rX;
+		this.rYO = this.nat.rY - this.rY;
+		this.gXO = this.nat.gX - this.gX;
+		this.gYO = this.nat.gY - this.gY;
+		this.bXO = this.nat.bX - this.bX;
+		this.bYO = this.nat.bY - this.bY;
+		this.wXO = this.nat.wX - this.wX;
+		this.wYO = this.nat.wY - this.wY;
 		
 	}
 	

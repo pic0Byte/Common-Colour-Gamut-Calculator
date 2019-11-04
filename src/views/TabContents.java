@@ -525,29 +525,29 @@ public class TabContents {
 		
 		if (this.gam.nativeLinked) {
 			
-			this.gam.rXN = this.spnRX.getSelection();
-			this.spnRXN.setSelection(this.gam.rXN);
+			this.gam.nat.rX = this.spnRX.getSelection();
+			this.spnRXN.setSelection(this.gam.nat.rX);
 			
-			this.gam.rYN = this.spnRY.getSelection();
-			this.spnRYN.setSelection(this.gam.rYN);
+			this.gam.nat.rY = this.spnRY.getSelection();
+			this.spnRYN.setSelection(this.gam.nat.rY);
 			
-			this.gam.gXN = this.spnGX.getSelection();
-			this.spnGXN.setSelection(this.gam.gXN);
+			this.gam.nat.gX = this.spnGX.getSelection();
+			this.spnGXN.setSelection(this.gam.nat.gX);
 			
-			this.gam.gYN = this.spnGY.getSelection();
-			this.spnGYN.setSelection(this.gam.gYN);
+			this.gam.nat.gY = this.spnGY.getSelection();
+			this.spnGYN.setSelection(this.gam.nat.gY);
 			
-			this.gam.bXN = this.spnBX.getSelection();
-			this.spnBXN.setSelection(this.gam.bXN);
+			this.gam.nat.bX = this.spnBX.getSelection();
+			this.spnBXN.setSelection(this.gam.nat.bX);
 			
-			this.gam.bYN = this.spnBY.getSelection();
-			this.spnBYN.setSelection(this.gam.bYN);
+			this.gam.nat.bY = this.spnBY.getSelection();
+			this.spnBYN.setSelection(this.gam.nat.bY);
 			
-			this.gam.wXN = this.spnWX.getSelection();
-			this.spnWXN.setSelection(this.gam.wXN);
+			this.gam.nat.wX = this.spnWX.getSelection();
+			this.spnWXN.setSelection(this.gam.nat.wX);
 			
-			this.gam.wYN = this.spnWY.getSelection();
-			this.spnWYN.setSelection(this.gam.wYN);
+			this.gam.nat.wY = this.spnWY.getSelection();
+			this.spnWYN.setSelection(this.gam.nat.wY);
 			
 		}
 	}
@@ -555,14 +555,14 @@ public class TabContents {
 	
 	public void setNVals() {
 		
-		this.gam.rXN = this.spnRXN.getSelection();
-		this.gam.rYN = this.spnRYN.getSelection();
-		this.gam.gXN = this.spnGXN.getSelection();
-		this.gam.gYN = this.spnGYN.getSelection();
-		this.gam.bXN = this.spnBXN.getSelection();
-		this.gam.bYN = this.spnBYN.getSelection();
-		this.gam.wXN = this.spnWXN.getSelection();
-		this.gam.wYN = this.spnWYN.getSelection();
+		this.gam.nat.rX = this.spnRXN.getSelection();
+		this.gam.nat.rY = this.spnRYN.getSelection();
+		this.gam.nat.gX = this.spnGXN.getSelection();
+		this.gam.nat.gY = this.spnGYN.getSelection();
+		this.gam.nat.bX = this.spnBXN.getSelection();
+		this.gam.nat.bY = this.spnBYN.getSelection();
+		this.gam.nat.wX = this.spnWXN.getSelection();
+		this.gam.nat.wY = this.spnWYN.getSelection();
 		
 		if (this.gam.nativeLinked) {
 			
@@ -619,12 +619,12 @@ public class TabContents {
 		double dbx = 50 + (this.gam.bX * XSCALER);
 		double dby = 310 - (this.gam.bY * YSCALER);
 
-		double drXn = 50 + (this.gam.rXN * XSCALER);
-		double drYn = 310 - (this.gam.rYN * YSCALER);
-		double dgXn = 50 + (this.gam.gXN * XSCALER);
-		double dgYn = 310 - (this.gam.gYN * YSCALER);
-		double dbXn = 50 + (this.gam.bXN * XSCALER);
-		double dbYn = 310 - (this.gam.bYN * YSCALER);
+		double drXn = 50 + (this.gam.nat.rX * XSCALER);
+		double drYn = 310 - (this.gam.nat.rY * YSCALER);
+		double dgXn = 50 + (this.gam.nat.gX * XSCALER);
+		double dgYn = 310 - (this.gam.nat.gY * YSCALER);
+		double dbXn = 50 + (this.gam.nat.bX * XSCALER);
+		double dbYn = 310 - (this.gam.nat.bY * YSCALER);
 
 		Image image = new Image(this.mw.display, MainWindow.class.getResourceAsStream("/resource/cie.gif"));
 		this.lblTriangleImage.setImage(image);
@@ -660,21 +660,19 @@ public class TabContents {
 	    int bXOS = this.gam.bXO + comGam.bX;
 	    int bYOS = this.gam.bYO + comGam.bY;
 	    
-	    if (!Gamut.isEnclosedByRed(rXOS, rYOS, this.gam)) {
-	    	gc.setBackground(this.mw.display.getSystemColor(SWT.COLOR_RED));
-	    }
+	    setPointColour(rXOS, rYOS, SWT.COLOR_GRAY);
 	    
 		gc.fillOval((int)((XOFFSET + rXOS * XSCALER) - 2), (int)((YOFFSET - rYOS * YSCALER) - 2), 4, 4);
 		
 	    gc.setBackground(this.mw.display.getSystemColor(SWT.COLOR_GRAY));
-		if (!Gamut.isEnclosedByGreen(gXOS, gYOS, this.gam)) {
+		if (!Gamut.isEnclosedByGreen(gXOS, gYOS, this.gam.nat)) {
 	    	gc.setBackground(this.mw.display.getSystemColor(SWT.COLOR_RED));
 		}
 		
 		gc.fillOval((int)((XOFFSET + gXOS * XSCALER) - 2), (int)((YOFFSET - gYOS * YSCALER) - 2), 4, 4);
 		
 	    gc.setBackground(this.mw.display.getSystemColor(SWT.COLOR_GRAY));
-		if (!Gamut.isEnclosedByBlue(bXOS, bYOS, this.gam)) {
+		if (!Gamut.isEnclosedByBlue(bXOS, bYOS, this.gam.nat)) {
 	    	gc.setBackground(this.mw.display.getSystemColor(SWT.COLOR_RED));
 		}
 		
@@ -710,4 +708,14 @@ public class TabContents {
 	    gc.dispose();
 
 	}
+	
+	private int setPointColour(int rX, int rY, int colour) {
+		
+	    if (!Gamut.isEnclosedByRed(rX, rY, this.gam.nat)) {
+	    	return SWT.COLOR_RED;
+	    }
+
+		return colour;
+	}
+	
 }
