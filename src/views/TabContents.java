@@ -87,7 +87,7 @@ public class TabContents {
 		this.spnRY = new Spinner(this.cmp, SWT.BORDER);
 		this.spnRY.setDigits(3);
 		this.spnRY.setMaximum(399);
-		this.spnRY.setMinimum(211);
+		this.spnRY.setMinimum(150);
 		this.spnRY.setSelection(330);
 		this.spnRY.setBounds(SPN_COLUMN1, ROW2, 56, 22);
 				
@@ -633,30 +633,55 @@ public class TabContents {
 
 		int dC = this.gam.drawColour;
 
-		gc.setLineWidth(1);
+		gc.setLineWidth(1);  // Draw native triangle first
 	    gc.setForeground(this.mw.display.getSystemColor(SWT.COLOR_BLACK));
 	    
 	    gc.drawLine((int)drXn, (int)drYn, (int)dgXn, (int)dgYn);
 	    gc.drawLine((int)dgXn, (int)dgYn, (int)dbXn, (int)dbYn);
 	    gc.drawLine((int)dbXn, (int)dbYn, (int)drXn, (int)drYn);
 	    
+	    
+		gc.setLineWidth(2); // Draw triangle for measured values
 	    gc.setForeground(this.mw.display.getSystemColor(dC));
-		gc.setLineWidth(2);
 		
 	    gc.drawLine((int)drx, (int)dry, (int)dgx, (int)dgy);
 	    gc.drawLine((int)dgx, (int)dgy, (int)dbx, (int)dby);
 	    gc.drawLine((int)dbx, (int)dby, (int)drx, (int)dry);
 
+	    
+	    gc.setLineWidth(1); // Draw target (offset) points
 	    gc.setForeground(this.mw.display.getSystemColor(SWT.COLOR_DARK_BLUE));
-	    gc.setLineWidth(1);
 	    gc.setBackground(this.mw.display.getSystemColor(SWT.COLOR_GRAY));
 	    
-		gc.fillOval((int)((XOFFSET + (this.gam.rXO + comGam.rX) * XSCALER) - 2), (int)((YOFFSET - (this.gam.rYO + comGam.rY) * YSCALER) - 2), 4, 4);
-		gc.fillOval((int)((XOFFSET + (this.gam.gXO + comGam.gX) * XSCALER) - 2), (int)((YOFFSET - (this.gam.gYO + comGam.gY) * YSCALER) - 2), 4, 4);
-		gc.fillOval((int)((XOFFSET + (this.gam.bXO + comGam.bX) * XSCALER) - 2), (int)((YOFFSET - (this.gam.bYO + comGam.bY) * YSCALER) - 2), 4, 4);
-		gc.drawOval((int)((XOFFSET + (this.gam.rXO + comGam.rX) * XSCALER) - 2), (int)((YOFFSET - (this.gam.rYO + comGam.rY) * YSCALER) - 2), 4, 4);
-		gc.drawOval((int)((XOFFSET + (this.gam.gXO + comGam.gX) * XSCALER) - 2), (int)((YOFFSET - (this.gam.gYO + comGam.gY) * YSCALER) - 2), 4, 4);
-		gc.drawOval((int)((XOFFSET + (this.gam.bXO + comGam.bX) * XSCALER) - 2), (int)((YOFFSET - (this.gam.bYO + comGam.bY) * YSCALER) - 2), 4, 4);
+	    int rXOS = this.gam.rXO + comGam.rX;
+	    int rYOS = this.gam.rYO + comGam.rY;
+	    int gXOS = this.gam.gXO + comGam.gX;
+	    int gYOS = this.gam.gYO + comGam.gY;
+	    int bXOS = this.gam.bXO + comGam.bX;
+	    int bYOS = this.gam.bYO + comGam.bY;
+	    
+	    if (!Gamut.isEnclosedByRed(rXOS, rYOS, this.gam)) {
+	    	gc.setBackground(this.mw.display.getSystemColor(SWT.COLOR_RED));
+	    }
+	    
+		gc.fillOval((int)((XOFFSET + rXOS * XSCALER) - 2), (int)((YOFFSET - rYOS * YSCALER) - 2), 4, 4);
+		
+	    gc.setBackground(this.mw.display.getSystemColor(SWT.COLOR_GRAY));
+		if (!Gamut.isEnclosedByGreen(gXOS, gYOS, this.gam)) {
+	    	gc.setBackground(this.mw.display.getSystemColor(SWT.COLOR_RED));
+		}
+		
+		gc.fillOval((int)((XOFFSET + gXOS * XSCALER) - 2), (int)((YOFFSET - gYOS * YSCALER) - 2), 4, 4);
+		
+	    gc.setBackground(this.mw.display.getSystemColor(SWT.COLOR_GRAY));
+		if (!Gamut.isEnclosedByBlue(bXOS, bYOS, this.gam)) {
+	    	gc.setBackground(this.mw.display.getSystemColor(SWT.COLOR_RED));
+		}
+		
+		gc.fillOval((int)((XOFFSET + bXOS * XSCALER) - 2), (int)((YOFFSET - bYOS * YSCALER) - 2), 4, 4);
+		gc.drawOval((int)((XOFFSET + rXOS * XSCALER) - 2), (int)((YOFFSET - rYOS * YSCALER) - 2), 4, 4);
+		gc.drawOval((int)((XOFFSET + gXOS * XSCALER) - 2), (int)((YOFFSET - gYOS * YSCALER) - 2), 4, 4);
+		gc.drawOval((int)((XOFFSET + bXOS * XSCALER) - 2), (int)((YOFFSET - bYOS * YSCALER) - 2), 4, 4);
 		
 		gc.setBackground(this.mw.display.getSystemColor(SWT.COLOR_DARK_GRAY));
 		
