@@ -69,7 +69,7 @@ public class MainWindow {
 	}
 
 
-	public void open() {
+	private void open() {
 		display = Display.getDefault();
 		createContents();
 		shlCCGC.open();
@@ -84,7 +84,7 @@ public class MainWindow {
 	}
 
 
-	protected void createContents() {
+	private void createContents() {
 		shlCCGC = new Shell();
 		shlCCGC.setSize(1106, 720);
 		shlCCGC.setText("Common Colour Gamut Calculator");
@@ -206,7 +206,7 @@ public class MainWindow {
 	}
 
 
-	protected void handleEvents() {
+	private void handleEvents() {
 
 		btnNewGamut.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -219,7 +219,7 @@ public class MainWindow {
 	}
 
 
-	protected void makeGamuts() {
+	private void makeGamuts() {
 
 		comGam = new Gamut(Gamut.EMPTY, Gamut.EMPTY, Gamut.EMPTY, Gamut.EMPTY,
 				Gamut.EMPTY, Gamut.EMPTY, Gamut.EMPTY, Gamut.EMPTY, SWT.COLOR_WHITE);
@@ -268,7 +268,7 @@ public class MainWindow {
 	}
 
 
-	protected void newGamut() {
+	private void newGamut() {
 
 		CTabItem tbtGam;
 
@@ -338,7 +338,7 @@ public class MainWindow {
 	}
 
 
-	public void getCommon() {
+	protected void getCommon() {
 
 		boolean firstGamut = true;
 
@@ -362,7 +362,7 @@ public class MainWindow {
 	}
 
 
-	protected void drawCommon(Label label) {
+	private void drawCommon(Label label) {
 
 
 		Image image = new Image(display, MainWindow.class.getResourceAsStream("/resource/cie.gif"));

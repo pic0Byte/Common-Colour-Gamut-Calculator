@@ -315,6 +315,8 @@ public class Gamut {
 		
 		boolean enclosed = false;
 		
+		gam.slope();
+		
 		double grX = (y - gam.grC) / gam.grM;
 		double rbY = gam.rbM * x + gam.rbC;
 		double rbX = (y - gam.rbC) / gam.rbM;
@@ -343,6 +345,9 @@ public class Gamut {
 	public static boolean isEnclosedByGreen(double x, double y, Gamut gam) {
 		
 		boolean enclosed = false;
+		
+		gam.slope();
+		
 		double bgY = gam.bgM * x + gam.bgC;
 		double bgX = (y - gam.bgC) / gam.bgM;
 		double grY = gam.grM * x + gam.grC;
@@ -371,6 +376,9 @@ public class Gamut {
 	public static boolean isEnclosedByBlue(double x, double y, Gamut gam) {
 		
 		boolean enclosed = false;
+		
+		gam.slope();
+		
 		double bgY = gam.bgM * x + gam.bgC;
 		double rbY = gam.rbM * x + gam.rbC;
 		

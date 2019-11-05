@@ -73,7 +73,7 @@ public class TabContents {
 	}
 	
 	
-	public void layoutSpinners() {
+	private void layoutSpinners() {
 		
 		//-----------------------------Spinners for measured values---------------------------//
 		
@@ -196,7 +196,7 @@ public class TabContents {
 	}
 	
 	
-	public void layoutFields() {
+	private void layoutFields() {
 		
 		this.lblRedXTVal = new Label(this.cmp, SWT.BORDER);
 		this.lblRedXTVal.setAlignment(SWT.LEFT);
@@ -233,7 +233,7 @@ public class TabContents {
 	}
 	
 	
-	public void layoutLabels() {
+	private void layoutLabels() {
 		
 		//-----------------Measured & native labels----------------------------------------------------//
 		
@@ -336,7 +336,7 @@ public class TabContents {
 	}
 	
 	
-	public void layoutButtons() {
+	private void layoutButtons() {
 		
 		this.btnLinked = new Button(this.cmp, SWT.NONE);
 		this.btnLinked.setBounds(145, 41, 25, 22);
@@ -345,7 +345,7 @@ public class TabContents {
 	}
 	
 	
-	public void layoutImage() {
+	private void layoutImage() {
 		
 		Image image = new Image(mw.display, MainWindow.class.getResourceAsStream("/resource/cie.gif"));
 		this.lblTriangleImage = new Label(this.cmp, SWT.NONE);
@@ -355,7 +355,7 @@ public class TabContents {
 	}
 	
 	
-	public void handleEvents() {
+	private void handleEvents() {
 		
 		
 		this.btnLinked.addSelectionListener(new SelectionAdapter(){
@@ -494,7 +494,7 @@ public class TabContents {
 	}
 	
 	
-	public void updateTab() {
+	protected void updateTab() {
 		
 		this.setVals();
 		mw.getCommon();
@@ -503,7 +503,7 @@ public class TabContents {
 	}
 	
 	
-	public void updateTabN() {
+	private void updateTabN() {
 		
 		this.setNVals();
 		mw.getCommon();
@@ -512,7 +512,7 @@ public class TabContents {
 	}
 	
 	
-	public void setVals() {
+	protected void setVals() {
 		
 		this.gam.rX = this.spnRX.getSelection();
 		this.gam.rY = this.spnRY.getSelection();
@@ -553,7 +553,7 @@ public class TabContents {
 	}
 	
 	
-	public void setNVals() {
+	private void setNVals() {
 		
 		this.gam.nat.rX = this.spnRXN.getSelection();
 		this.gam.nat.rY = this.spnRYN.getSelection();
@@ -594,7 +594,7 @@ public class TabContents {
 	}
 	
 	
-	public void setOffsets (Gamut comGam) {
+	protected void setOffsets (Gamut comGam) {
 		
 		this.gam.updateOffsets();
 		
@@ -651,32 +651,23 @@ public class TabContents {
 	    
 	    gc.setLineWidth(1); // Draw target (offset) points
 	    gc.setForeground(this.mw.display.getSystemColor(SWT.COLOR_DARK_BLUE));
-	    gc.setBackground(this.mw.display.getSystemColor(SWT.COLOR_GRAY));
 	    
-	    int rXOS = this.gam.rXO + comGam.rX;
-	    int rYOS = this.gam.rYO + comGam.rY;
-	    int gXOS = this.gam.gXO + comGam.gX;
-	    int gYOS = this.gam.gYO + comGam.gY;
-	    int bXOS = this.gam.bXO + comGam.bX;
-	    int bYOS = this.gam.bYO + comGam.bY;
+	    double rXOS = this.gam.rXO + comGam.rX;
+	    double rYOS = this.gam.rYO + comGam.rY;
+	    double gXOS = this.gam.gXO + comGam.gX;
+	    double gYOS = this.gam.gYO + comGam.gY;
+	    double bXOS = this.gam.bXO + comGam.bX;
+	    double bYOS = this.gam.bYO + comGam.bY;
 	    
-	    setPointColour(rXOS, rYOS, SWT.COLOR_GRAY);
-	    
+	    gc.setBackground(this.mw.display.getSystemColor(setPointColour(rXOS, rYOS, SWT.COLOR_GRAY)));
 		gc.fillOval((int)((XOFFSET + rXOS * XSCALER) - 2), (int)((YOFFSET - rYOS * YSCALER) - 2), 4, 4);
 		
-	    gc.setBackground(this.mw.display.getSystemColor(SWT.COLOR_GRAY));
-		if (!Gamut.isEnclosedByGreen(gXOS, gYOS, this.gam.nat)) {
-	    	gc.setBackground(this.mw.display.getSystemColor(SWT.COLOR_RED));
-		}
-		
+	    gc.setBackground(this.mw.display.getSystemColor(setPointColour(gXOS, gYOS, SWT.COLOR_GRAY)));
 		gc.fillOval((int)((XOFFSET + gXOS * XSCALER) - 2), (int)((YOFFSET - gYOS * YSCALER) - 2), 4, 4);
 		
-	    gc.setBackground(this.mw.display.getSystemColor(SWT.COLOR_GRAY));
-		if (!Gamut.isEnclosedByBlue(bXOS, bYOS, this.gam.nat)) {
-	    	gc.setBackground(this.mw.display.getSystemColor(SWT.COLOR_RED));
-		}
-		
+	    gc.setBackground(this.mw.display.getSystemColor(setPointColour(bXOS, bYOS, SWT.COLOR_GRAY)));
 		gc.fillOval((int)((XOFFSET + bXOS * XSCALER) - 2), (int)((YOFFSET - bYOS * YSCALER) - 2), 4, 4);
+		
 		gc.drawOval((int)((XOFFSET + rXOS * XSCALER) - 2), (int)((YOFFSET - rYOS * YSCALER) - 2), 4, 4);
 		gc.drawOval((int)((XOFFSET + gXOS * XSCALER) - 2), (int)((YOFFSET - gYOS * YSCALER) - 2), 4, 4);
 		gc.drawOval((int)((XOFFSET + bXOS * XSCALER) - 2), (int)((YOFFSET - bYOS * YSCALER) - 2), 4, 4);
@@ -709,9 +700,11 @@ public class TabContents {
 
 	}
 	
-	private int setPointColour(int rX, int rY, int colour) {
+	
+	private int setPointColour(double rX, double rY, int colour) {
 		
-	    if (!Gamut.isEnclosedByRed(rX, rY, this.gam.nat)) {
+	    if (!Gamut.isEnclosedByRed(rX, rY, this.gam.nat) || !Gamut.isEnclosedByGreen(rX, rY, this.gam.nat)
+	    		|| !Gamut.isEnclosedByBlue(rX, rY, this.gam.nat)) {
 	    	return SWT.COLOR_RED;
 	    }
 
